@@ -1,0 +1,6 @@
+make[1]: Entering directory `/home/hadoop/ISA-L/isa-l-master/generated_doc/latex'
+rm -f *.ps *.dvi *.aux *.toc *.idx *.ind *.ilg *.log *.out *.brf *.blg *.bbl refman.pdf
+pdflatex refman
+make[1]: pdflatex: Command not found
+make[1]: *** [refman.pdf] Error 127
+make[1]: Leaving directory `/home/hadoop/ISA-L/isa-l-master/generated_doc/latex'

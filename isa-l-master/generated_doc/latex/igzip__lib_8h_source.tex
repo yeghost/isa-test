@@ -1,0 +1,578 @@
+\hypertarget{igzip__lib_8h}{\section{igzip\-\_\-lib.\-h}
+\label{igzip__lib_8h}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/**********************************************************************}
+00002 \textcolor{comment}{  Copyright(c) 2011-2016 Intel Corporation All rights reserved.}
+00003 \textcolor{comment}{}
+00004 \textcolor{comment}{  Redistribution and use in source and binary forms, with or without}
+00005 \textcolor{comment}{  modification, are permitted provided that the following conditions}
+00006 \textcolor{comment}{  are met:}
+00007 \textcolor{comment}{    * Redistributions of source code must retain the above copyright}
+00008 \textcolor{comment}{      notice, this list of conditions and the following disclaimer.}
+00009 \textcolor{comment}{    * Redistributions in binary form must reproduce the above copyright}
+00010 \textcolor{comment}{      notice, this list of conditions and the following disclaimer in}
+00011 \textcolor{comment}{      the documentation and/or other materials provided with the}
+00012 \textcolor{comment}{      distribution.}
+00013 \textcolor{comment}{    * Neither the name of Intel Corporation nor the names of its}
+00014 \textcolor{comment}{      contributors may be used to endorse or promote products derived}
+00015 \textcolor{comment}{      from this software without specific prior written permission.}
+00016 \textcolor{comment}{}
+00017 \textcolor{comment}{  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00018 \textcolor{comment}{  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00019 \textcolor{comment}{  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00020 \textcolor{comment}{  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00021 \textcolor{comment}{  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00022 \textcolor{comment}{  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00023 \textcolor{comment}{  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00024 \textcolor{comment}{  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00025 \textcolor{comment}{  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00026 \textcolor{comment}{  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00027 \textcolor{comment}{  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+00028 \textcolor{comment}{**********************************************************************/}
+00029 
+00030 \textcolor{preprocessor}{#ifndef \_IGZIP\_H}
+00031 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define \_IGZIP\_H}
+00032 \textcolor{preprocessor}{}
+00074 \textcolor{preprocessor}{#include <stdint.h>}
+00075 
+00076 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00077 \textcolor{preprocessor}{}\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00078 \textcolor{preprocessor}{#endif}
+00079 \textcolor{preprocessor}{}
+00080 \textcolor{comment}{/******************************************************************************/}
+00081 \textcolor{comment}{/* Deflate Compression Standard Defines */}
+00082 \textcolor{comment}{/******************************************************************************/}
+00083 \textcolor{preprocessor}{#define IGZIP\_K  1024}
+00084 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_MAX\_HDR\_SIZE 328}
+00085 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_MAX\_CODE\_LEN 15}
+00086 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_HIST\_SIZE (32*IGZIP\_K)}
+00087 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_MAX\_HIST\_BITS 15}
+00088 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_MAX\_MATCH 258}
+00089 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_MIN\_MATCH 3}
+00090 \textcolor{preprocessor}{}
+00091 \textcolor{preprocessor}{#define ISAL\_DEF\_LIT\_SYMBOLS 257}
+00092 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LEN\_SYMBOLS 29}
+00093 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_DIST\_SYMBOLS 30}
+00094 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LIT\_LEN\_SYMBOLS (ISAL\_DEF\_LIT\_SYMBOLS + ISAL\_DEF\_LEN\_SYMBOLS)}
+00095 \textcolor{preprocessor}{}
+00096 \textcolor{comment}{/* Max repeat length, rounded up to 32 byte boundary */}
+00097 \textcolor{preprocessor}{#define ISAL\_LOOK\_AHEAD ((ISAL\_DEF\_MAX\_MATCH + 31) & ~31)}
+00098 \textcolor{preprocessor}{}
+00099 \textcolor{comment}{/******************************************************************************/}
+00100 \textcolor{comment}{/* Deflate Implementation Specific Defines */}
+00101 \textcolor{comment}{/******************************************************************************/}
+00102 \textcolor{comment}{/* Note IGZIP\_HIST\_SIZE must be a power of two */}
+00103 \textcolor{preprocessor}{#ifndef IGZIP\_HIST\_SIZE}
+00104 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HIST\_SIZE ISAL\_DEF\_HIST\_SIZE}
+00105 \textcolor{preprocessor}{}\textcolor{preprocessor}{#endif}
+00106 \textcolor{preprocessor}{}
+00107 \textcolor{preprocessor}{#if (IGZIP\_HIST\_SIZE > ISAL\_DEF\_HIST\_SIZE)}
+00108 \textcolor{preprocessor}{}\textcolor{preprocessor}{#undef IGZIP\_HIST\_SIZE}
+00109 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HIST\_SIZE ISAL\_DEF\_HIST\_SIZE}
+00110 \textcolor{preprocessor}{}\textcolor{preprocessor}{#endif}
+00111 \textcolor{preprocessor}{}
+00112 \textcolor{preprocessor}{#ifdef LONGER\_HUFFTABLE}
+00113 \textcolor{preprocessor}{}\textcolor{preprocessor}{#if (IGZIP\_HIST\_SIZE > 8 * IGZIP\_K)}
+00114 \textcolor{preprocessor}{}\textcolor{preprocessor}{#undef IGZIP\_HIST\_SIZE}
+00115 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HIST\_SIZE (8 * IGZIP\_K)}
+00116 \textcolor{preprocessor}{}\textcolor{preprocessor}{#endif}
+00117 \textcolor{preprocessor}{}\textcolor{preprocessor}{#endif}
+00118 \textcolor{preprocessor}{}
+00119 \textcolor{preprocessor}{#define ISAL\_LIMIT\_HASH\_UPDATE}
+00120 \textcolor{preprocessor}{}
+00121 \textcolor{preprocessor}{#define IGZIP\_HASH8K\_HASH\_SIZE (8 * IGZIP\_K)}
+00122 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HASH\_HIST\_SIZE IGZIP\_HIST\_SIZE}
+00123 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HASH\_MAP\_HASH\_SIZE IGZIP\_HIST\_SIZE}
+00124 \textcolor{preprocessor}{}
+00125 \textcolor{preprocessor}{#define IGZIP\_LVL0\_HASH\_SIZE  (8 * IGZIP\_K)}
+00126 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_LVL1\_HASH\_SIZE  IGZIP\_HASH8K\_HASH\_SIZE}
+00127 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_LVL2\_HASH\_SIZE  IGZIP\_HASH\_HIST\_SIZE}
+00128 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_LVL3\_HASH\_SIZE  IGZIP\_HASH\_MAP\_HASH\_SIZE}
+00129 \textcolor{preprocessor}{}
+00130 \textcolor{preprocessor}{#ifdef LONGER\_HUFFTABLE}
+00131 \textcolor{preprocessor}{}\textcolor{keyword}{enum} \{IGZIP\_DIST\_TABLE\_SIZE = 8*1024\};
+00132 
+00133 \textcolor{comment}{/* DECODE\_OFFSET is dist code index corresponding to DIST\_TABLE\_SIZE + 1 */}
+00134 \textcolor{keyword}{enum} \{ IGZIP\_DECODE\_OFFSET = 26 \};
+00135 \textcolor{preprocessor}{#else}
+00136 \textcolor{preprocessor}{}\textcolor{keyword}{enum} \{IGZIP\_DIST\_TABLE\_SIZE = 2\};
+00137 \textcolor{comment}{/* DECODE\_OFFSET is dist code index corresponding to DIST\_TABLE\_SIZE + 1 */}
+00138 \textcolor{keyword}{enum} \{ IGZIP\_DECODE\_OFFSET = 0 \};
+00139 \textcolor{preprocessor}{#endif}
+00140 \textcolor{preprocessor}{}\textcolor{keyword}{enum} \{IGZIP\_LEN\_TABLE\_SIZE = 256\};
+00141 \textcolor{keyword}{enum} \{IGZIP\_LIT\_TABLE\_SIZE = ISAL\_DEF\_LIT\_SYMBOLS\};
+00142 
+00143 \textcolor{preprocessor}{#define IGZIP\_HUFFTABLE\_CUSTOM 0}
+00144 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HUFFTABLE\_DEFAULT 1}
+00145 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HUFFTABLE\_STATIC 2}
+00146 \textcolor{preprocessor}{}
+00147 \textcolor{comment}{/* Flush Flags */}
+00148 \textcolor{preprocessor}{#define NO\_FLUSH        0       }\textcolor{comment}{/* Default */}\textcolor{preprocessor}{}
+00149 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define SYNC\_FLUSH      1}
+00150 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define FULL\_FLUSH      2}
+00151 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define FINISH\_FLUSH    0       }\textcolor{comment}{/* Deprecated */}\textcolor{preprocessor}{}
+00152 \textcolor{preprocessor}{}
+00153 \textcolor{comment}{/* Gzip Flags */}
+00154 \textcolor{preprocessor}{#define IGZIP\_DEFLATE   0       }\textcolor{comment}{/* Default */}\textcolor{preprocessor}{}
+00155 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_GZIP      1}
+00156 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_GZIP\_NO\_HDR       2}
+00157 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_ZLIB      3}
+00158 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_ZLIB\_NO\_HDR       4}
+00159 \textcolor{preprocessor}{}
+00160 \textcolor{comment}{/* Compression Return values */}
+00161 \textcolor{preprocessor}{#define COMP\_OK 0}
+00162 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define INVALID\_FLUSH -7}
+00163 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define INVALID\_PARAM -8}
+00164 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define STATELESS\_OVERFLOW -1}
+00165 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_OPERATION -9}
+00166 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_STATE -3}
+00167 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_LEVEL -4   }\textcolor{comment}{/* Invalid Compression level set */}\textcolor{preprocessor}{}
+00168 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_LEVEL\_BUF -5 }\textcolor{comment}{/* Invalid buffer specified for the compression level */}\textcolor{preprocessor}{}
+00169 \textcolor{preprocessor}{}
+00176 \textcolor{comment}{/* When the state is set to ZSTATE\_NEW\_HDR or TMP\_ZSTATE\_NEW\_HEADER, the}
+00177 \textcolor{comment}{ * hufftable being used for compression may be swapped}
+00178 \textcolor{comment}{ */}
+\hypertarget{igzip__lib_8h_source_l00179}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}{00179} \textcolor{keyword}{enum} \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}{isal\_zstate\_state} \{
+\hypertarget{igzip__lib_8h_source_l00180}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ae29ac79025884cb44734bf6cc1c2dc8a}{00180}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ae29ac79025884cb44734bf6cc1c2dc8a}{ZSTATE\_NEW\_HDR},  
+\hypertarget{igzip__lib_8h_source_l00181}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a0732985b5f3f6326df79d3a9602a5d28}{00181}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a0732985b5f3f6326df79d3a9602a5d28}{ZSTATE\_HDR},   
+\hypertarget{igzip__lib_8h_source_l00182}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa1f5cabded72c30de4d7d259045be9d6}{00182}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa1f5cabded72c30de4d7d259045be9d6}{ZSTATE\_CREATE\_HDR}, 
+\hypertarget{igzip__lib_8h_source_l00183}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a19eb4a317476d06fe3aeb5747b4bdd94}{00183}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a19eb4a317476d06fe3aeb5747b4bdd94}{ZSTATE\_BODY}, 
+\hypertarget{igzip__lib_8h_source_l00184}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a109b2268f524b66c72e518926d6a50e1}{00184}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a109b2268f524b66c72e518926d6a50e1}{ZSTATE\_FLUSH\_READ\_BUFFER}, 
+00185         ZSTATE\_FLUSH\_ICF\_BUFFER,
+00186         ZSTATE\_TYPE0\_HDR, 
+\hypertarget{igzip__lib_8h_source_l00187}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a5176ea8c48e72828d68a623e1c6adf8b}{00187}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a5176ea8c48e72828d68a623e1c6adf8b}{ZSTATE\_TYPE0\_BODY}, 
+\hypertarget{igzip__lib_8h_source_l00188}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad1bc4b252110bf3a966b60bdf1e47933}{00188}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad1bc4b252110bf3a966b60bdf1e47933}{ZSTATE\_SYNC\_FLUSH}, 
+\hypertarget{igzip__lib_8h_source_l00189}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a06bfbb1c73e37a846f8d49444c77ef09}{00189}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a06bfbb1c73e37a846f8d49444c77ef09}{ZSTATE\_FLUSH\_WRITE\_BUFFER}, 
+\hypertarget{igzip__lib_8h_source_l00190}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a88bfe2520b8b8075ac982cf78f299629}{00190}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a88bfe2520b8b8075ac982cf78f299629}{ZSTATE\_TRL},   
+\hypertarget{igzip__lib_8h_source_l00191}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aed309f0832206a73cc9d3ca7ca1cefcc}{00191}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aed309f0832206a73cc9d3ca7ca1cefcc}{ZSTATE\_END},   
+\hypertarget{igzip__lib_8h_source_l00192}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ac51b1849e58365ad73de62a6dd48d8af}{00192}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ac51b1849e58365ad73de62a6dd48d8af}{ZSTATE\_TMP\_NEW\_HDR}, 
+\hypertarget{igzip__lib_8h_source_l00193}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a9022a6088ebb9bd63824c30fdc9bb7e6}{00193}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a9022a6088ebb9bd63824c30fdc9bb7e6}{ZSTATE\_TMP\_HDR},   
+\hypertarget{igzip__lib_8h_source_l00194}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a4987d9d303e6fb02ec68b7279e561a5f}{00194}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a4987d9d303e6fb02ec68b7279e561a5f}{ZSTATE\_TMP\_CREATE\_HDR}, 
+\hypertarget{igzip__lib_8h_source_l00195}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad6f44c8d6ac1935f2ab547492dbfafc0}{00195}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad6f44c8d6ac1935f2ab547492dbfafc0}{ZSTATE\_TMP\_BODY}, 
+\hypertarget{igzip__lib_8h_source_l00196}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aef8435f222e77fa05a876babf8096922}{00196}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aef8435f222e77fa05a876babf8096922}{ZSTATE\_TMP\_FLUSH\_READ\_BUFFER}, 
+00197         ZSTATE\_TMP\_FLUSH\_ICF\_BUFFER,
+00198         ZSTATE\_TMP\_TYPE0\_HDR, 
+\hypertarget{igzip__lib_8h_source_l00199}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a42d4ad449237e3adb254121514ffe552}{00199}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a42d4ad449237e3adb254121514ffe552}{ZSTATE\_TMP\_TYPE0\_BODY}, 
+\hypertarget{igzip__lib_8h_source_l00200}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aeeab8dee9837e67fb0439e8c1b7bc8e2}{00200}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aeeab8dee9837e67fb0439e8c1b7bc8e2}{ZSTATE\_TMP\_SYNC\_FLUSH}, 
+\hypertarget{igzip__lib_8h_source_l00201}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a206cc526da1927e20bbff7f1518c641c}{00201}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a206cc526da1927e20bbff7f1518c641c}{ZSTATE\_TMP\_FLUSH\_WRITE\_BUFFER}, 
+\hypertarget{igzip__lib_8h_source_l00202}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa6a864ea51b7f866425ca5e5dc155194}{00202}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa6a864ea51b7f866425ca5e5dc155194}{ZSTATE\_TMP\_TRL},   
+\hypertarget{igzip__lib_8h_source_l00203}{}\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad7db4e6c908ed5949574b81a19f829f9}{00203}         \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad7db4e6c908ed5949574b81a19f829f9}{ZSTATE\_TMP\_END}    
+00204 \};
+00205 
+00206 \textcolor{comment}{/* Offset used to switch between TMP states and non-tmp states */}
+00207 \textcolor{preprocessor}{#define ZSTATE\_TMP\_OFFSET ZSTATE\_TMP\_HDR - ZSTATE\_HDR}
+00208 \textcolor{preprocessor}{}
+00209 \textcolor{comment}{/******************************************************************************/}
+00210 \textcolor{comment}{/* Inflate Implementation Specific Defines */}
+00211 \textcolor{comment}{/******************************************************************************/}
+00212 \textcolor{preprocessor}{#define ISAL\_DECODE\_LONG\_BITS 12}
+00213 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DECODE\_SHORT\_BITS 10}
+00214 \textcolor{preprocessor}{}
+00215 \textcolor{comment}{/* Current state of decompression */}
+00216 \textcolor{keyword}{enum} isal\_block\_state \{
+00217         ISAL\_BLOCK\_NEW\_HDR,     \textcolor{comment}{/* Just starting a new block */}
+00218         ISAL\_BLOCK\_HDR,         \textcolor{comment}{/* In the middle of reading in a block header */}
+00219         ISAL\_BLOCK\_TYPE0,       \textcolor{comment}{/* Decoding a type 0 block */}
+00220         ISAL\_BLOCK\_CODED,       \textcolor{comment}{/* Decoding a huffman coded block */}
+00221         ISAL\_BLOCK\_INPUT\_DONE,  \textcolor{comment}{/* Decompression of input is completed */}
+00222         ISAL\_BLOCK\_FINISH,      \textcolor{comment}{/* Decompression of input is completed and all data has been flushed to
+       output */}
+00223         ISAL\_GZIP\_EXTRA\_LEN,
+00224         ISAL\_GZIP\_EXTRA,
+00225         ISAL\_GZIP\_NAME,
+00226         ISAL\_GZIP\_COMMENT,
+00227         ISAL\_GZIP\_HCRC,
+00228         ISAL\_ZLIB\_DICT,
+00229         ISAL\_CHECKSUM\_CHECK,
+00230 \};
+00231 
+00232 
+00233 \textcolor{comment}{/* Inflate Flags */}
+00234 \textcolor{preprocessor}{#define ISAL\_DEFLATE    0       }\textcolor{comment}{/* Default */}\textcolor{preprocessor}{}
+00235 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_GZIP       1}
+00236 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_GZIP\_NO\_HDR        2}
+00237 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_ZLIB       3}
+00238 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_ZLIB\_NO\_HDR        4}
+00239 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_ZLIB\_NO\_HDR\_VER    5}
+00240 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_GZIP\_NO\_HDR\_VER    6}
+00241 \textcolor{preprocessor}{}
+00242 \textcolor{comment}{/* Inflate Return values */}
+00243 \textcolor{preprocessor}{#define ISAL\_DECOMP\_OK 0        }\textcolor{comment}{/* No errors encountered while decompressing */}\textcolor{preprocessor}{}
+00244 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_END\_INPUT 1        }\textcolor{comment}{/* End of input reached */}\textcolor{preprocessor}{}
+00245 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_OUT\_OVERFLOW 2     }\textcolor{comment}{/* End of output reached */}\textcolor{preprocessor}{}
+00246 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_NAME\_OVERFLOW 3    }\textcolor{comment}{/* End of gzip name buffer reached */}\textcolor{preprocessor}{}
+00247 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_COMMENT\_OVERFLOW 4 }\textcolor{comment}{/* End of gzip name buffer reached */}\textcolor{preprocessor}{}
+00248 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_EXTRA\_OVERFLOW 5   }\textcolor{comment}{/* End of extra buffer reached */}\textcolor{preprocessor}{}
+00249 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_NEED\_DICT 6 }\textcolor{comment}{/* Stream needs a dictionary to continue */}\textcolor{preprocessor}{}
+00250 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_BLOCK -1   }\textcolor{comment}{/* Invalid deflate block found */}\textcolor{preprocessor}{}
+00251 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_SYMBOL -2  }\textcolor{comment}{/* Invalid deflate symbol found */}\textcolor{preprocessor}{}
+00252 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_LOOKBACK -3        }\textcolor{comment}{/* Invalid lookback distance found */}\textcolor{preprocessor}{}
+00253 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INVALID\_WRAPPER -4 }\textcolor{comment}{/* Invalid gzip/zlib wrapper found */}\textcolor{preprocessor}{}
+00254 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_UNSUPPORTED\_METHOD -5      }\textcolor{comment}{/* Gzip/zlib wrapper specifies unsupported compress method */}\textcolor{preprocessor}{}
+00255 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_INCORRECT\_CHECKSUM -6 }\textcolor{comment}{/* Incorrect checksum found */}\textcolor{preprocessor}{}
+00256 \textcolor{preprocessor}{}
+00257 \textcolor{comment}{/******************************************************************************/}
+00258 \textcolor{comment}{/* Compression structures */}
+00259 \textcolor{comment}{/******************************************************************************/}
+\hypertarget{igzip__lib_8h_source_l00261}{}\hyperlink{structisal__huff__histogram}{00261} \textcolor{keyword}{struct }\hyperlink{structisal__huff__histogram}{isal\_huff\_histogram} \{
+\hypertarget{igzip__lib_8h_source_l00262}{}\hyperlink{structisal__huff__histogram_ac17cf755b424f646110fb72514cac916}{00262}         uint64\_t \hyperlink{structisal__huff__histogram_ac17cf755b424f646110fb72514cac916}{lit\_len\_histogram}[ISAL\_DEF\_LIT\_LEN\_SYMBOLS]; 
+\hypertarget{igzip__lib_8h_source_l00263}{}\hyperlink{structisal__huff__histogram_a01f4b69ba1d34810baa98ce185248723}{00263}         uint64\_t \hyperlink{structisal__huff__histogram_a01f4b69ba1d34810baa98ce185248723}{dist\_histogram}[ISAL\_DEF\_DIST\_SYMBOLS]; 
+\hypertarget{igzip__lib_8h_source_l00264}{}\hyperlink{structisal__huff__histogram_a7c131c72a6a7336c6ecc98d731998e09}{00264}         uint16\_t \hyperlink{structisal__huff__histogram_a7c131c72a6a7336c6ecc98d731998e09}{hash\_table}[IGZIP\_LVL0\_HASH\_SIZE]; 
+00265 \};
+00266 
+\hypertarget{igzip__lib_8h_source_l00267}{}\hyperlink{structisal__mod__hist}{00267} \textcolor{keyword}{struct }\hyperlink{structisal__mod__hist}{isal\_mod\_hist} \{
+00268     uint32\_t d\_hist[30];
+00269     uint32\_t ll\_hist[513];
+00270 \};
+00271 
+00272 \textcolor{preprocessor}{#define ISAL\_DEF\_MIN\_LEVEL 0}
+00273 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_MAX\_LEVEL 3}
+00274 \textcolor{preprocessor}{}
+00275 \textcolor{comment}{/* Defines used set level data sizes */}
+00276 \textcolor{comment}{/* has to be at least sizeof(struct level\_buf) + sizeof(struct lvlX\_buf */}
+00277 \textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_REQ 0}
+00278 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_REQ (4 * IGZIP\_K + 2 * IGZIP\_LVL1\_HASH\_SIZE)}
+00279 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_TOKEN\_SIZE 4}
+00280 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_REQ (4 * IGZIP\_K + 2 * IGZIP\_LVL2\_HASH\_SIZE)}
+00281 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_TOKEN\_SIZE 4}
+00282 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_REQ 4 * IGZIP\_K + 4 * 4 * IGZIP\_K + 2 * IGZIP\_LVL3\_HASH\_SIZE}
+00283 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_TOKEN\_SIZE 4}
+00284 \textcolor{preprocessor}{}
+00285 \textcolor{comment}{/* Data sizes for level specific data options */}
+00286 \textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_MIN ISAL\_DEF\_LVL0\_REQ}
+00287 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_SMALL ISAL\_DEF\_LVL0\_REQ}
+00288 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_MEDIUM ISAL\_DEF\_LVL0\_REQ}
+00289 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_LARGE ISAL\_DEF\_LVL0\_REQ}
+00290 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_EXTRA\_LARGE ISAL\_DEF\_LVL0\_REQ}
+00291 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL0\_DEFAULT ISAL\_DEF\_LVL0\_REQ}
+00292 \textcolor{preprocessor}{}
+00293 \textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_MIN (ISAL\_DEF\_LVL1\_REQ + ISAL\_DEF\_LVL1\_TOKEN\_SIZE * 1 * IGZIP\_K)}
+00294 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_SMALL (ISAL\_DEF\_LVL1\_REQ + ISAL\_DEF\_LVL1\_TOKEN\_SIZE * 16 * IGZIP\_K)}
+00295 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_MEDIUM (ISAL\_DEF\_LVL1\_REQ + ISAL\_DEF\_LVL1\_TOKEN\_SIZE * 32 * IGZIP\_K)}
+00296 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_LARGE (ISAL\_DEF\_LVL1\_REQ + ISAL\_DEF\_LVL1\_TOKEN\_SIZE * 64 * IGZIP\_K)}
+00297 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_EXTRA\_LARGE (ISAL\_DEF\_LVL1\_REQ + ISAL\_DEF\_LVL1\_TOKEN\_SIZE * 128 * IGZIP\_K)}
+00298 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL1\_DEFAULT ISAL\_DEF\_LVL1\_LARGE}
+00299 \textcolor{preprocessor}{}
+00300 \textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_MIN (ISAL\_DEF\_LVL2\_REQ + ISAL\_DEF\_LVL2\_TOKEN\_SIZE * 1 * IGZIP\_K)}
+00301 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_SMALL (ISAL\_DEF\_LVL2\_REQ + ISAL\_DEF\_LVL2\_TOKEN\_SIZE * 16 * IGZIP\_K)}
+00302 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_MEDIUM (ISAL\_DEF\_LVL2\_REQ + ISAL\_DEF\_LVL2\_TOKEN\_SIZE * 32 * IGZIP\_K)}
+00303 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_LARGE (ISAL\_DEF\_LVL2\_REQ + ISAL\_DEF\_LVL2\_TOKEN\_SIZE * 64 * IGZIP\_K)}
+00304 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_EXTRA\_LARGE (ISAL\_DEF\_LVL2\_REQ + ISAL\_DEF\_LVL2\_TOKEN\_SIZE * 128 * IGZIP\_K)}
+00305 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL2\_DEFAULT ISAL\_DEF\_LVL2\_LARGE}
+00306 \textcolor{preprocessor}{}
+00307 \textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_MIN (ISAL\_DEF\_LVL3\_REQ + ISAL\_DEF\_LVL3\_TOKEN\_SIZE * 1 * IGZIP\_K)}
+00308 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_SMALL (ISAL\_DEF\_LVL3\_REQ + ISAL\_DEF\_LVL3\_TOKEN\_SIZE * 16 * IGZIP\_K)}
+00309 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_MEDIUM (ISAL\_DEF\_LVL3\_REQ + ISAL\_DEF\_LVL3\_TOKEN\_SIZE * 32 * IGZIP\_K)}
+00310 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_LARGE (ISAL\_DEF\_LVL3\_REQ + ISAL\_DEF\_LVL3\_TOKEN\_SIZE * 64 * IGZIP\_K)}
+00311 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_EXTRA\_LARGE (ISAL\_DEF\_LVL3\_REQ + ISAL\_DEF\_LVL3\_TOKEN\_SIZE * 128 * IGZIP\_K)}
+00312 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_DEF\_LVL3\_DEFAULT ISAL\_DEF\_LVL3\_LARGE}
+00313 \textcolor{preprocessor}{}
+00314 \textcolor{preprocessor}{#define IGZIP\_NO\_HIST 0}
+00315 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_HIST 1}
+00316 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_DICT\_HIST 2}
+00317 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define IGZIP\_DICT\_HASH\_SET 3}
+00318 \textcolor{preprocessor}{}
+\hypertarget{igzip__lib_8h_source_l00320}{}\hyperlink{structBitBuf2}{00320} \textcolor{keyword}{struct }\hyperlink{structBitBuf2}{BitBuf2} \{
+\hypertarget{igzip__lib_8h_source_l00321}{}\hyperlink{structBitBuf2_aacc18f894ebd91816c384b9057770fac}{00321}         uint64\_t \hyperlink{structBitBuf2_aacc18f894ebd91816c384b9057770fac}{m\_bits};  
+\hypertarget{igzip__lib_8h_source_l00322}{}\hyperlink{structBitBuf2_a446dd553f29ac2941bb570f89f188230}{00322}         uint32\_t \hyperlink{structBitBuf2_a446dd553f29ac2941bb570f89f188230}{m\_bit\_count};        
+\hypertarget{igzip__lib_8h_source_l00323}{}\hyperlink{structBitBuf2_a7ec2667d96d3d242150c703fde685c11}{00323}         uint8\_t *\hyperlink{structBitBuf2_a7ec2667d96d3d242150c703fde685c11}{m\_out\_buf};    
+\hypertarget{igzip__lib_8h_source_l00324}{}\hyperlink{structBitBuf2_ac122f67aef743267a779af8030d9bf08}{00324}         uint8\_t *\hyperlink{structBitBuf2_ac122f67aef743267a779af8030d9bf08}{m\_out\_end};    
+\hypertarget{igzip__lib_8h_source_l00325}{}\hyperlink{structBitBuf2_a8daeab9c6fe5e664a91a6c6895124b7a}{00325}         uint8\_t *\hyperlink{structBitBuf2_a8daeab9c6fe5e664a91a6c6895124b7a}{m\_out\_start};        
+00326 \};
+00327 
+\hypertarget{igzip__lib_8h_source_l00328}{}\hyperlink{structisal__zlib__header}{00328} \textcolor{keyword}{struct }\hyperlink{structisal__zlib__header}{isal\_zlib\_header} \{
+\hypertarget{igzip__lib_8h_source_l00329}{}\hyperlink{structisal__zlib__header_aa1eab37684857680e607bf54806c836a}{00329}         uint32\_t \hyperlink{structisal__zlib__header_aa1eab37684857680e607bf54806c836a}{info};              
+\hypertarget{igzip__lib_8h_source_l00330}{}\hyperlink{structisal__zlib__header_ae5d1a42e558f3d8cdcd34c8ba80f2b92}{00330}         uint32\_t \hyperlink{structisal__zlib__header_ae5d1a42e558f3d8cdcd34c8ba80f2b92}{level};            
+\hypertarget{igzip__lib_8h_source_l00331}{}\hyperlink{structisal__zlib__header_a8a60d9a952c4aadb5d5f8d96b823c14f}{00331}         uint32\_t \hyperlink{structisal__zlib__header_a8a60d9a952c4aadb5d5f8d96b823c14f}{dict\_id};        
+\hypertarget{igzip__lib_8h_source_l00332}{}\hyperlink{structisal__zlib__header_a9ff86b868b00983aa7de3617a4042079}{00332}         uint32\_t \hyperlink{structisal__zlib__header_a9ff86b868b00983aa7de3617a4042079}{dict\_flag};    
+00333 \};
+00334 
+\hypertarget{igzip__lib_8h_source_l00335}{}\hyperlink{structisal__gzip__header}{00335} \textcolor{keyword}{struct }\hyperlink{structisal__gzip__header}{isal\_gzip\_header} \{
+\hypertarget{igzip__lib_8h_source_l00336}{}\hyperlink{structisal__gzip__header_adc43e295007880ff5b0e89668f7292a4}{00336}         uint32\_t \hyperlink{structisal__gzip__header_adc43e295007880ff5b0e89668f7292a4}{text};              
+\hypertarget{igzip__lib_8h_source_l00337}{}\hyperlink{structisal__gzip__header_a9b5abca0311cb57b7e03846b536e471d}{00337}         uint32\_t \hyperlink{structisal__gzip__header_a9b5abca0311cb57b7e03846b536e471d}{time};              
+\hypertarget{igzip__lib_8h_source_l00338}{}\hyperlink{structisal__gzip__header_abe25065b6394c44eb3bc78d18cea572c}{00338}         uint32\_t \hyperlink{structisal__gzip__header_abe25065b6394c44eb3bc78d18cea572c}{xflags};          
+\hypertarget{igzip__lib_8h_source_l00339}{}\hyperlink{structisal__gzip__header_a2ba793e4e1e4d771558ae0d420f0638b}{00339}         uint32\_t \hyperlink{structisal__gzip__header_a2ba793e4e1e4d771558ae0d420f0638b}{os};          
+\hypertarget{igzip__lib_8h_source_l00340}{}\hyperlink{structisal__gzip__header_a08cc64e1f0c3ccd0e61ee0fd8db20f08}{00340}         uint8\_t *\hyperlink{structisal__gzip__header_a08cc64e1f0c3ccd0e61ee0fd8db20f08}{extra};            
+\hypertarget{igzip__lib_8h_source_l00341}{}\hyperlink{structisal__gzip__header_a14c696396c281eb0bf7669db7f2146bc}{00341}         uint32\_t \hyperlink{structisal__gzip__header_a14c696396c281eb0bf7669db7f2146bc}{extra\_buf\_len};    
+\hypertarget{igzip__lib_8h_source_l00342}{}\hyperlink{structisal__gzip__header_adf9858f78131209d4b08ea69970dda20}{00342}         uint32\_t \hyperlink{structisal__gzip__header_adf9858f78131209d4b08ea69970dda20}{extra\_len};    
+\hypertarget{igzip__lib_8h_source_l00343}{}\hyperlink{structisal__gzip__header_ad52fb23b5b735c6fcfb27ecec311fc91}{00343}         \textcolor{keywordtype}{char} *\hyperlink{structisal__gzip__header_ad52fb23b5b735c6fcfb27ecec311fc91}{name};         
+\hypertarget{igzip__lib_8h_source_l00344}{}\hyperlink{structisal__gzip__header_aba7f1f032ae3a471c3de05ad2c629d71}{00344}         uint32\_t \hyperlink{structisal__gzip__header_aba7f1f032ae3a471c3de05ad2c629d71}{name\_buf\_len};      
+\hypertarget{igzip__lib_8h_source_l00345}{}\hyperlink{structisal__gzip__header_aa141438d7fd4ee9cbe8a11686c7e5619}{00345}         \textcolor{keywordtype}{char} *\hyperlink{structisal__gzip__header_aa141438d7fd4ee9cbe8a11686c7e5619}{comment};           
+\hypertarget{igzip__lib_8h_source_l00346}{}\hyperlink{structisal__gzip__header_a8319310883f1ccbeeea470ee680c66cc}{00346}         uint32\_t \hyperlink{structisal__gzip__header_a8319310883f1ccbeeea470ee680c66cc}{comment\_buf\_len};        
+\hypertarget{igzip__lib_8h_source_l00347}{}\hyperlink{structisal__gzip__header_a887c9cf4ad220fca36274129ab8b5e0f}{00347}         uint32\_t \hyperlink{structisal__gzip__header_a887c9cf4ad220fca36274129ab8b5e0f}{hcrc};              
+\hypertarget{igzip__lib_8h_source_l00348}{}\hyperlink{structisal__gzip__header_a82a007737211be9e96fcd94e0540dd0f}{00348}         uint32\_t \hyperlink{structisal__gzip__header_a82a007737211be9e96fcd94e0540dd0f}{flags};            
+00349 \};
+00350 
+00351 \textcolor{comment}{/* Variable prefixes:}
+00352 \textcolor{comment}{ * b\_ : Measured wrt the start of the buffer}
+00353 \textcolor{comment}{ * f\_ : Measured wrt the start of the file (aka file\_start)}
+00354 \textcolor{comment}{ */}
+00355 
+\hypertarget{igzip__lib_8h_source_l00357}{}\hyperlink{structisal__zstate}{00357} \textcolor{keyword}{struct }\hyperlink{structisal__zstate}{isal\_zstate} \{
+\hypertarget{igzip__lib_8h_source_l00358}{}\hyperlink{structisal__zstate_a990d24372549ff1a52b4c979f9d33fe5}{00358}         uint32\_t \hyperlink{structisal__zstate_a990d24372549ff1a52b4c979f9d33fe5}{total\_in\_start}; 
+\hypertarget{igzip__lib_8h_source_l00359}{}\hyperlink{structisal__zstate_a906c377decb19fa260c2cf095b0814e9}{00359}         uint32\_t \hyperlink{structisal__zstate_a906c377decb19fa260c2cf095b0814e9}{block\_next};  
+\hypertarget{igzip__lib_8h_source_l00360}{}\hyperlink{structisal__zstate_aee5434d36c06853f78f715fb9cd37482}{00360}         uint32\_t \hyperlink{structisal__zstate_aee5434d36c06853f78f715fb9cd37482}{block\_end};    
+\hypertarget{igzip__lib_8h_source_l00361}{}\hyperlink{structisal__zstate_aa5c0d828386bc413bac15d1b76dc7e6b}{00361}         uint32\_t \hyperlink{structisal__zstate_aa5c0d828386bc413bac15d1b76dc7e6b}{dist\_mask};    
+00362         uint32\_t hash\_mask;
+\hypertarget{igzip__lib_8h_source_l00363}{}\hyperlink{structisal__zstate_a972dd54176275b6ca03ebd82a9e104c6}{00363}         \textcolor{keyword}{enum} \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}{isal\_zstate\_state} \hyperlink{structisal__zstate_a972dd54176275b6ca03ebd82a9e104c6}{state};     
+\hypertarget{igzip__lib_8h_source_l00364}{}\hyperlink{structisal__zstate_a6ac389906a92107b440b74ac8d9ccd7b}{00364}         \textcolor{keyword}{struct }\hyperlink{structBitBuf2}{BitBuf2} \hyperlink{structisal__zstate_a6ac389906a92107b440b74ac8d9ccd7b}{bitbuf};     
+\hypertarget{igzip__lib_8h_source_l00365}{}\hyperlink{structisal__zstate_a8508929f6b193987f05fb4fbee69bffe}{00365}         uint32\_t \hyperlink{structisal__zstate_a8508929f6b193987f05fb4fbee69bffe}{crc};                
+\hypertarget{igzip__lib_8h_source_l00366}{}\hyperlink{structisal__zstate_adb81b0703b0f1c4c9516b9f02cae8595}{00366}         uint8\_t \hyperlink{structisal__zstate_adb81b0703b0f1c4c9516b9f02cae8595}{has\_wrap\_hdr};       
+\hypertarget{igzip__lib_8h_source_l00367}{}\hyperlink{structisal__zstate_a01941715df42c4ca8cd449f5a4e98ae3}{00367}         uint8\_t \hyperlink{structisal__zstate_a01941715df42c4ca8cd449f5a4e98ae3}{has\_eob\_hdr}; 
+\hypertarget{igzip__lib_8h_source_l00368}{}\hyperlink{structisal__zstate_a1a0944cac395cfb6b63d5737ebc116c3}{00368}         uint8\_t \hyperlink{structisal__zstate_a1a0944cac395cfb6b63d5737ebc116c3}{has\_eob}; 
+\hypertarget{igzip__lib_8h_source_l00369}{}\hyperlink{structisal__zstate_a5e1e89dd31dfee589dcf7ef3e42aa1ef}{00369}         uint8\_t \hyperlink{structisal__zstate_a5e1e89dd31dfee589dcf7ef3e42aa1ef}{has\_hist};       
+\hypertarget{igzip__lib_8h_source_l00370}{}\hyperlink{structisal__zstate_a3f0312f301a4bdf551dc19ea0f65d814}{00370}         uint16\_t \hyperlink{structisal__zstate_a3f0312f301a4bdf551dc19ea0f65d814}{has\_level\_buf\_init}; 
+\hypertarget{igzip__lib_8h_source_l00371}{}\hyperlink{structisal__zstate_a73a55d919202b77b7c75dbf041aed60d}{00371}         uint32\_t \hyperlink{structisal__zstate_a73a55d919202b77b7c75dbf041aed60d}{count};    
+\hypertarget{igzip__lib_8h_source_l00372}{}\hyperlink{structisal__zstate_ac4647cb8161a09ee3571a5b23fb31ede}{00372}         uint8\_t \hyperlink{structisal__zstate_ac4647cb8161a09ee3571a5b23fb31ede}{tmp\_out\_buff}[16];   
+\hypertarget{igzip__lib_8h_source_l00373}{}\hyperlink{structisal__zstate_a65a9ebba76414ada501f3acae26c53b1}{00373}         uint32\_t \hyperlink{structisal__zstate_a65a9ebba76414ada501f3acae26c53b1}{tmp\_out\_start};    
+\hypertarget{igzip__lib_8h_source_l00374}{}\hyperlink{structisal__zstate_a85468e210ff1af953c6cf03963268b3f}{00374}         uint32\_t \hyperlink{structisal__zstate_a85468e210ff1af953c6cf03963268b3f}{tmp\_out\_end};        
+\hypertarget{igzip__lib_8h_source_l00375}{}\hyperlink{structisal__zstate_a4cf27b5f5708535fa8e286caff216e1f}{00375}         uint32\_t \hyperlink{structisal__zstate_a4cf27b5f5708535fa8e286caff216e1f}{b\_bytes\_valid};    
+\hypertarget{igzip__lib_8h_source_l00376}{}\hyperlink{structisal__zstate_ad504130e6f13a7c49e17b955b73c50c7}{00376}         uint32\_t \hyperlink{structisal__zstate_ad504130e6f13a7c49e17b955b73c50c7}{b\_bytes\_processed};    
+\hypertarget{igzip__lib_8h_source_l00377}{}\hyperlink{structisal__zstate_a78c640b0579b255e49cd3603b6549bd6}{00377}         uint8\_t \hyperlink{structisal__zstate_a78c640b0579b255e49cd3603b6549bd6}{buffer}[2 * IGZIP\_HIST\_SIZE + ISAL\_LOOK\_AHEAD];    
+00378 
+00379         \textcolor{comment}{/* Stream should be setup such that the head is cache aligned*/}
+\hypertarget{igzip__lib_8h_source_l00380}{}\hyperlink{structisal__zstate_aea49aef5075c1852f2f4197f0d9b8809}{00380}         uint16\_t \hyperlink{structisal__zstate_aea49aef5075c1852f2f4197f0d9b8809}{head}[IGZIP\_LVL0\_HASH\_SIZE];        
+00381 \};
+00382 
+\hypertarget{igzip__lib_8h_source_l00384}{}\hyperlink{structisal__hufftables}{00384} \textcolor{keyword}{struct }\hyperlink{structisal__hufftables}{isal\_hufftables} \{
+00385 
+\hypertarget{igzip__lib_8h_source_l00386}{}\hyperlink{structisal__hufftables_a1b087bbe2a68e745de3f3e07f32325d0}{00386}         uint8\_t \hyperlink{structisal__hufftables_a1b087bbe2a68e745de3f3e07f32325d0}{deflate\_hdr}[ISAL\_DEF\_MAX\_HDR\_SIZE]; 
+\hypertarget{igzip__lib_8h_source_l00387}{}\hyperlink{structisal__hufftables_acb2b9fe9c6f2f9f349653bb4ff1b2ff1}{00387}         uint32\_t \hyperlink{structisal__hufftables_acb2b9fe9c6f2f9f349653bb4ff1b2ff1}{deflate\_hdr\_count}; 
+\hypertarget{igzip__lib_8h_source_l00388}{}\hyperlink{structisal__hufftables_ad0a67b1eba3b08dc4b29881cdb3b7a91}{00388}         uint32\_t \hyperlink{structisal__hufftables_ad0a67b1eba3b08dc4b29881cdb3b7a91}{deflate\_hdr\_extra\_bits}; 
+\hypertarget{igzip__lib_8h_source_l00389}{}\hyperlink{structisal__hufftables_a31b696f195715ec9fb3a03fcedb3b42c}{00389}         uint32\_t \hyperlink{structisal__hufftables_a31b696f195715ec9fb3a03fcedb3b42c}{dist\_table}[IGZIP\_DIST\_TABLE\_SIZE]; 
+\hypertarget{igzip__lib_8h_source_l00390}{}\hyperlink{structisal__hufftables_a214f59643e7904ab0b7c9e278a0172d6}{00390}         uint32\_t \hyperlink{structisal__hufftables_a214f59643e7904ab0b7c9e278a0172d6}{len\_table}[IGZIP\_LEN\_TABLE\_SIZE]; 
+\hypertarget{igzip__lib_8h_source_l00391}{}\hyperlink{structisal__hufftables_aa4eb4c670579e7f3dde5171684771b37}{00391}         uint16\_t \hyperlink{structisal__hufftables_aa4eb4c670579e7f3dde5171684771b37}{lit\_table}[IGZIP\_LIT\_TABLE\_SIZE]; 
+\hypertarget{igzip__lib_8h_source_l00392}{}\hyperlink{structisal__hufftables_abbba034c819d09a5e135d9de6d27fc96}{00392}         uint8\_t \hyperlink{structisal__hufftables_abbba034c819d09a5e135d9de6d27fc96}{lit\_table\_sizes}[IGZIP\_LIT\_TABLE\_SIZE]; 
+\hypertarget{igzip__lib_8h_source_l00393}{}\hyperlink{structisal__hufftables_a92bcda751f360088f782cf468c95a858}{00393}         uint16\_t \hyperlink{structisal__hufftables_a92bcda751f360088f782cf468c95a858}{dcodes}[30 - IGZIP\_DECODE\_OFFSET]; 
+\hypertarget{igzip__lib_8h_source_l00394}{}\hyperlink{structisal__hufftables_ab2e78b7c6d91762112bf530caf54ae60}{00394}         uint8\_t \hyperlink{structisal__hufftables_ab2e78b7c6d91762112bf530caf54ae60}{dcodes\_sizes}[30 - IGZIP\_DECODE\_OFFSET]; 
+00395 
+00396 \};
+00397 
+\hypertarget{igzip__lib_8h_source_l00399}{}\hyperlink{structisal__zstream}{00399} \textcolor{keyword}{struct }\hyperlink{structisal__zstream}{isal\_zstream} \{
+\hypertarget{igzip__lib_8h_source_l00400}{}\hyperlink{structisal__zstream_ad1af5ae0aed97539bcfcb932444363c0}{00400}         uint8\_t *\hyperlink{structisal__zstream_ad1af5ae0aed97539bcfcb932444363c0}{next\_in};        
+\hypertarget{igzip__lib_8h_source_l00401}{}\hyperlink{structisal__zstream_a104ab8b7139e790ceca4c4bfe4277b1c}{00401}         uint32\_t \hyperlink{structisal__zstream_a104ab8b7139e790ceca4c4bfe4277b1c}{avail\_in};      
+\hypertarget{igzip__lib_8h_source_l00402}{}\hyperlink{structisal__zstream_af5405009f71758d2b2eddd16229011b8}{00402}         uint32\_t \hyperlink{structisal__zstream_af5405009f71758d2b2eddd16229011b8}{total\_in};      
+00403 
+\hypertarget{igzip__lib_8h_source_l00404}{}\hyperlink{structisal__zstream_a2a7525f6fc85d0f7de399474d4c723bc}{00404}         uint8\_t *\hyperlink{structisal__zstream_a2a7525f6fc85d0f7de399474d4c723bc}{next\_out};      
+\hypertarget{igzip__lib_8h_source_l00405}{}\hyperlink{structisal__zstream_a2f960cdd24b681b8cb007e0c7bf95ef3}{00405}         uint32\_t \hyperlink{structisal__zstream_a2f960cdd24b681b8cb007e0c7bf95ef3}{avail\_out};    
+\hypertarget{igzip__lib_8h_source_l00406}{}\hyperlink{structisal__zstream_ab8e856611ff7bb74b07b8181c65a3ac9}{00406}         uint32\_t \hyperlink{structisal__zstream_ab8e856611ff7bb74b07b8181c65a3ac9}{total\_out};    
+00407 
+\hypertarget{igzip__lib_8h_source_l00408}{}\hyperlink{structisal__zstream_aa7df05aaedba218a462bd8618bbb1e14}{00408}         \textcolor{keyword}{struct }\hyperlink{structisal__hufftables}{isal\_hufftables} *\hyperlink{structisal__zstream_aa7df05aaedba218a462bd8618bbb1e14}{hufftables}; 
+\hypertarget{igzip__lib_8h_source_l00409}{}\hyperlink{structisal__zstream_ab6400b8e160686601593acfbbb9576c7}{00409}         uint32\_t \hyperlink{structisal__zstream_ab6400b8e160686601593acfbbb9576c7}{level}; 
+\hypertarget{igzip__lib_8h_source_l00410}{}\hyperlink{structisal__zstream_a38161009752cf0dcf95aec62ce6826a5}{00410}         uint32\_t \hyperlink{structisal__zstream_a38161009752cf0dcf95aec62ce6826a5}{level\_buf\_size}; 
+\hypertarget{igzip__lib_8h_source_l00411}{}\hyperlink{structisal__zstream_afd3126f1572c50c48d9fc00906589ab5}{00411}         uint8\_t * \hyperlink{structisal__zstream_afd3126f1572c50c48d9fc00906589ab5}{level\_buf}; 
+\hypertarget{igzip__lib_8h_source_l00412}{}\hyperlink{structisal__zstream_a8eb1025e062bff0676c9e87e53786017}{00412}         uint16\_t \hyperlink{structisal__zstream_a8eb1025e062bff0676c9e87e53786017}{end\_of\_stream};    
+\hypertarget{igzip__lib_8h_source_l00413}{}\hyperlink{structisal__zstream_af508d21a8ce51e9791b0a8dcef0a6aa3}{00413}         uint16\_t \hyperlink{structisal__zstream_af508d21a8ce51e9791b0a8dcef0a6aa3}{flush};    
+\hypertarget{igzip__lib_8h_source_l00414}{}\hyperlink{structisal__zstream_a1533fae7c0608f5c651df09da21a9d58}{00414}         uint16\_t \hyperlink{structisal__zstream_a1533fae7c0608f5c651df09da21a9d58}{gzip\_flag}; 
+\hypertarget{igzip__lib_8h_source_l00415}{}\hyperlink{structisal__zstream_aaba002a436d34dc8080a3eee6317ffba}{00415}         uint16\_t \hyperlink{structisal__zstream_aaba002a436d34dc8080a3eee6317ffba}{hist\_bits}; 
+\hypertarget{igzip__lib_8h_source_l00416}{}\hyperlink{structisal__zstream_a0cac5165b6c4b21159fb6dfc4a5dc307}{00416}         \textcolor{keyword}{struct }\hyperlink{structisal__zstate}{isal\_zstate} \hyperlink{structisal__zstream_a0cac5165b6c4b21159fb6dfc4a5dc307}{internal\_state};     
+00417 \};
+00418 
+00419 \textcolor{comment}{/******************************************************************************/}
+00420 \textcolor{comment}{/* Inflate structures */}
+00421 \textcolor{comment}{/******************************************************************************/}
+00422 \textcolor{comment}{/*}
+00423 \textcolor{comment}{ * Inflate\_huff\_code data structures are used to store a Huffman code for fast}
+00424 \textcolor{comment}{ * lookup. It works by performing a lookup in small\_code\_lookup that hopefully}
+00425 \textcolor{comment}{ * yields the correct symbol. Otherwise a lookup into long\_code\_lookup is}
+00426 \textcolor{comment}{ * performed to find the correct symbol. The details of how this works follows:}
+00427 \textcolor{comment}{ *}
+00428 \textcolor{comment}{ * Let i be some index into small\_code\_lookup and let e be the associated}
+00429 \textcolor{comment}{ * element.  Bit 15 in e is a flag. If bit 15 is not set, then index i contains}
+00430 \textcolor{comment}{ * a Huffman code for a symbol which has length at most DECODE\_LOOKUP\_SIZE. Bits}
+00431 \textcolor{comment}{ * 0 through 8 are the symbol associated with that code and bits 9 through 12 of}
+00432 \textcolor{comment}{ * e represent the number of bits in the code. If bit 15 is set, the i}
+00433 \textcolor{comment}{ * corresponds to the first DECODE\_LOOKUP\_SIZE bits of a Huffman code which has}
+00434 \textcolor{comment}{ * length longer than DECODE\_LOOKUP\_SIZE. In this case, bits 0 through 8}
+00435 \textcolor{comment}{ * represent an offset into long\_code\_lookup table and bits 9 through 12}
+00436 \textcolor{comment}{ * represent the maximum length of a Huffman code starting with the bits in the}
+00437 \textcolor{comment}{ * index i. The offset into long\_code\_lookup is for an array associated with all}
+00438 \textcolor{comment}{ * codes which start with the bits in i.}
+00439 \textcolor{comment}{ *}
+00440 \textcolor{comment}{ * The elements of long\_code\_lookup are in the same format as small\_code\_lookup,}
+00441 \textcolor{comment}{ * except bit 15 is never set. Let i be a number made up of DECODE\_LOOKUP\_SIZE}
+00442 \textcolor{comment}{ * bits.  Then all Huffman codes which start with DECODE\_LOOKUP\_SIZE bits are}
+00443 \textcolor{comment}{ * stored in an array starting at index h in long\_code\_lookup. This index h is}
+00444 \textcolor{comment}{ * stored in bits 0 through 9 at index i in small\_code\_lookup. The index j is an}
+00445 \textcolor{comment}{ * index of this array if the number of bits contained in j and i is the number}
+00446 \textcolor{comment}{ * of bits in the longest huff\_code starting with the bits of i. The symbol}
+00447 \textcolor{comment}{ * stored at index j is the symbol whose huffcode can be found in (j <<}
+00448 \textcolor{comment}{ * DECODE\_LOOKUP\_SIZE) | i. Note these arrays will be stored sorted in order of}
+00449 \textcolor{comment}{ * maximum Huffman code length.}
+00450 \textcolor{comment}{ *}
+00451 \textcolor{comment}{ * The following are explanations for sizes of the tables:}
+00452 \textcolor{comment}{ *}
+00453 \textcolor{comment}{ * Since small\_code\_lookup is a lookup on DECODE\_LOOKUP\_SIZE bits, it must have}
+00454 \textcolor{comment}{ * size 2^DECODE\_LOOKUP\_SIZE.}
+00455 \textcolor{comment}{ *}
+00456 \textcolor{comment}{ * To determine the amount of memory required for long\_code\_lookup, note that}
+00457 \textcolor{comment}{ * any element of long\_code\_lookup corresponds to a code, a duplicate of an}
+00458 \textcolor{comment}{ * existing code, or a invalid code. Since deflate Huffman are stored such that}
+00459 \textcolor{comment}{ * the code size and the code value form an increasing function, the number of}
+00460 \textcolor{comment}{ * duplicates is maximized when all the duplicates are contained in a single}
+00461 \textcolor{comment}{ * array, thus there are at most 2^(15 - DECODE\_LOOKUP\_SIZE) -}
+00462 \textcolor{comment}{ * (DECODE\_LOOKUP\_SIZE + 1) duplicate elements. Similarly the number of invalid}
+00463 \textcolor{comment}{ * elements is maximized at 2^(15 - DECODE\_LOOKUP\_SIZE) - 2^(floor((15 -}
+00464 \textcolor{comment}{ * DECODE\_LOOKUP\_SIZE)/2) - 2^(ceil((15 - DECODE\_LOOKUP\_SIZE)/2) + 1. Thus the}
+00465 \textcolor{comment}{ * amount of memory required is: NUM\_CODES + 2^(16 - DECODE\_LOOKUP\_SIZE) -}
+00466 \textcolor{comment}{ * (DECODE\_LOOKUP\_SIZE + 1) - 2^(floor((15 - DECODE\_LOOKUP\_SIZE)/2) -}
+00467 \textcolor{comment}{ * 2^(ceil((15 - DECODE\_LOOKUP\_SIZE)/2) + 1. The values used below are those}
+00468 \textcolor{comment}{ * values rounded up to the nearest 16 byte boundary}
+00469 \textcolor{comment}{ *}
+00470 \textcolor{comment}{ * Note that DECODE\_LOOKUP\_SIZE can be any length even though the offset in}
+00471 \textcolor{comment}{ * small\_lookup\_code is 9 bits long because the increasing relationship between}
+00472 \textcolor{comment}{ * code length and code value forces the maximum offset to be less than 288.}
+00473 \textcolor{comment}{ */}
+00474 
+00475 \textcolor{comment}{/* In the following defines, L stands for LARGE and S for SMALL */}
+00476 \textcolor{preprocessor}{#define ISAL\_L\_REM (21 - ISAL\_DECODE\_LONG\_BITS)}
+00477 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_S\_REM (15 - ISAL\_DECODE\_SHORT\_BITS)}
+00478 \textcolor{preprocessor}{}
+00479 \textcolor{preprocessor}{#define ISAL\_L\_DUP ((1 << ISAL\_L\_REM) - (ISAL\_L\_REM + 1))}
+00480 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_S\_DUP ((1 << ISAL\_S\_REM) - (ISAL\_S\_REM + 1))}
+00481 \textcolor{preprocessor}{}
+00482 \textcolor{preprocessor}{#define ISAL\_L\_UNUSED ((1 << ISAL\_L\_REM) - (1 << ((ISAL\_L\_REM)/2)) - (1 << ((ISAL\_L\_REM + 1)/2)) + 1)}
+00483 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_S\_UNUSED ((1 << ISAL\_S\_REM) - (1 << ((ISAL\_S\_REM)/2)) - (1 << ((ISAL\_S\_REM + 1)/2)) + 1)}
+00484 \textcolor{preprocessor}{}
+00485 \textcolor{preprocessor}{#define ISAL\_L\_SIZE (ISAL\_DEF\_LIT\_LEN\_SYMBOLS + ISAL\_L\_DUP + ISAL\_L\_UNUSED)}
+00486 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_S\_SIZE (ISAL\_DEF\_DIST\_SYMBOLS + ISAL\_S\_DUP + ISAL\_S\_UNUSED)}
+00487 \textcolor{preprocessor}{}
+00488 \textcolor{preprocessor}{#define ISAL\_HUFF\_CODE\_LARGE\_LONG\_ALIGNED (ISAL\_L\_SIZE + (-ISAL\_L\_SIZE & 0xf))}
+00489 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_HUFF\_CODE\_SMALL\_LONG\_ALIGNED (ISAL\_S\_SIZE + (-ISAL\_S\_SIZE & 0xf))}
+00490 \textcolor{preprocessor}{}
+00491 \textcolor{comment}{/* Large lookup table for decoding huffman codes */}
+\hypertarget{igzip__lib_8h_source_l00492}{}\hyperlink{structinflate__huff__code__large}{00492} \textcolor{keyword}{struct }\hyperlink{structinflate__huff__code__large}{inflate\_huff\_code\_large} \{
+00493         uint32\_t short\_code\_lookup[1 << (ISAL\_DECODE\_LONG\_BITS)];
+00494         uint16\_t long\_code\_lookup[ISAL\_HUFF\_CODE\_LARGE\_LONG\_ALIGNED];
+00495 \};
+00496 
+00497 \textcolor{comment}{/* Small lookup table for decoding huffman codes */}
+\hypertarget{igzip__lib_8h_source_l00498}{}\hyperlink{structinflate__huff__code__small}{00498} \textcolor{keyword}{struct }\hyperlink{structinflate__huff__code__small}{inflate\_huff\_code\_small} \{
+00499         uint16\_t short\_code\_lookup[1 << (ISAL\_DECODE\_SHORT\_BITS)];
+00500         uint16\_t long\_code\_lookup[ISAL\_HUFF\_CODE\_SMALL\_LONG\_ALIGNED];
+00501 \};
+00502 
+\hypertarget{igzip__lib_8h_source_l00504}{}\hyperlink{structinflate__state}{00504} \textcolor{keyword}{struct }\hyperlink{structinflate__state}{inflate\_state} \{
+\hypertarget{igzip__lib_8h_source_l00505}{}\hyperlink{structinflate__state_abbf4f563f2d72a00d96ff4fc684d02c6}{00505}         uint8\_t *\hyperlink{structinflate__state_abbf4f563f2d72a00d96ff4fc684d02c6}{next\_out};      
+\hypertarget{igzip__lib_8h_source_l00506}{}\hyperlink{structinflate__state_a8806b67f8aa044f345f64a510fa7ee45}{00506}         uint32\_t \hyperlink{structinflate__state_a8806b67f8aa044f345f64a510fa7ee45}{avail\_out};    
+\hypertarget{igzip__lib_8h_source_l00507}{}\hyperlink{structinflate__state_aa8fe90014653de7ec8b843e2fe4ae7e9}{00507}         uint32\_t \hyperlink{structinflate__state_aa8fe90014653de7ec8b843e2fe4ae7e9}{total\_out};    
+\hypertarget{igzip__lib_8h_source_l00508}{}\hyperlink{structinflate__state_a65069a2b7e931db174234fcf68a5a746}{00508}         uint8\_t *\hyperlink{structinflate__state_a65069a2b7e931db174234fcf68a5a746}{next\_in};        
+\hypertarget{igzip__lib_8h_source_l00509}{}\hyperlink{structinflate__state_a7b31d8a1e82de2e303c61d291e899e28}{00509}         uint64\_t \hyperlink{structinflate__state_a7b31d8a1e82de2e303c61d291e899e28}{read\_in};        
+\hypertarget{igzip__lib_8h_source_l00510}{}\hyperlink{structinflate__state_a93274af406747bdd3f94b5546a67bd07}{00510}         uint32\_t \hyperlink{structinflate__state_a93274af406747bdd3f94b5546a67bd07}{avail\_in};      
+\hypertarget{igzip__lib_8h_source_l00511}{}\hyperlink{structinflate__state_a20599afa006cb6544d3d6ade67b67c62}{00511}         int32\_t \hyperlink{structinflate__state_a20599afa006cb6544d3d6ade67b67c62}{read\_in\_length};   
+\hypertarget{igzip__lib_8h_source_l00512}{}\hyperlink{structinflate__state_ac582f8f6e53188b366260c7f38931731}{00512}         \textcolor{keyword}{struct }\hyperlink{structinflate__huff__code__large}{inflate\_huff\_code\_large} \hyperlink{structinflate__state_ac582f8f6e53188b366260c7f38931731}{lit\_huff\_code};       
+\hypertarget{igzip__lib_8h_source_l00513}{}\hyperlink{structinflate__state_ae8f5da00291599b6f19c4a145d8b5738}{00513}         \textcolor{keyword}{struct }\hyperlink{structinflate__huff__code__small}{inflate\_huff\_code\_small} \hyperlink{structinflate__state_ae8f5da00291599b6f19c4a145d8b5738}{dist\_huff\_code};     
+\hypertarget{igzip__lib_8h_source_l00514}{}\hyperlink{structinflate__state_ac0bb6a4a584fb515a000d6f1be0f2711}{00514}         \textcolor{keyword}{enum} isal\_block\_state \hyperlink{structinflate__state_ac0bb6a4a584fb515a000d6f1be0f2711}{block\_state};   
+\hypertarget{igzip__lib_8h_source_l00515}{}\hyperlink{structinflate__state_a7a359006ca174357e69db75fd9e038fe}{00515}         uint32\_t \hyperlink{structinflate__state_a7a359006ca174357e69db75fd9e038fe}{dict\_length};        
+\hypertarget{igzip__lib_8h_source_l00516}{}\hyperlink{structinflate__state_acf6d2c8ab990a35b45057f592051c7be}{00516}         uint32\_t \hyperlink{structinflate__state_acf6d2c8ab990a35b45057f592051c7be}{bfinal};  
+\hypertarget{igzip__lib_8h_source_l00517}{}\hyperlink{structinflate__state_ab2d3dac9eb492d567e151e8301a92b79}{00517}         uint32\_t \hyperlink{structinflate__state_ab2d3dac9eb492d567e151e8301a92b79}{crc\_flag};      
+\hypertarget{igzip__lib_8h_source_l00518}{}\hyperlink{structinflate__state_a3b6a7581b596c2ad3c0e797805d02955}{00518}         uint32\_t \hyperlink{structinflate__state_a3b6a7581b596c2ad3c0e797805d02955}{crc};                
+\hypertarget{igzip__lib_8h_source_l00519}{}\hyperlink{structinflate__state_a38879a59194da05b16beb16ac1753843}{00519}         uint32\_t \hyperlink{structinflate__state_a38879a59194da05b16beb16ac1753843}{hist\_bits}; 
+00520         \textcolor{keyword}{union }\{
+\hypertarget{igzip__lib_8h_source_l00521}{}\hyperlink{structinflate__state_ade86a18378d63c8d5d55308a2a8b2baf}{00521}                 int32\_t \hyperlink{structinflate__state_ade86a18378d63c8d5d55308a2a8b2baf}{type0\_block\_len}; 
+\hypertarget{igzip__lib_8h_source_l00522}{}\hyperlink{structinflate__state_a587977c569fe163e400b91dcd8a55849}{00522}                 int32\_t \hyperlink{structinflate__state_a587977c569fe163e400b91dcd8a55849}{count}; 
+00523                 uint32\_t dict\_id;
+00524         \};
+00525         int32\_t write\_overflow\_lits;
+00526         int32\_t write\_overflow\_len;
+\hypertarget{igzip__lib_8h_source_l00527}{}\hyperlink{structinflate__state_a69940c6f7c20c4817dc395217d052594}{00527}         int32\_t \hyperlink{structinflate__state_a69940c6f7c20c4817dc395217d052594}{copy\_overflow\_length};       
+\hypertarget{igzip__lib_8h_source_l00528}{}\hyperlink{structinflate__state_a9eb789eea7581efad31ebd10fc09cbc6}{00528}         int32\_t \hyperlink{structinflate__state_a9eb789eea7581efad31ebd10fc09cbc6}{copy\_overflow\_distance};   
+00529         int16\_t wrapper\_flag;
+\hypertarget{igzip__lib_8h_source_l00530}{}\hyperlink{structinflate__state_ab6a6c36c9bda624f3b15f380f6dfd563}{00530}         int16\_t \hyperlink{structinflate__state_ab6a6c36c9bda624f3b15f380f6dfd563}{tmp\_in\_size}; 
+\hypertarget{igzip__lib_8h_source_l00531}{}\hyperlink{structinflate__state_ad7a6734e5267eac4769b125cc3c3edb4}{00531}         int32\_t \hyperlink{structinflate__state_ad7a6734e5267eac4769b125cc3c3edb4}{tmp\_out\_valid};     
+\hypertarget{igzip__lib_8h_source_l00532}{}\hyperlink{structinflate__state_aa4c82daf12d611bca6cb28905a4c5168}{00532}         int32\_t \hyperlink{structinflate__state_aa4c82daf12d611bca6cb28905a4c5168}{tmp\_out\_processed};     
+\hypertarget{igzip__lib_8h_source_l00533}{}\hyperlink{structinflate__state_aca852f3fbb23de387aa789f572303cf8}{00533}         uint8\_t \hyperlink{structinflate__state_aca852f3fbb23de387aa789f572303cf8}{tmp\_in\_buffer}[ISAL\_DEF\_MAX\_HDR\_SIZE];      
+\hypertarget{igzip__lib_8h_source_l00534}{}\hyperlink{structinflate__state_abf70896b8d99c6fbb91c5bb2ff1c2337}{00534}         uint8\_t \hyperlink{structinflate__state_abf70896b8d99c6fbb91c5bb2ff1c2337}{tmp\_out\_buffer}[2 * ISAL\_DEF\_HIST\_SIZE + ISAL\_LOOK\_AHEAD];         
+00535 \};
+00536 
+00537 \textcolor{comment}{/******************************************************************************/}
+00538 \textcolor{comment}{/* Compression functions */}
+00539 \textcolor{comment}{/******************************************************************************/}
+00551 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_abcf32e76e2b6802792a5ceb4b51f1c4e}{isal\_update\_histogram}(uint8\_t * in\_stream, \textcolor{keywordtype}{int} length, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__huff__histogram}{isal\_huff\_histogram} * histogram);
+00552 
+00553 
+00564 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a4d4699267b60c1b57c034b2adc612ee7}{isal\_create\_hufftables}(\textcolor{keyword}{struct} \hyperlink{structisal__hufftables}{isal\_hufftables} * hufftables,
+00565                         \textcolor{keyword}{struct} \hyperlink{structisal__huff__histogram}{isal\_huff\_histogram} * histogram);
+00566 
+00577 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_aa45350d816cfdcbad55ec95284776af3}{isal\_create\_hufftables\_subset}(\textcolor{keyword}{struct} 
+      \hyperlink{structisal__hufftables}{isal\_hufftables} * hufftables,
+00578                                 \textcolor{keyword}{struct} \hyperlink{structisal__huff__histogram}{isal\_huff\_histogram} * histogram);
+00579 
+00586 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_a6d311328df613652c3d1606d4a0297c7}{isal\_deflate\_init}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream);
+00587 
+00597 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_ae582f5e4fc6a35ab8796949660259178}{isal\_deflate\_reset}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream);
+00598 
+00599 
+00605 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_aafa595cf3fdcb8f40f5ded192944c54b}{isal\_gzip\_header\_init}(\textcolor{keyword}{struct} \hyperlink{structisal__gzip__header}{isal\_gzip\_header} *gz\_hdr);
+00606 
+00622 uint32\_t \hyperlink{igzip__lib_8h_a2e5fe18579896416b7477e6598489b28}{isal\_write\_gzip\_header}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} * stream, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__gzip__header}{isal\_gzip\_header} *gz\_hdr);
+00623 
+00639 uint32\_t \hyperlink{igzip__lib_8h_ac6409a35e068fc012e37f85fa189a999}{isal\_write\_zlib\_header}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} * stream, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__zlib__header}{isal\_zlib\_header} *z\_hdr);
+00640 
+00661 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a142e998c9897b815135742ff04102978}{isal\_deflate\_set\_hufftables}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream,
+00662                                 \textcolor{keyword}{struct} \hyperlink{structisal__hufftables}{isal\_hufftables} *hufftables, \textcolor{keywordtype}{int} type);
+00663 
+00670 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_aeae02071c5f41de12b7350dc90b314fc}{isal\_deflate\_stateless\_init}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream);
+00671 
+00672 
+00687 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}{isal\_deflate\_set\_dict}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream, uint8\_t *dict, 
+      uint32\_t dict\_len);
+00688 
+\hypertarget{igzip__lib_8h_source_l00691}{}\hyperlink{structisal__dict}{00691} \textcolor{keyword}{struct }\hyperlink{structisal__dict}{isal\_dict} \{
+00692         uint32\_t params;
+00693         uint32\_t level;
+00694         uint32\_t hist\_size;
+00695         uint32\_t hash\_size;
+00696         uint8\_t history[ISAL\_DEF\_HIST\_SIZE];
+00697         uint16\_t hashtable[IGZIP\_LVL3\_HASH\_SIZE];
+00698 \};
+00699 
+00718 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a15edadeb459a40840e6c2f4baa59fb12}{isal\_deflate\_process\_dict}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__dict}{isal\_dict} *dict\_str,
+00719                         uint8\_t *dict, uint32\_t dict\_len);
+00720 
+00738 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a36116973797161ef4243c49c68b64cc2}{isal\_deflate\_reset\_dict}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__dict}{isal\_dict} *dict\_str);
+00739 
+00740 
+00795 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\_deflate}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream);
+00796 
+00797 
+00825 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a2dd4d4c13d44fe96ca0d37d169fbf525}{isal\_deflate\_stateless}(\textcolor{keyword}{struct} \hyperlink{structisal__zstream}{isal\_zstream} *stream);
+00826 
+00827 
+00828 \textcolor{comment}{/******************************************************************************/}
+00829 \textcolor{comment}{/* Inflate functions */}
+00830 \textcolor{comment}{/******************************************************************************/}
+00837 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_a00513fdbbc6688c613d1a41b694ad168}{isal\_inflate\_init}(\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state);
+00838 
+00845 \textcolor{keywordtype}{void} \hyperlink{igzip__lib_8h_af6d86fe1b62a34074e908390b17e5a31}{isal\_inflate\_reset}(\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state);
+00846 
+00860 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a5a5a24dc5d4f9a9ca3bf08b5bb0274ff}{isal\_inflate\_set\_dict}(\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state, uint8\_t *dict, 
+      uint32\_t dict\_len);
+00861 
+00883 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a7fd333cf5024c376599a3fd8fb616b7d}{isal\_read\_gzip\_header} (\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__gzip__header}{isal\_gzip\_header} *gz\_hdr);
+00884 
+00898 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_a4af9bf84dd7ca9a60eb1d07bad4a7c76}{isal\_read\_zlib\_header} (\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state, \textcolor{keyword}{struct} 
+      \hyperlink{structisal__zlib__header}{isal\_zlib\_header} *zlib\_hdr);
+00899 
+00946 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{isal\_inflate}(\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state);
+00947 
+00968 \textcolor{keywordtype}{int} \hyperlink{igzip__lib_8h_adb59d093d9b8b621285fef81f82e4c0c}{isal\_inflate\_stateless}(\textcolor{keyword}{struct} \hyperlink{structinflate__state}{inflate\_state} *state);
+00969 
+00970 \textcolor{comment}{/******************************************************************************/}
+00971 \textcolor{comment}{/* Other functions */}
+00972 \textcolor{comment}{/******************************************************************************/}
+00985 uint32\_t \hyperlink{igzip__lib_8h_ac2adc31ec28075401ffae270df525593}{isal\_adler32}(uint32\_t init, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, uint64\_t len);
+00986 
+00987 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00988 \textcolor{preprocessor}{}\}
+00989 \textcolor{preprocessor}{#endif}
+00990 \textcolor{preprocessor}{}\textcolor{preprocessor}{#endif  }\textcolor{comment}{/* ifndef \_IGZIP\_H */}\textcolor{preprocessor}{}
+\end{DoxyCode}

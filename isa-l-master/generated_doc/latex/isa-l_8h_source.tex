@@ -1,0 +1,23 @@
+\hypertarget{isa-l_8h_source}{\section{isa-\/l.h}
+}
+
+\begin{DoxyCode}
+00001 
+00007 \textcolor{preprocessor}{#ifndef \_ISAL\_H\_}
+00008 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define \_ISAL\_H\_}
+00009 \textcolor{preprocessor}{}
+00010 \textcolor{preprocessor}{#define ISAL\_MAJOR\_VERSION 2}
+00011 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_MINOR\_VERSION 30}
+00012 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_PATCH\_VERSION 0}
+00013 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_MAKE\_VERSION(maj, min, patch)  ((maj) * 0x10000 + (min) * 0x100 + (patch))}
+00014 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define ISAL\_VERSION ISAL\_MAKE\_VERSION(ISAL\_MAJOR\_VERSION, ISAL\_MINOR\_VERSION, ISAL\_PATCH\_VERSION)}
+00015 \textcolor{preprocessor}{}
+00016 \textcolor{preprocessor}{#include <isa-l/crc.h>}
+00017 \textcolor{preprocessor}{#include <isa-l/crc64.h>}
+00018 \textcolor{preprocessor}{#include <isa-l/erasure\_code.h>}
+00019 \textcolor{preprocessor}{#include <isa-l/gf\_vect\_mul.h>}
+00020 \textcolor{preprocessor}{#include <isa-l/igzip\_lib.h>}
+00021 \textcolor{preprocessor}{#include <isa-l/mem\_routines.h>}
+00022 \textcolor{preprocessor}{#include <isa-l/raid.h>}
+00023 \textcolor{preprocessor}{#endif //\_ISAL\_H\_}
+\end{DoxyCode}

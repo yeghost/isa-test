@@ -1,0 +1,241 @@
+\hypertarget{raid_8h}{\section{raid.\-h File Reference}
+\label{raid_8h}\index{raid.\-h@{raid.\-h}}
+}
+
+
+Interface to R\-A\-I\-D functions -\/ X\-O\-R and P+\-Q calculation.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{raid_8h_afe3180e1fefab9a892cadaac903fe197}{xor\-\_\-gen} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Generate X\-O\-R parity vector from N sources, runs appropriate version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a0174206318adc9bf9bdd48ebd67ddd46}{xor\-\_\-check} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Checks that array has X\-O\-R parity sum of 0 across all vectors, runs appropriate version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a5493e93296c68d6e6e1a5c0a63e78e62}{pq\-\_\-gen} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Generate P+\-Q parity vectors from N sources, runs appropriate version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a7fe68ec6df2d903d7611daf2d5c7b3cc}{pq\-\_\-check} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Checks that array of N sources, P and Q are consistent across all vectors, runs appropriate version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a49d42025de6401ec1586abaa886b91f8}{pq\-\_\-gen\-\_\-base} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Generate P+\-Q parity vectors from N sources, runs baseline version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a3ed85ca849e93a1641392c3c64e93f98}{xor\-\_\-gen\-\_\-base} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Generate X\-O\-R parity vector from N sources, runs baseline version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a23917d3ac151358d5e66f474e92f1ae8}{xor\-\_\-check\-\_\-base} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Checks that array has X\-O\-R parity sum of 0 across all vectors, runs baseline version. \end{DoxyCompactList}\item 
+int \hyperlink{raid_8h_a02a57871d8822dc77b3841471ab5ffca}{pq\-\_\-check\-\_\-base} (int vects, int len, void $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Checks that array of N sources, P and Q are consistent across all vectors, runs baseline version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface to R\-A\-I\-D functions -\/ X\-O\-R and P+\-Q calculation. This file defines the interface to optimized X\-O\-R calculation (R\-A\-I\-D5) or P+\-Q dual parity (R\-A\-I\-D6). Operations are carried out on an array of pointers to sources and output arrays. 
+
+\subsection{Function Documentation}
+\hypertarget{raid_8h_a7fe68ec6df2d903d7611daf2d5c7b3cc}{\index{raid.\-h@{raid.\-h}!pq\-\_\-check@{pq\-\_\-check}}
+\index{pq\-\_\-check@{pq\-\_\-check}!raid.h@{raid.\-h}}
+\subsubsection[{pq\-\_\-check}]{\setlength{\rightskip}{0pt plus 5cm}int pq\-\_\-check (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a7fe68ec6df2d903d7611daf2d5c7b3cc}
+
+
+Checks that array of N sources, P and Q are consistent across all vectors, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of vectors in array including P\&Q. \\
+\hline
+{\em len} & Length of each vector in bytes. Must be 16\-B aligned. \\
+\hline
+{\em array} & Array of pointers to source and P, Q. P and Q parity are assumed to be the last two pointers in the array. All pointers must be aligned to 16\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_a02a57871d8822dc77b3841471ab5ffca}{\index{raid.\-h@{raid.\-h}!pq\-\_\-check\-\_\-base@{pq\-\_\-check\-\_\-base}}
+\index{pq\-\_\-check\-\_\-base@{pq\-\_\-check\-\_\-base}!raid.h@{raid.\-h}}
+\subsubsection[{pq\-\_\-check\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}int pq\-\_\-check\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a02a57871d8822dc77b3841471ab5ffca}
+
+
+Checks that array of N sources, P and Q are consistent across all vectors, runs baseline version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of vectors in array including P\&Q. \\
+\hline
+{\em len} & Length of each vector in bytes. Must be 16\-B aligned. \\
+\hline
+{\em array} & Array of pointers to source and P, Q. P and Q parity are assumed to be the last two pointers in the array. All pointers must be aligned to 16\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_a5493e93296c68d6e6e1a5c0a63e78e62}{\index{raid.\-h@{raid.\-h}!pq\-\_\-gen@{pq\-\_\-gen}}
+\index{pq\-\_\-gen@{pq\-\_\-gen}!raid.h@{raid.\-h}}
+\subsubsection[{pq\-\_\-gen}]{\setlength{\rightskip}{0pt plus 5cm}int pq\-\_\-gen (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a5493e93296c68d6e6e1a5c0a63e78e62}
+
+
+Generate P+\-Q parity vectors from N sources, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of source+dest vectors in array. \\
+\hline
+{\em len} & Length of each vector in bytes. Must be 32\-B aligned. \\
+\hline
+{\em array} & Array of pointers to source and dest. For P+\-Q the dest is the last two pointers. ie array\mbox{[}vects-\/2\mbox{]}, array\mbox{[}vects-\/1\mbox{]}. P and Q parity vectors are written to these last two pointers. Src and dest pointers must be aligned to 32\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_a49d42025de6401ec1586abaa886b91f8}{\index{raid.\-h@{raid.\-h}!pq\-\_\-gen\-\_\-base@{pq\-\_\-gen\-\_\-base}}
+\index{pq\-\_\-gen\-\_\-base@{pq\-\_\-gen\-\_\-base}!raid.h@{raid.\-h}}
+\subsubsection[{pq\-\_\-gen\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}int pq\-\_\-gen\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a49d42025de6401ec1586abaa886b91f8}
+
+
+Generate P+\-Q parity vectors from N sources, runs baseline version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of source+dest vectors in array. \\
+\hline
+{\em len} & Length of each vector in bytes. Must be 16\-B aligned. \\
+\hline
+{\em array} & Array of pointers to source and dest. For P+\-Q the dest is the last two pointers. ie array\mbox{[}vects-\/2\mbox{]}, array\mbox{[}vects-\/1\mbox{]}. P and Q parity vectors are written to these last two pointers. Src and dest pointers must be aligned to 16\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_a0174206318adc9bf9bdd48ebd67ddd46}{\index{raid.\-h@{raid.\-h}!xor\-\_\-check@{xor\-\_\-check}}
+\index{xor\-\_\-check@{xor\-\_\-check}!raid.h@{raid.\-h}}
+\subsubsection[{xor\-\_\-check}]{\setlength{\rightskip}{0pt plus 5cm}int xor\-\_\-check (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a0174206318adc9bf9bdd48ebd67ddd46}
+
+
+Checks that array has X\-O\-R parity sum of 0 across all vectors, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of vectors in array. \\
+\hline
+{\em len} & Length of each vector in bytes. \\
+\hline
+{\em array} & Array of pointers to vectors. Src and dest pointers must be aligned to 16\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_a23917d3ac151358d5e66f474e92f1ae8}{\index{raid.\-h@{raid.\-h}!xor\-\_\-check\-\_\-base@{xor\-\_\-check\-\_\-base}}
+\index{xor\-\_\-check\-\_\-base@{xor\-\_\-check\-\_\-base}!raid.h@{raid.\-h}}
+\subsubsection[{xor\-\_\-check\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}int xor\-\_\-check\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a23917d3ac151358d5e66f474e92f1ae8}
+
+
+Checks that array has X\-O\-R parity sum of 0 across all vectors, runs baseline version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of vectors in array. \\
+\hline
+{\em len} & Length of each vector in bytes. \\
+\hline
+{\em array} & Array of pointers to vectors. Src and dest pointers must be aligned to 16\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_afe3180e1fefab9a892cadaac903fe197}{\index{raid.\-h@{raid.\-h}!xor\-\_\-gen@{xor\-\_\-gen}}
+\index{xor\-\_\-gen@{xor\-\_\-gen}!raid.h@{raid.\-h}}
+\subsubsection[{xor\-\_\-gen}]{\setlength{\rightskip}{0pt plus 5cm}int xor\-\_\-gen (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_afe3180e1fefab9a892cadaac903fe197}
+
+
+Generate X\-O\-R parity vector from N sources, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of source+dest vectors in array. \\
+\hline
+{\em len} & Length of each vector in bytes. \\
+\hline
+{\em array} & Array of pointers to source and dest. For X\-O\-R the dest is the last pointer. ie array\mbox{[}vects-\/1\mbox{]}. Src and dest pointers must be aligned to 32\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{raid_8h_a3ed85ca849e93a1641392c3c64e93f98}{\index{raid.\-h@{raid.\-h}!xor\-\_\-gen\-\_\-base@{xor\-\_\-gen\-\_\-base}}
+\index{xor\-\_\-gen\-\_\-base@{xor\-\_\-gen\-\_\-base}!raid.h@{raid.\-h}}
+\subsubsection[{xor\-\_\-gen\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}int xor\-\_\-gen\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{vects, }
+\item[{int}]{len, }
+\item[{void $\ast$$\ast$}]{array}
+\end{DoxyParamCaption}
+)}}\label{raid_8h_a3ed85ca849e93a1641392c3c64e93f98}
+
+
+Generate X\-O\-R parity vector from N sources, runs baseline version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vects} & Number of source+dest vectors in array. \\
+\hline
+{\em len} & Length of each vector in bytes. \\
+\hline
+{\em array} & Array of pointers to source and dest. For X\-O\-R the dest is the last pointer. ie array\mbox{[}vects-\/1\mbox{]}. Src and dest pointers must be aligned to 32\-B.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}

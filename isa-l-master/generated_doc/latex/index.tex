@@ -1,0 +1,84 @@
+\href{https://travis-ci.org/intel/isa-l}{\tt !\mbox{[}Build Status\mbox{]}(https\-://travis-\/ci.\-org/intel/isa-\/l.\-svg?branch=master)} \href{https://anaconda.org/conda-forge/isa-l}{\tt !\mbox{[}Package on conda-\/forge\mbox{]}(https\-://img.\-shields.\-io/conda/v/conda-\/forge/isa-\/l.\-svg)}
+
+I\-S\-A-\/\-L is a collection of optimized low-\/level functions targeting storage applications. I\-S\-A-\/\-L includes\-:
+\begin{DoxyItemize}
+\item Erasure codes -\/ Fast block Reed-\/\-Solomon type erasure codes for any encode/decode matrix in G\-F(2$^\wedge$8).
+\item C\-R\-C -\/ Fast implementations of cyclic redundancy check. Six different polynomials supported.
+\begin{DoxyItemize}
+\item iscsi32, ieee32, t10dif, ecma64, iso64, jones64.
+\end{DoxyItemize}
+\item Raid -\/ calculate and operate on X\-O\-R and P+\-Q parity found in common R\-A\-I\-D implementations.
+\item Compression -\/ Fast deflate-\/compatible data compression.
+\item De-\/compression -\/ Fast inflate-\/compatible data compression.
+\end{DoxyItemize}
+
+Also see\-:
+\begin{DoxyItemize}
+\item \href{https://github.com/intel/isa-l}{\tt I\-S\-A-\/\-L for updates}.
+\item For crypto functions see \href{https://github.com/intel/isa-l_crypto}{\tt isa-\/l\-\_\-crypto on github}.
+\item The \href{https://github.com/intel/isa-l/wiki}{\tt github wiki} including a list of \href{https://github.com/intel/isa-l/wiki/Ports--Repos}{\tt distros/ports} offering binary packages.
+\item I\-S\-A-\/\-L \href{https://lists.01.org/hyperkitty/list/isal@lists.01.org/}{\tt mailing list}.
+\item \href{CONTRIBUTING.md}{\tt Contributing}.
+\end{DoxyItemize}
+
+\subsection*{Building I\-S\-A-\/\-L }
+
+\subsubsection*{Prerequisites}
+
+
+\begin{DoxyItemize}
+\item Make\-: G\-N\-U 'make' or 'nmake' (Windows).
+\item Optional\-: Building with autotools requires autoconf/automake packages.
+\end{DoxyItemize}
+
+x86\-\_\-64\-:
+\begin{DoxyItemize}
+\item Assembler\-: nasm v2.\-11.\-01 or later (nasm v2.\-13 or better suggested for building in A\-V\-X512 support) or yasm version 1.\-2.\-0 or later.
+\item Compiler\-: gcc, clang, icc or V\-C compiler.
+\end{DoxyItemize}
+
+aarch64\-:
+\begin{DoxyItemize}
+\item Assembler\-: gas v2.\-24 or later.
+\item Compiler\-: gcc v4.\-7 or later.
+\end{DoxyItemize}
+
+other\-:
+\begin{DoxyItemize}
+\item Compiler\-: Portable base functions are available that build with most C compilers.
+\end{DoxyItemize}
+
+\subsubsection*{Autotools}
+
+To build and install the library with autotools it is usually sufficient to run\-: \begin{DoxyVerb}./autogen.sh
+./configure
+make
+sudo make install
+\end{DoxyVerb}
+
+
+\subsubsection*{Makefile}
+
+To use a standard makefile run\-: \begin{DoxyVerb}make -f Makefile.unx
+\end{DoxyVerb}
+
+
+\subsubsection*{Windows}
+
+On Windows use nmake to build dll and static lib\-: \begin{DoxyVerb}nmake -f Makefile.nmake
+\end{DoxyVerb}
+
+
+or see \href{doc/build.md}{\tt details on setting up environment here}.
+
+\subsubsection*{Other make targets}
+
+Other targets include\-:
+\begin{DoxyItemize}
+\item {\ttfamily make check} \-: create and run tests
+\item {\ttfamily make tests} \-: create additional unit tests
+\item {\ttfamily make perfs} \-: create included performance tests
+\item {\ttfamily make ex} \-: build examples
+\item {\ttfamily make other} \-: build other utilities such as compression file tests
+\item {\ttfamily make doc} \-: build A\-P\-I manual 
+\end{DoxyItemize}

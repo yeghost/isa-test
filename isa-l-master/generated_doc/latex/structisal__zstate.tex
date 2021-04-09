@@ -1,0 +1,83 @@
+\hypertarget{structisal__zstate}{\section{isal\-\_\-zstate Struct Reference}
+\label{structisal__zstate}\index{isal\-\_\-zstate@{isal\-\_\-zstate}}
+}
+
+
+Holds the internal state information for input and output compression streams.  
+
+
+
+
+{\ttfamily \#include $<$igzip\-\_\-lib.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structisal__zstate_a990d24372549ff1a52b4c979f9d33fe5}{uint32\-\_\-t \hyperlink{structisal__zstate_a990d24372549ff1a52b4c979f9d33fe5}{total\-\_\-in\-\_\-start}}\label{structisal__zstate_a990d24372549ff1a52b4c979f9d33fe5}
+
+\begin{DoxyCompactList}\small\item\em Not used, may be replaced with something else. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a906c377decb19fa260c2cf095b0814e9}{uint32\-\_\-t \hyperlink{structisal__zstate_a906c377decb19fa260c2cf095b0814e9}{block\-\_\-next}}\label{structisal__zstate_a906c377decb19fa260c2cf095b0814e9}
+
+\begin{DoxyCompactList}\small\item\em Start of current deflate block in the input. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_aee5434d36c06853f78f715fb9cd37482}{uint32\-\_\-t \hyperlink{structisal__zstate_aee5434d36c06853f78f715fb9cd37482}{block\-\_\-end}}\label{structisal__zstate_aee5434d36c06853f78f715fb9cd37482}
+
+\begin{DoxyCompactList}\small\item\em End of current deflate block in the input. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_aa5c0d828386bc413bac15d1b76dc7e6b}{uint32\-\_\-t \hyperlink{structisal__zstate_aa5c0d828386bc413bac15d1b76dc7e6b}{dist\-\_\-mask}}\label{structisal__zstate_aa5c0d828386bc413bac15d1b76dc7e6b}
+
+\begin{DoxyCompactList}\small\item\em Distance mask used. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a972dd54176275b6ca03ebd82a9e104c6}{enum \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}{isal\-\_\-zstate\-\_\-state} \hyperlink{structisal__zstate_a972dd54176275b6ca03ebd82a9e104c6}{state}}\label{structisal__zstate_a972dd54176275b6ca03ebd82a9e104c6}
+
+\begin{DoxyCompactList}\small\item\em Current state in processing the data stream. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a6ac389906a92107b440b74ac8d9ccd7b}{struct \hyperlink{structBitBuf2}{Bit\-Buf2} \hyperlink{structisal__zstate_a6ac389906a92107b440b74ac8d9ccd7b}{bitbuf}}\label{structisal__zstate_a6ac389906a92107b440b74ac8d9ccd7b}
+
+\begin{DoxyCompactList}\small\item\em Bit Buffer. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a8508929f6b193987f05fb4fbee69bffe}{uint32\-\_\-t \hyperlink{structisal__zstate_a8508929f6b193987f05fb4fbee69bffe}{crc}}\label{structisal__zstate_a8508929f6b193987f05fb4fbee69bffe}
+
+\begin{DoxyCompactList}\small\item\em Current checksum without finalize step if any (adler) \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_adb81b0703b0f1c4c9516b9f02cae8595}{uint8\-\_\-t \hyperlink{structisal__zstate_adb81b0703b0f1c4c9516b9f02cae8595}{has\-\_\-wrap\-\_\-hdr}}\label{structisal__zstate_adb81b0703b0f1c4c9516b9f02cae8595}
+
+\begin{DoxyCompactList}\small\item\em keeps track of wrapper header \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a01941715df42c4ca8cd449f5a4e98ae3}{uint8\-\_\-t \hyperlink{structisal__zstate_a01941715df42c4ca8cd449f5a4e98ae3}{has\-\_\-eob\-\_\-hdr}}\label{structisal__zstate_a01941715df42c4ca8cd449f5a4e98ae3}
+
+\begin{DoxyCompactList}\small\item\em keeps track of eob hdr (with B\-F\-I\-N\-A\-L set) \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a1a0944cac395cfb6b63d5737ebc116c3}{uint8\-\_\-t \hyperlink{structisal__zstate_a1a0944cac395cfb6b63d5737ebc116c3}{has\-\_\-eob}}\label{structisal__zstate_a1a0944cac395cfb6b63d5737ebc116c3}
+
+\begin{DoxyCompactList}\small\item\em keeps track of eob on the last deflate block \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a5e1e89dd31dfee589dcf7ef3e42aa1ef}{uint8\-\_\-t \hyperlink{structisal__zstate_a5e1e89dd31dfee589dcf7ef3e42aa1ef}{has\-\_\-hist}}\label{structisal__zstate_a5e1e89dd31dfee589dcf7ef3e42aa1ef}
+
+\begin{DoxyCompactList}\small\item\em flag to track if there is match history \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a3f0312f301a4bdf551dc19ea0f65d814}{uint16\-\_\-t \hyperlink{structisal__zstate_a3f0312f301a4bdf551dc19ea0f65d814}{has\-\_\-level\-\_\-buf\-\_\-init}}\label{structisal__zstate_a3f0312f301a4bdf551dc19ea0f65d814}
+
+\begin{DoxyCompactList}\small\item\em flag to track if user supplied memory has been initialized. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a73a55d919202b77b7c75dbf041aed60d}{uint32\-\_\-t \hyperlink{structisal__zstate_a73a55d919202b77b7c75dbf041aed60d}{count}}\label{structisal__zstate_a73a55d919202b77b7c75dbf041aed60d}
+
+\begin{DoxyCompactList}\small\item\em used for partial header/trailer writes \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_ac4647cb8161a09ee3571a5b23fb31ede}{uint8\-\_\-t \hyperlink{structisal__zstate_ac4647cb8161a09ee3571a5b23fb31ede}{tmp\-\_\-out\-\_\-buff} \mbox{[}16\mbox{]}}\label{structisal__zstate_ac4647cb8161a09ee3571a5b23fb31ede}
+
+\begin{DoxyCompactList}\small\item\em temporary array \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a65a9ebba76414ada501f3acae26c53b1}{uint32\-\_\-t \hyperlink{structisal__zstate_a65a9ebba76414ada501f3acae26c53b1}{tmp\-\_\-out\-\_\-start}}\label{structisal__zstate_a65a9ebba76414ada501f3acae26c53b1}
+
+\begin{DoxyCompactList}\small\item\em temporary variable \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a85468e210ff1af953c6cf03963268b3f}{uint32\-\_\-t \hyperlink{structisal__zstate_a85468e210ff1af953c6cf03963268b3f}{tmp\-\_\-out\-\_\-end}}\label{structisal__zstate_a85468e210ff1af953c6cf03963268b3f}
+
+\begin{DoxyCompactList}\small\item\em temporary variable \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a4cf27b5f5708535fa8e286caff216e1f}{uint32\-\_\-t \hyperlink{structisal__zstate_a4cf27b5f5708535fa8e286caff216e1f}{b\-\_\-bytes\-\_\-valid}}\label{structisal__zstate_a4cf27b5f5708535fa8e286caff216e1f}
+
+\begin{DoxyCompactList}\small\item\em number of valid bytes in buffer \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_ad504130e6f13a7c49e17b955b73c50c7}{uint32\-\_\-t \hyperlink{structisal__zstate_ad504130e6f13a7c49e17b955b73c50c7}{b\-\_\-bytes\-\_\-processed}}\label{structisal__zstate_ad504130e6f13a7c49e17b955b73c50c7}
+
+\begin{DoxyCompactList}\small\item\em number of bytes processed in buffer \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_a78c640b0579b255e49cd3603b6549bd6}{uint8\-\_\-t \hyperlink{structisal__zstate_a78c640b0579b255e49cd3603b6549bd6}{buffer} \mbox{[}2 $\ast$I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E+I\-S\-A\-L\-\_\-\-L\-O\-O\-K\-\_\-\-A\-H\-E\-A\-D\mbox{]}}\label{structisal__zstate_a78c640b0579b255e49cd3603b6549bd6}
+
+\begin{DoxyCompactList}\small\item\em Internal buffer. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstate_aea49aef5075c1852f2f4197f0d9b8809}{uint16\-\_\-t \hyperlink{structisal__zstate_aea49aef5075c1852f2f4197f0d9b8809}{head} \mbox{[}I\-G\-Z\-I\-P\-\_\-\-L\-V\-L0\-\_\-\-H\-A\-S\-H\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structisal__zstate_aea49aef5075c1852f2f4197f0d9b8809}
+
+\begin{DoxyCompactList}\small\item\em Hash array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds the internal state information for input and output compression streams. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{igzip__lib_8h}{igzip\-\_\-lib.\-h}\end{DoxyCompactItemize}

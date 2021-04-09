@@ -1,0 +1,68 @@
+\hypertarget{structisal__zstream}{\section{isal\-\_\-zstream Struct Reference}
+\label{structisal__zstream}\index{isal\-\_\-zstream@{isal\-\_\-zstream}}
+}
+
+
+Holds stream information.  
+
+
+
+
+{\ttfamily \#include $<$igzip\-\_\-lib.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structisal__zstream_ad1af5ae0aed97539bcfcb932444363c0}{uint8\-\_\-t $\ast$ \hyperlink{structisal__zstream_ad1af5ae0aed97539bcfcb932444363c0}{next\-\_\-in}}\label{structisal__zstream_ad1af5ae0aed97539bcfcb932444363c0}
+
+\begin{DoxyCompactList}\small\item\em Next input byte. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a104ab8b7139e790ceca4c4bfe4277b1c}{uint32\-\_\-t \hyperlink{structisal__zstream_a104ab8b7139e790ceca4c4bfe4277b1c}{avail\-\_\-in}}\label{structisal__zstream_a104ab8b7139e790ceca4c4bfe4277b1c}
+
+\begin{DoxyCompactList}\small\item\em number of bytes available at next\-\_\-in \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_af5405009f71758d2b2eddd16229011b8}{uint32\-\_\-t \hyperlink{structisal__zstream_af5405009f71758d2b2eddd16229011b8}{total\-\_\-in}}\label{structisal__zstream_af5405009f71758d2b2eddd16229011b8}
+
+\begin{DoxyCompactList}\small\item\em total number of bytes read so far \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a2a7525f6fc85d0f7de399474d4c723bc}{uint8\-\_\-t $\ast$ \hyperlink{structisal__zstream_a2a7525f6fc85d0f7de399474d4c723bc}{next\-\_\-out}}\label{structisal__zstream_a2a7525f6fc85d0f7de399474d4c723bc}
+
+\begin{DoxyCompactList}\small\item\em Next output byte. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a2f960cdd24b681b8cb007e0c7bf95ef3}{uint32\-\_\-t \hyperlink{structisal__zstream_a2f960cdd24b681b8cb007e0c7bf95ef3}{avail\-\_\-out}}\label{structisal__zstream_a2f960cdd24b681b8cb007e0c7bf95ef3}
+
+\begin{DoxyCompactList}\small\item\em number of bytes available at next\-\_\-out \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_ab8e856611ff7bb74b07b8181c65a3ac9}{uint32\-\_\-t \hyperlink{structisal__zstream_ab8e856611ff7bb74b07b8181c65a3ac9}{total\-\_\-out}}\label{structisal__zstream_ab8e856611ff7bb74b07b8181c65a3ac9}
+
+\begin{DoxyCompactList}\small\item\em total number of bytes written so far \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_aa7df05aaedba218a462bd8618bbb1e14}{struct \hyperlink{structisal__hufftables}{isal\-\_\-hufftables} $\ast$ \hyperlink{structisal__zstream_aa7df05aaedba218a462bd8618bbb1e14}{hufftables}}\label{structisal__zstream_aa7df05aaedba218a462bd8618bbb1e14}
+
+\begin{DoxyCompactList}\small\item\em Huffman encoding used when compressing. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_ab6400b8e160686601593acfbbb9576c7}{uint32\-\_\-t \hyperlink{structisal__zstream_ab6400b8e160686601593acfbbb9576c7}{level}}\label{structisal__zstream_ab6400b8e160686601593acfbbb9576c7}
+
+\begin{DoxyCompactList}\small\item\em Compression level to use. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a38161009752cf0dcf95aec62ce6826a5}{uint32\-\_\-t \hyperlink{structisal__zstream_a38161009752cf0dcf95aec62ce6826a5}{level\-\_\-buf\-\_\-size}}\label{structisal__zstream_a38161009752cf0dcf95aec62ce6826a5}
+
+\begin{DoxyCompactList}\small\item\em Size of level\-\_\-buf. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_afd3126f1572c50c48d9fc00906589ab5}{uint8\-\_\-t $\ast$ \hyperlink{structisal__zstream_afd3126f1572c50c48d9fc00906589ab5}{level\-\_\-buf}}\label{structisal__zstream_afd3126f1572c50c48d9fc00906589ab5}
+
+\begin{DoxyCompactList}\small\item\em User allocated buffer required for different compression levels. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a8eb1025e062bff0676c9e87e53786017}{uint16\-\_\-t \hyperlink{structisal__zstream_a8eb1025e062bff0676c9e87e53786017}{end\-\_\-of\-\_\-stream}}\label{structisal__zstream_a8eb1025e062bff0676c9e87e53786017}
+
+\begin{DoxyCompactList}\small\item\em non-\/zero if this is the last input buffer \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_af508d21a8ce51e9791b0a8dcef0a6aa3}{uint16\-\_\-t \hyperlink{structisal__zstream_af508d21a8ce51e9791b0a8dcef0a6aa3}{flush}}\label{structisal__zstream_af508d21a8ce51e9791b0a8dcef0a6aa3}
+
+\begin{DoxyCompactList}\small\item\em Flush type can be N\-O\-\_\-\-F\-L\-U\-S\-H, S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H or F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a1533fae7c0608f5c651df09da21a9d58}{uint16\-\_\-t \hyperlink{structisal__zstream_a1533fae7c0608f5c651df09da21a9d58}{gzip\-\_\-flag}}\label{structisal__zstream_a1533fae7c0608f5c651df09da21a9d58}
+
+\begin{DoxyCompactList}\small\item\em Indicate if gzip compression is to be performed. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_aaba002a436d34dc8080a3eee6317ffba}{uint16\-\_\-t \hyperlink{structisal__zstream_aaba002a436d34dc8080a3eee6317ffba}{hist\-\_\-bits}}\label{structisal__zstream_aaba002a436d34dc8080a3eee6317ffba}
+
+\begin{DoxyCompactList}\small\item\em Log base 2 of maximum lookback distance, 0 is use default. \end{DoxyCompactList}\item 
+\hypertarget{structisal__zstream_a0cac5165b6c4b21159fb6dfc4a5dc307}{struct \hyperlink{structisal__zstate}{isal\-\_\-zstate} \hyperlink{structisal__zstream_a0cac5165b6c4b21159fb6dfc4a5dc307}{internal\-\_\-state}}\label{structisal__zstream_a0cac5165b6c4b21159fb6dfc4a5dc307}
+
+\begin{DoxyCompactList}\small\item\em Internal state for this stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds stream information. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{igzip__lib_8h}{igzip\-\_\-lib.\-h}\end{DoxyCompactItemize}

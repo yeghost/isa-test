@@ -1,0 +1,21 @@
+Tests are divided into check tests, unit tests and fuzz tests. Check tests, built with {\ttfamily make check}, should have no additional dependencies. Other unit tests built with {\ttfamily make test} may have additional dependencies in order to make comparisons of the output of I\-S\-A-\/\-L to other standard libraries and ensure compatibility. Fuzz tests are meant to be run with a fuzzing tool such as \href{https://github.com/google/AFL}{\tt A\-F\-L} or \href{https://llvm.org/docs/LibFuzzer.html}{\tt llvm lib\-Fuzzer} fuzzing to direct the input data based on coverage. There are a number of scripts in the /tools directory to help with automating the running of tests.
+
+\subsection*{Test check}
+
+{\ttfamily ./tools/test\-\_\-autorun.sh} is a helper script for kicking off check tests, that typically run for a few minutes, or extended tests that could run much longer. The command {\ttfamily test\-\_\-autorun.\-sh check} build and runs all check tests with autotools and runs other short tests to ensure check tests, unit tests, examples, install, exe stack, format are correct. Each run of {\ttfamily test\-\_\-autorun.\-sh} builds tests with a new random test seed that ensures that each run is unique to the seed but deterministic for debugging. Tests are also built with sanitizers and Electric Fence if available.
+
+\subsection*{Extended tests}
+
+Extended tests are initiated with the command {\ttfamily ./tools/test\-\_\-autorun.sh ext}. These build and run check tests, unit tests, and other utilities that can take much longer than check tests alone. This includes special compression tools and some cross targets such as the no-\/arch build of base functions only and mingw build if tools are available.
+
+\subsection*{Fuzz testing}
+
+{\ttfamily ./tools/test\-\_\-fuzz.sh} is a helper script for fuzzing to setup, build and run the I\-S\-A-\/\-L inflate fuzz tests on multiple fuzz tools. Fuzzing with \href{https://llvm.org/docs/LibFuzzer.html}{\tt llvm lib\-Fuzzer} requires clang compiler tools with {\ttfamily -\/fsanitize=fuzzer} or {\ttfamily lib\-Fuzzer} installed. You can invoke the default fuzz tests under llvm with \begin{DoxyVerb}./tools/test_fuzz.sh -e checked
+\end{DoxyVerb}
+
+
+To use \href{https://github.com/google/AFL}{\tt A\-F\-L}, install tools and system setup for {\ttfamily afl-\/fuzz} and run \begin{DoxyVerb}./tools/test_fuzz.sh -e checked --afl 1 --llvm -1 -d 1
+\end{DoxyVerb}
+
+
+This uses internal vectors as a seed. You can also specify a sample file to use as a seed instead with {\ttfamily -\/f $<$file$>$}. One of three fuzz tests can be invoked\-: checked, simple, and round\-\_\-trip. 

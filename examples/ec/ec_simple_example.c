@@ -74,7 +74,7 @@ struct Myinfo
     int id;//线程编号
 };
 
-/*void encode(void *p) //void *p可以保存任何类型的指针
+void encode(void *p) //void *p可以保存任何类型的指针
 {
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
@@ -90,18 +90,16 @@ void decode(void *p) //void *p可以保存任何类型的指针
     CPU_ZERO(&mask);    //置空
     CPU_SET(20 + pinfo->id,&mask);
     ec_encode_data(pinfo->len, pinfo->k, pinfo->nerrs, pinfo->g_tbls, pinfo->recover_srcs, &pinfo->recover_outp,pinfo->begin);
-}*/
+}
 int main(int argc, char *argv[])
 {
 	int i, j, m, c, e, ret;
 	int k = 3, p = 3, len = 8 * 1024 * 1024 / 3;	// Default params
 	int nerrs = 0;
-	//int num_of_thread=2;
-    //struct Myinfo myp;
-	//long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
-	//long en_code=0,de_code=0;
-	//long en_init=0,de_init=0;
-	//long cauchy_sse=0 , init_sse = 0, code_sse=0;
+	int num_of_thread=2;
+    struct Myinfo myp;
+	long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
+	long cauchy_sse=0 , init_sse = 0, code_sse=0;
     long en_cauchy_matrix = 0,de_cauchy_matrix = 0;
     struct timespec time1 = {0, 0};
     struct timespec time2 = {0, 0};
@@ -238,7 +236,7 @@ int main(int argc, char *argv[])
 	ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //en_init = time2.tv_nsec-time1.tv_nsec;
-	/*myp.p = p;
+	myp.p = p;
     myp.g_tbls=g_tbls;
     myp.k = k;
     for(int z=0;z<MMAX;z++)
@@ -258,7 +256,7 @@ int main(int argc, char *argv[])
         pthread_join(tid[z],NULL);//等待线程结束
     }
     clock_gettime(CLOCK_REALTIME, &time2);
-    en_code = time2.tv_nsec-time1.tv_nsec;*/
+    en_code = time2.tv_nsec-time1.tv_nsec;
 	ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k],0);
 
 
@@ -289,7 +287,7 @@ int main(int argc, char *argv[])
 	ec_init_tables(k, nerrs, decode_matrix, g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //de_init = time2.tv_nsec-time1.tv_nsec;
-    /*
+
     myp.nerrs = nerrs;
 
     for(int z=0;z<MMAX;z++)
@@ -311,7 +309,7 @@ int main(int argc, char *argv[])
         pthread_join(tid[z],NULL);//等待线程结束
     }
     clock_gettime(CLOCK_REALTIME, &time2);
-    de_code = time2.tv_nsec-time1.tv_nsec;*/
+    de_code = time2.tv_nsec-time1.tv_nsec;
 
     //clock_gettime(CLOCK_REALTIME, &time1);
 	ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp,0);

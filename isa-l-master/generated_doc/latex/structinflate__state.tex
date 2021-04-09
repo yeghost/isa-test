@@ -1,0 +1,95 @@
+\hypertarget{structinflate__state}{\section{inflate\-\_\-state Struct Reference}
+\label{structinflate__state}\index{inflate\-\_\-state@{inflate\-\_\-state}}
+}
+
+
+Holds decompression state information.  
+
+
+
+
+{\ttfamily \#include $<$igzip\-\_\-lib.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structinflate__state_abbf4f563f2d72a00d96ff4fc684d02c6}{uint8\-\_\-t $\ast$ \hyperlink{structinflate__state_abbf4f563f2d72a00d96ff4fc684d02c6}{next\-\_\-out}}\label{structinflate__state_abbf4f563f2d72a00d96ff4fc684d02c6}
+
+\begin{DoxyCompactList}\small\item\em Next output Byte. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a8806b67f8aa044f345f64a510fa7ee45}{uint32\-\_\-t \hyperlink{structinflate__state_a8806b67f8aa044f345f64a510fa7ee45}{avail\-\_\-out}}\label{structinflate__state_a8806b67f8aa044f345f64a510fa7ee45}
+
+\begin{DoxyCompactList}\small\item\em Number of bytes available at next\-\_\-out. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_aa8fe90014653de7ec8b843e2fe4ae7e9}{uint32\-\_\-t \hyperlink{structinflate__state_aa8fe90014653de7ec8b843e2fe4ae7e9}{total\-\_\-out}}\label{structinflate__state_aa8fe90014653de7ec8b843e2fe4ae7e9}
+
+\begin{DoxyCompactList}\small\item\em Total bytes written out so far. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a65069a2b7e931db174234fcf68a5a746}{uint8\-\_\-t $\ast$ \hyperlink{structinflate__state_a65069a2b7e931db174234fcf68a5a746}{next\-\_\-in}}\label{structinflate__state_a65069a2b7e931db174234fcf68a5a746}
+
+\begin{DoxyCompactList}\small\item\em Next input byte. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a7b31d8a1e82de2e303c61d291e899e28}{uint64\-\_\-t \hyperlink{structinflate__state_a7b31d8a1e82de2e303c61d291e899e28}{read\-\_\-in}}\label{structinflate__state_a7b31d8a1e82de2e303c61d291e899e28}
+
+\begin{DoxyCompactList}\small\item\em Bits buffered to handle unaligned streams. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a93274af406747bdd3f94b5546a67bd07}{uint32\-\_\-t \hyperlink{structinflate__state_a93274af406747bdd3f94b5546a67bd07}{avail\-\_\-in}}\label{structinflate__state_a93274af406747bdd3f94b5546a67bd07}
+
+\begin{DoxyCompactList}\small\item\em Number of bytes available at next\-\_\-in. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a20599afa006cb6544d3d6ade67b67c62}{int32\-\_\-t \hyperlink{structinflate__state_a20599afa006cb6544d3d6ade67b67c62}{read\-\_\-in\-\_\-length}}\label{structinflate__state_a20599afa006cb6544d3d6ade67b67c62}
+
+\begin{DoxyCompactList}\small\item\em Bits in read\-\_\-in. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ac582f8f6e53188b366260c7f38931731}{struct \hyperlink{structinflate__huff__code__large}{inflate\-\_\-huff\-\_\-code\-\_\-large} \hyperlink{structinflate__state_ac582f8f6e53188b366260c7f38931731}{lit\-\_\-huff\-\_\-code}}\label{structinflate__state_ac582f8f6e53188b366260c7f38931731}
+
+\begin{DoxyCompactList}\small\item\em Structure for decoding lit/len symbols. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ae8f5da00291599b6f19c4a145d8b5738}{struct \hyperlink{structinflate__huff__code__small}{inflate\-\_\-huff\-\_\-code\-\_\-small} \hyperlink{structinflate__state_ae8f5da00291599b6f19c4a145d8b5738}{dist\-\_\-huff\-\_\-code}}\label{structinflate__state_ae8f5da00291599b6f19c4a145d8b5738}
+
+\begin{DoxyCompactList}\small\item\em Structure for decoding dist symbols. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ac0bb6a4a584fb515a000d6f1be0f2711}{enum isal\-\_\-block\-\_\-state \hyperlink{structinflate__state_ac0bb6a4a584fb515a000d6f1be0f2711}{block\-\_\-state}}\label{structinflate__state_ac0bb6a4a584fb515a000d6f1be0f2711}
+
+\begin{DoxyCompactList}\small\item\em Current decompression state. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a7a359006ca174357e69db75fd9e038fe}{uint32\-\_\-t \hyperlink{structinflate__state_a7a359006ca174357e69db75fd9e038fe}{dict\-\_\-length}}\label{structinflate__state_a7a359006ca174357e69db75fd9e038fe}
+
+\begin{DoxyCompactList}\small\item\em Length of dictionary used. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_acf6d2c8ab990a35b45057f592051c7be}{uint32\-\_\-t \hyperlink{structinflate__state_acf6d2c8ab990a35b45057f592051c7be}{bfinal}}\label{structinflate__state_acf6d2c8ab990a35b45057f592051c7be}
+
+\begin{DoxyCompactList}\small\item\em Flag identifying final block. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ab2d3dac9eb492d567e151e8301a92b79}{uint32\-\_\-t \hyperlink{structinflate__state_ab2d3dac9eb492d567e151e8301a92b79}{crc\-\_\-flag}}\label{structinflate__state_ab2d3dac9eb492d567e151e8301a92b79}
+
+\begin{DoxyCompactList}\small\item\em Flag identifying whether to track of crc. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a3b6a7581b596c2ad3c0e797805d02955}{uint32\-\_\-t \hyperlink{structinflate__state_a3b6a7581b596c2ad3c0e797805d02955}{crc}}\label{structinflate__state_a3b6a7581b596c2ad3c0e797805d02955}
+
+\begin{DoxyCompactList}\small\item\em Contains crc or adler32 of output if crc\-\_\-flag is set. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a38879a59194da05b16beb16ac1753843}{uint32\-\_\-t \hyperlink{structinflate__state_a38879a59194da05b16beb16ac1753843}{hist\-\_\-bits}}\label{structinflate__state_a38879a59194da05b16beb16ac1753843}
+
+\begin{DoxyCompactList}\small\item\em Log base 2 of maximum lookback distance. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a69940c6f7c20c4817dc395217d052594}{int32\-\_\-t \hyperlink{structinflate__state_a69940c6f7c20c4817dc395217d052594}{copy\-\_\-overflow\-\_\-length}}\label{structinflate__state_a69940c6f7c20c4817dc395217d052594}
+
+\begin{DoxyCompactList}\small\item\em Length left to copy when outbuffer overflow occurred. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a9eb789eea7581efad31ebd10fc09cbc6}{int32\-\_\-t \hyperlink{structinflate__state_a9eb789eea7581efad31ebd10fc09cbc6}{copy\-\_\-overflow\-\_\-distance}}\label{structinflate__state_a9eb789eea7581efad31ebd10fc09cbc6}
+
+\begin{DoxyCompactList}\small\item\em Lookback distance when outbuffer overflow occurred. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ab6a6c36c9bda624f3b15f380f6dfd563}{int16\-\_\-t \hyperlink{structinflate__state_ab6a6c36c9bda624f3b15f380f6dfd563}{tmp\-\_\-in\-\_\-size}}\label{structinflate__state_ab6a6c36c9bda624f3b15f380f6dfd563}
+
+\begin{DoxyCompactList}\small\item\em Number of bytes in tmp\-\_\-in\-\_\-buffer. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ad7a6734e5267eac4769b125cc3c3edb4}{int32\-\_\-t \hyperlink{structinflate__state_ad7a6734e5267eac4769b125cc3c3edb4}{tmp\-\_\-out\-\_\-valid}}\label{structinflate__state_ad7a6734e5267eac4769b125cc3c3edb4}
+
+\begin{DoxyCompactList}\small\item\em Number of bytes in tmp\-\_\-out\-\_\-buffer. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_aa4c82daf12d611bca6cb28905a4c5168}{int32\-\_\-t \hyperlink{structinflate__state_aa4c82daf12d611bca6cb28905a4c5168}{tmp\-\_\-out\-\_\-processed}}\label{structinflate__state_aa4c82daf12d611bca6cb28905a4c5168}
+
+\begin{DoxyCompactList}\small\item\em Number of bytes processed in tmp\-\_\-out\-\_\-buffer. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_aca852f3fbb23de387aa789f572303cf8}{uint8\-\_\-t \hyperlink{structinflate__state_aca852f3fbb23de387aa789f572303cf8}{tmp\-\_\-in\-\_\-buffer} \mbox{[}I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-A\-X\-\_\-\-H\-D\-R\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structinflate__state_aca852f3fbb23de387aa789f572303cf8}
+
+\begin{DoxyCompactList}\small\item\em Temporary buffer containing data from the input stream. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_abf70896b8d99c6fbb91c5bb2ff1c2337}{uint8\-\_\-t \hyperlink{structinflate__state_abf70896b8d99c6fbb91c5bb2ff1c2337}{tmp\-\_\-out\-\_\-buffer} \mbox{[}2 $\ast$I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E+I\-S\-A\-L\-\_\-\-L\-O\-O\-K\-\_\-\-A\-H\-E\-A\-D\mbox{]}}\label{structinflate__state_abf70896b8d99c6fbb91c5bb2ff1c2337}
+
+\begin{DoxyCompactList}\small\item\em Temporary buffer containing data from the output stream. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_ade86a18378d63c8d5d55308a2a8b2baf}{int32\-\_\-t \hyperlink{structinflate__state_ade86a18378d63c8d5d55308a2a8b2baf}{type0\-\_\-block\-\_\-len}}\label{structinflate__state_ade86a18378d63c8d5d55308a2a8b2baf}
+
+\begin{DoxyCompactList}\small\item\em Length left to read of type 0 block when outbuffer overflow occurred. \end{DoxyCompactList}\item 
+\hypertarget{structinflate__state_a587977c569fe163e400b91dcd8a55849}{int32\-\_\-t \hyperlink{structinflate__state_a587977c569fe163e400b91dcd8a55849}{count}}\label{structinflate__state_a587977c569fe163e400b91dcd8a55849}
+
+\begin{DoxyCompactList}\small\item\em Count of bytes remaining to be parsed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds decompression state information. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{igzip__lib_8h}{igzip\-\_\-lib.\-h}\end{DoxyCompactItemize}

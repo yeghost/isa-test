@@ -1,0 +1,306 @@
+\hypertarget{crc_8h}{\section{crc.\-h File Reference}
+\label{crc_8h}\index{crc.\-h@{crc.\-h}}
+}
+
+
+C\-R\-C functions.  
+
+
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\-\_\-t \hyperlink{crc_8h_a215110f2c12cccba0595f8e50f8775bb}{crc16\-\_\-t10dif} (uint16\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from the T10 standard, runs appropriate version. \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{crc_8h_ab1badb6bdc8bdfeb341280cdedeed4e6}{crc16\-\_\-t10dif\-\_\-copy} (uint16\-\_\-t init\-\_\-crc, uint8\-\_\-t $\ast$dst, uint8\-\_\-t $\ast$src, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C and copy T10 standard, runs appropriate version. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{crc_8h_a48a9c9192fb63c267bd17eaaad3ed312}{crc32\-\_\-ieee} (uint32\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from the I\-E\-E\-E standard, runs appropriate version. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{crc_8h_a713dcdbea7f47fcfa626710a1efedb9f}{crc32\-\_\-gzip\-\_\-refl} (uint32\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate the customized C\-R\-C based on R\-F\-C 1952 C\-R\-C (\href{http://www.ietf.org/rfc/rfc1952.txt}{\tt http\-://www.\-ietf.\-org/rfc/rfc1952.\-txt}) standard, runs appropriate version. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{crc_8h_abdf5fc84c01b815d8416028020e04cdd}{crc32\-\_\-iscsi} (unsigned char $\ast$buffer, int len, unsigned int init\-\_\-crc)
+\begin{DoxyCompactList}\small\item\em I\-S\-C\-S\-I C\-R\-C function, runs appropriate version. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{crc_8h_a8c216b4f40a01e7c4ddf469fe977dae5}{crc32\-\_\-iscsi\-\_\-base} (unsigned char $\ast$buffer, int len, unsigned int crc\-\_\-init)
+\begin{DoxyCompactList}\small\item\em I\-S\-C\-S\-I C\-R\-C function, baseline version. \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{crc_8h_a6c9755b34822dbd00f623156e259065b}{crc16\-\_\-t10dif\-\_\-base} (uint16\-\_\-t seed, uint8\-\_\-t $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from the T10 standard, runs baseline version. \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{crc_8h_aeb4398df0999f50e7195e55b5cbb748d}{crc16\-\_\-t10dif\-\_\-copy\-\_\-base} (uint16\-\_\-t init\-\_\-crc, uint8\-\_\-t $\ast$dst, uint8\-\_\-t $\ast$src, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C and copy T10 standard, runs baseline version. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{crc_8h_a36545b7b726b8279f6a4648e9cae348a}{crc32\-\_\-ieee\-\_\-base} (uint32\-\_\-t seed, uint8\-\_\-t $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from the I\-E\-E\-E standard, runs baseline version. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{crc_8h_a215addccbeab504299bffb6eadecbd53}{crc32\-\_\-gzip\-\_\-refl\-\_\-base} (uint32\-\_\-t seed, uint8\-\_\-t $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate the customized C\-R\-C based on R\-F\-C 1952 C\-R\-C (\href{http://www.ietf.org/rfc/rfc1952.txt}{\tt http\-://www.\-ietf.\-org/rfc/rfc1952.\-txt}) standard, runs baseline version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C\-R\-C functions. 
+
+\subsection{Function Documentation}
+\hypertarget{crc_8h_a215110f2c12cccba0595f8e50f8775bb}{\index{crc.\-h@{crc.\-h}!crc16\-\_\-t10dif@{crc16\-\_\-t10dif}}
+\index{crc16\-\_\-t10dif@{crc16\-\_\-t10dif}!crc.h@{crc.\-h}}
+\subsubsection[{crc16\-\_\-t10dif}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t crc16\-\_\-t10dif (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a215110f2c12cccba0595f8e50f8775bb}
+
+
+Generate C\-R\-C from the T10 standard, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+\begin{DoxyReturn}{Returns}
+16 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 16 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_a6c9755b34822dbd00f623156e259065b}{\index{crc.\-h@{crc.\-h}!crc16\-\_\-t10dif\-\_\-base@{crc16\-\_\-t10dif\-\_\-base}}
+\index{crc16\-\_\-t10dif\-\_\-base@{crc16\-\_\-t10dif\-\_\-base}!crc.h@{crc.\-h}}
+\subsubsection[{crc16\-\_\-t10dif\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t crc16\-\_\-t10dif\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{seed, }
+\item[{uint8\-\_\-t $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a6c9755b34822dbd00f623156e259065b}
+
+
+Generate C\-R\-C from the T10 standard, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+16 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & initial C\-R\-C value, 16 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_ab1badb6bdc8bdfeb341280cdedeed4e6}{\index{crc.\-h@{crc.\-h}!crc16\-\_\-t10dif\-\_\-copy@{crc16\-\_\-t10dif\-\_\-copy}}
+\index{crc16\-\_\-t10dif\-\_\-copy@{crc16\-\_\-t10dif\-\_\-copy}!crc.h@{crc.\-h}}
+\subsubsection[{crc16\-\_\-t10dif\-\_\-copy}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t crc16\-\_\-t10dif\-\_\-copy (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{init\-\_\-crc, }
+\item[{uint8\-\_\-t $\ast$}]{dst, }
+\item[{uint8\-\_\-t $\ast$}]{src, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_ab1badb6bdc8bdfeb341280cdedeed4e6}
+
+
+Generate C\-R\-C and copy T10 standard, runs appropriate version. 
+
+Stitched C\-R\-C + copy function.
+
+\begin{DoxyReturn}{Returns}
+16 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 16 bits \\
+\hline
+{\em dst} & buffer destination for copy \\
+\hline
+{\em src} & buffer source to crc + copy \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_aeb4398df0999f50e7195e55b5cbb748d}{\index{crc.\-h@{crc.\-h}!crc16\-\_\-t10dif\-\_\-copy\-\_\-base@{crc16\-\_\-t10dif\-\_\-copy\-\_\-base}}
+\index{crc16\-\_\-t10dif\-\_\-copy\-\_\-base@{crc16\-\_\-t10dif\-\_\-copy\-\_\-base}!crc.h@{crc.\-h}}
+\subsubsection[{crc16\-\_\-t10dif\-\_\-copy\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t crc16\-\_\-t10dif\-\_\-copy\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{init\-\_\-crc, }
+\item[{uint8\-\_\-t $\ast$}]{dst, }
+\item[{uint8\-\_\-t $\ast$}]{src, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_aeb4398df0999f50e7195e55b5cbb748d}
+
+
+Generate C\-R\-C and copy T10 standard, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+16 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 16 bits \\
+\hline
+{\em dst} & buffer destination for copy \\
+\hline
+{\em src} & buffer source to crc + copy \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_a713dcdbea7f47fcfa626710a1efedb9f}{\index{crc.\-h@{crc.\-h}!crc32\-\_\-gzip\-\_\-refl@{crc32\-\_\-gzip\-\_\-refl}}
+\index{crc32\-\_\-gzip\-\_\-refl@{crc32\-\_\-gzip\-\_\-refl}!crc.h@{crc.\-h}}
+\subsubsection[{crc32\-\_\-gzip\-\_\-refl}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t crc32\-\_\-gzip\-\_\-refl (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a713dcdbea7f47fcfa626710a1efedb9f}
+
+
+Generate the customized C\-R\-C based on R\-F\-C 1952 C\-R\-C (\href{http://www.ietf.org/rfc/rfc1952.txt}{\tt http\-://www.\-ietf.\-org/rfc/rfc1952.\-txt}) standard, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+Note\-: C\-R\-C32 I\-E\-E\-E standard is widely used in H\-D\-L\-C, Ethernet, Gzip and many others. Its polynomial is 0x04\-C11\-D\-B7 in normal and 0x\-E\-D\-B88320 in reflection (or reverse). In I\-S\-A-\/\-L C\-R\-C, function crc32\-\_\-ieee is actually designed for normal C\-R\-C32 I\-E\-E\-E version. And function crc32\-\_\-gzip\-\_\-refl is actually designed for reflected C\-R\-C32 I\-E\-E\-E. These two versions of C\-R\-C32 I\-E\-E\-E are not compatible with each other. Users who want to replace their not optimized crc32 ieee with I\-S\-A-\/\-L's crc32 function should be careful of that. Since many applications use C\-R\-C32 I\-E\-E\-E reflected version, Please have a check whether crc32\-\_\-gzip\-\_\-refl is right one for you instead of crc32\-\_\-ieee.
+
+\begin{DoxyReturn}{Returns}
+32 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 32 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_a215addccbeab504299bffb6eadecbd53}{\index{crc.\-h@{crc.\-h}!crc32\-\_\-gzip\-\_\-refl\-\_\-base@{crc32\-\_\-gzip\-\_\-refl\-\_\-base}}
+\index{crc32\-\_\-gzip\-\_\-refl\-\_\-base@{crc32\-\_\-gzip\-\_\-refl\-\_\-base}!crc.h@{crc.\-h}}
+\subsubsection[{crc32\-\_\-gzip\-\_\-refl\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t crc32\-\_\-gzip\-\_\-refl\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{seed, }
+\item[{uint8\-\_\-t $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a215addccbeab504299bffb6eadecbd53}
+
+
+Generate the customized C\-R\-C based on R\-F\-C 1952 C\-R\-C (\href{http://www.ietf.org/rfc/rfc1952.txt}{\tt http\-://www.\-ietf.\-org/rfc/rfc1952.\-txt}) standard, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+32 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & initial C\-R\-C value, 32 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_a48a9c9192fb63c267bd17eaaad3ed312}{\index{crc.\-h@{crc.\-h}!crc32\-\_\-ieee@{crc32\-\_\-ieee}}
+\index{crc32\-\_\-ieee@{crc32\-\_\-ieee}!crc.h@{crc.\-h}}
+\subsubsection[{crc32\-\_\-ieee}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t crc32\-\_\-ieee (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a48a9c9192fb63c267bd17eaaad3ed312}
+
+
+Generate C\-R\-C from the I\-E\-E\-E standard, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. Note\-: C\-R\-C32 I\-E\-E\-E standard is widely used in H\-D\-L\-C, Ethernet, Gzip and many others. Its polynomial is 0x04\-C11\-D\-B7 in normal and 0x\-E\-D\-B88320 in reflection (or reverse). In I\-S\-A-\/\-L C\-R\-C, function crc32\-\_\-ieee is actually designed for normal C\-R\-C32 I\-E\-E\-E version. And function crc32\-\_\-gzip\-\_\-refl is actually designed for reflected C\-R\-C32 I\-E\-E\-E. These two versions of C\-R\-C32 I\-E\-E\-E are not compatible with each other. Users who want to replace their not optimized crc32 ieee with I\-S\-A-\/\-L's crc32 function should be careful of that. Since many applications use C\-R\-C32 I\-E\-E\-E reflected version, Please have a check whether crc32\-\_\-gzip\-\_\-refl is right one for you instead of crc32\-\_\-ieee.
+
+\begin{DoxyReturn}{Returns}
+32 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 32 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_a36545b7b726b8279f6a4648e9cae348a}{\index{crc.\-h@{crc.\-h}!crc32\-\_\-ieee\-\_\-base@{crc32\-\_\-ieee\-\_\-base}}
+\index{crc32\-\_\-ieee\-\_\-base@{crc32\-\_\-ieee\-\_\-base}!crc.h@{crc.\-h}}
+\subsubsection[{crc32\-\_\-ieee\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t crc32\-\_\-ieee\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{seed, }
+\item[{uint8\-\_\-t $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a36545b7b726b8279f6a4648e9cae348a}
+
+
+Generate C\-R\-C from the I\-E\-E\-E standard, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+32 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & initial C\-R\-C value, 32 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_abdf5fc84c01b815d8416028020e04cdd}{\index{crc.\-h@{crc.\-h}!crc32\-\_\-iscsi@{crc32\-\_\-iscsi}}
+\index{crc32\-\_\-iscsi@{crc32\-\_\-iscsi}!crc.h@{crc.\-h}}
+\subsubsection[{crc32\-\_\-iscsi}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int crc32\-\_\-iscsi (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{buffer, }
+\item[{int}]{len, }
+\item[{unsigned int}]{init\-\_\-crc}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_abdf5fc84c01b815d8416028020e04cdd}
+
+
+I\-S\-C\-S\-I C\-R\-C function, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+\begin{DoxyReturn}{Returns}
+32 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes \\
+\hline
+{\em init\-\_\-crc} & initial C\-R\-C value \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc_8h_a8c216b4f40a01e7c4ddf469fe977dae5}{\index{crc.\-h@{crc.\-h}!crc32\-\_\-iscsi\-\_\-base@{crc32\-\_\-iscsi\-\_\-base}}
+\index{crc32\-\_\-iscsi\-\_\-base@{crc32\-\_\-iscsi\-\_\-base}!crc.h@{crc.\-h}}
+\subsubsection[{crc32\-\_\-iscsi\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int crc32\-\_\-iscsi\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{buffer, }
+\item[{int}]{len, }
+\item[{unsigned int}]{crc\-\_\-init}
+\end{DoxyParamCaption}
+)}}\label{crc_8h_a8c216b4f40a01e7c4ddf469fe977dae5}
+
+
+I\-S\-C\-S\-I C\-R\-C function, baseline version. 
+
+\begin{DoxyReturn}{Returns}
+32 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes \\
+\hline
+{\em crc\-\_\-init} & initial C\-R\-C value \\
+\hline
+\end{DoxyParams}

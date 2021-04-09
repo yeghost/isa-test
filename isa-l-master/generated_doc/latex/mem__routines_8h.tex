@@ -1,0 +1,44 @@
+\hypertarget{mem__routines_8h}{\section{mem\-\_\-routines.\-h File Reference}
+\label{mem__routines_8h}\index{mem\-\_\-routines.\-h@{mem\-\_\-routines.\-h}}
+}
+
+
+Interface to storage mem operations.  
+
+
+{\ttfamily \#include $<$stddef.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mem__routines_8h_a55bf74827e07e1a13ff283ae64d1c55d}{isal\-\_\-zero\-\_\-detect} (void $\ast$mem, size\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Detect if a memory region is all zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface to storage mem operations. Defines the interface for vector versions of common memory functions. 
+
+\subsection{Function Documentation}
+\hypertarget{mem__routines_8h_a55bf74827e07e1a13ff283ae64d1c55d}{\index{mem\-\_\-routines.\-h@{mem\-\_\-routines.\-h}!isal\-\_\-zero\-\_\-detect@{isal\-\_\-zero\-\_\-detect}}
+\index{isal\-\_\-zero\-\_\-detect@{isal\-\_\-zero\-\_\-detect}!mem_routines.h@{mem\-\_\-routines.\-h}}
+\subsubsection[{isal\-\_\-zero\-\_\-detect}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-zero\-\_\-detect (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{mem, }
+\item[{size\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{mem__routines_8h_a55bf74827e07e1a13ff283ae64d1c55d}
+
+
+Detect if a memory region is all zero. 
+
+Zero detect function with optimizations for large blocks $>$ 128 bytes
+
+
+\begin{DoxyParams}{Parameters}
+{\em mem} & Pointer to memory region to test \\
+\hline
+{\em len} & Length of region in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 -\/ region is all zeros other -\/ region has non zero bytes 
+\end{DoxyReturn}

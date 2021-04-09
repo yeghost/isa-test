@@ -1,0 +1,749 @@
+\hypertarget{igzip__lib_8h}{\section{igzip\-\_\-lib.\-h File Reference}
+\label{igzip__lib_8h}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}
+}
+
+
+This file defines the igzip compression and decompression interface, a high performance deflate compression interface for storage applications.  
+
+
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structisal__huff__histogram}{isal\-\_\-huff\-\_\-histogram}
+\begin{DoxyCompactList}\small\item\em Holds histogram of deflate symbols. \end{DoxyCompactList}\item 
+struct \hyperlink{structisal__mod__hist}{isal\-\_\-mod\-\_\-hist}
+\item 
+struct \hyperlink{structBitBuf2}{Bit\-Buf2}
+\begin{DoxyCompactList}\small\item\em Holds Bit Buffer information. \end{DoxyCompactList}\item 
+struct \hyperlink{structisal__zlib__header}{isal\-\_\-zlib\-\_\-header}
+\item 
+struct \hyperlink{structisal__gzip__header}{isal\-\_\-gzip\-\_\-header}
+\item 
+struct \hyperlink{structisal__zstate}{isal\-\_\-zstate}
+\begin{DoxyCompactList}\small\item\em Holds the internal state information for input and output compression streams. \end{DoxyCompactList}\item 
+struct \hyperlink{structisal__hufftables}{isal\-\_\-hufftables}
+\begin{DoxyCompactList}\small\item\em Holds the huffman tree used to huffman encode the input stream. \end{DoxyCompactList}\item 
+struct \hyperlink{structisal__zstream}{isal\-\_\-zstream}
+\begin{DoxyCompactList}\small\item\em Holds stream information. \end{DoxyCompactList}\item 
+struct \hyperlink{structinflate__huff__code__large}{inflate\-\_\-huff\-\_\-code\-\_\-large}
+\item 
+struct \hyperlink{structinflate__huff__code__small}{inflate\-\_\-huff\-\_\-code\-\_\-small}
+\item 
+struct \hyperlink{structinflate__state}{inflate\-\_\-state}
+\begin{DoxyCompactList}\small\item\em Holds decompression state information. \end{DoxyCompactList}\item 
+struct \hyperlink{structisal__dict}{isal\-\_\-dict}
+\begin{DoxyCompactList}\small\item\em Structure for holding processed dictionary information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}{isal\-\_\-zstate\-\_\-state} \{ \\*
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ae29ac79025884cb44734bf6cc1c2dc8a}{Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a0732985b5f3f6326df79d3a9602a5d28}{Z\-S\-T\-A\-T\-E\-\_\-\-H\-D\-R}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa1f5cabded72c30de4d7d259045be9d6}{Z\-S\-T\-A\-T\-E\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a19eb4a317476d06fe3aeb5747b4bdd94}{Z\-S\-T\-A\-T\-E\-\_\-\-B\-O\-D\-Y}, 
+\\*
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a109b2268f524b66c72e518926d6a50e1}{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}
+, \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a5176ea8c48e72828d68a623e1c6adf8b}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad1bc4b252110bf3a966b60bdf1e47933}{Z\-S\-T\-A\-T\-E\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a06bfbb1c73e37a846f8d49444c77ef09}{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}, 
+\\*
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a88bfe2520b8b8075ac982cf78f299629}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aed309f0832206a73cc9d3ca7ca1cefcc}{Z\-S\-T\-A\-T\-E\-\_\-\-E\-N\-D}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ac51b1849e58365ad73de62a6dd48d8af}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a9022a6088ebb9bd63824c30fdc9bb7e6}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-H\-D\-R}, 
+\\*
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a4987d9d303e6fb02ec68b7279e561a5f}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad6f44c8d6ac1935f2ab547492dbfafc0}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-B\-O\-D\-Y}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aef8435f222e77fa05a876babf8096922}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}
+, \hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a42d4ad449237e3adb254121514ffe552}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}, 
+\\*
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aeeab8dee9837e67fb0439e8c1b7bc8e2}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a206cc526da1927e20bbff7f1518c641c}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa6a864ea51b7f866425ca5e5dc155194}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-R\-L}, 
+\hyperlink{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad7db4e6c908ed5949574b81a19f829f9}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-E\-N\-D}
+ \}
+\begin{DoxyCompactList}\small\item\em Compression State please note Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L only applies for G\-Z\-I\-P compression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{igzip__lib_8h_abcf32e76e2b6802792a5ceb4b51f1c4e}{isal\-\_\-update\-\_\-histogram} (uint8\-\_\-t $\ast$in\-\_\-stream, int length, struct \hyperlink{structisal__huff__histogram}{isal\-\_\-huff\-\_\-histogram} $\ast$histogram)
+\begin{DoxyCompactList}\small\item\em Updates histograms to include the symbols found in the input stream. Since this function only updates the histograms, it can be called on multiple streams to get a histogram better representing the desired data set. When first using histogram it must be initialized by zeroing the structure. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a4d4699267b60c1b57c034b2adc612ee7}{isal\-\_\-create\-\_\-hufftables} (struct \hyperlink{structisal__hufftables}{isal\-\_\-hufftables} $\ast$hufftables, struct \hyperlink{structisal__huff__histogram}{isal\-\_\-huff\-\_\-histogram} $\ast$histogram)
+\begin{DoxyCompactList}\small\item\em Creates a custom huffman code for the given histograms in which every literal and repeat length is assigned a code and all possible lookback distances are assigned a code. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_aa45350d816cfdcbad55ec95284776af3}{isal\-\_\-create\-\_\-hufftables\-\_\-subset} (struct \hyperlink{structisal__hufftables}{isal\-\_\-hufftables} $\ast$hufftables, struct \hyperlink{structisal__huff__histogram}{isal\-\_\-huff\-\_\-histogram} $\ast$histogram)
+\begin{DoxyCompactList}\small\item\em Creates a custom huffman code for the given histograms like \hyperlink{igzip__lib_8h_a4d4699267b60c1b57c034b2adc612ee7}{isal\-\_\-create\-\_\-hufftables()} except literals with 0 frequency in the histogram are not assigned a code. \end{DoxyCompactList}\item 
+void \hyperlink{igzip__lib_8h_a6d311328df613652c3d1606d4a0297c7}{isal\-\_\-deflate\-\_\-init} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Initialize compression stream data structure. \end{DoxyCompactList}\item 
+void \hyperlink{igzip__lib_8h_ae582f5e4fc6a35ab8796949660259178}{isal\-\_\-deflate\-\_\-reset} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Reinitialize compression stream data structure. Performs the same action as isal\-\_\-deflate\-\_\-init, but does not change user supplied input such as the level, flush type, compression wrapper (like gzip), hufftables, and end\-\_\-of\-\_\-stream\-\_\-flag. \end{DoxyCompactList}\item 
+void \hyperlink{igzip__lib_8h_aafa595cf3fdcb8f40f5ded192944c54b}{isal\-\_\-gzip\-\_\-header\-\_\-init} (struct \hyperlink{structisal__gzip__header}{isal\-\_\-gzip\-\_\-header} $\ast$gz\-\_\-hdr)
+\begin{DoxyCompactList}\small\item\em Set gzip header default values. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{igzip__lib_8h_a2e5fe18579896416b7477e6598489b28}{isal\-\_\-write\-\_\-gzip\-\_\-header} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream, struct \hyperlink{structisal__gzip__header}{isal\-\_\-gzip\-\_\-header} $\ast$gz\-\_\-hdr)
+\begin{DoxyCompactList}\small\item\em Write gzip header to output stream. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{igzip__lib_8h_ac6409a35e068fc012e37f85fa189a999}{isal\-\_\-write\-\_\-zlib\-\_\-header} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream, struct \hyperlink{structisal__zlib__header}{isal\-\_\-zlib\-\_\-header} $\ast$z\-\_\-hdr)
+\begin{DoxyCompactList}\small\item\em Write zlib header to output stream. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a142e998c9897b815135742ff04102978}{isal\-\_\-deflate\-\_\-set\-\_\-hufftables} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream, struct \hyperlink{structisal__hufftables}{isal\-\_\-hufftables} $\ast$hufftables, int type)
+\begin{DoxyCompactList}\small\item\em Set stream to use a new Huffman code. \end{DoxyCompactList}\item 
+void \hyperlink{igzip__lib_8h_aeae02071c5f41de12b7350dc90b314fc}{isal\-\_\-deflate\-\_\-stateless\-\_\-init} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Initialize compression stream data structure. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}{isal\-\_\-deflate\-\_\-set\-\_\-dict} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream, uint8\-\_\-t $\ast$dict, uint32\-\_\-t dict\-\_\-len)
+\begin{DoxyCompactList}\small\item\em Set compression dictionary to use. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a15edadeb459a40840e6c2f4baa59fb12}{isal\-\_\-deflate\-\_\-process\-\_\-dict} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream, struct \hyperlink{structisal__dict}{isal\-\_\-dict} $\ast$dict\-\_\-str, uint8\-\_\-t $\ast$dict, uint32\-\_\-t dict\-\_\-len)
+\begin{DoxyCompactList}\small\item\em Process dictionary to reuse later. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a36116973797161ef4243c49c68b64cc2}{isal\-\_\-deflate\-\_\-reset\-\_\-dict} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream, struct \hyperlink{structisal__dict}{isal\-\_\-dict} $\ast$dict\-\_\-str)
+\begin{DoxyCompactList}\small\item\em Reset compression dictionary to use. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Fast data (deflate) compression for storage applications. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a2dd4d4c13d44fe96ca0d37d169fbf525}{isal\-\_\-deflate\-\_\-stateless} (struct \hyperlink{structisal__zstream}{isal\-\_\-zstream} $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Fast data (deflate) stateless compression for storage applications. \end{DoxyCompactList}\item 
+void \hyperlink{igzip__lib_8h_a00513fdbbc6688c613d1a41b694ad168}{isal\-\_\-inflate\-\_\-init} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Initialize decompression state data structure. \end{DoxyCompactList}\item 
+void \hyperlink{igzip__lib_8h_af6d86fe1b62a34074e908390b17e5a31}{isal\-\_\-inflate\-\_\-reset} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Reinitialize decompression state data structure. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a5a5a24dc5d4f9a9ca3bf08b5bb0274ff}{isal\-\_\-inflate\-\_\-set\-\_\-dict} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state, uint8\-\_\-t $\ast$dict, uint32\-\_\-t dict\-\_\-len)
+\begin{DoxyCompactList}\small\item\em Set decompression dictionary to use. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a7fd333cf5024c376599a3fd8fb616b7d}{isal\-\_\-read\-\_\-gzip\-\_\-header} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state, struct \hyperlink{structisal__gzip__header}{isal\-\_\-gzip\-\_\-header} $\ast$gz\-\_\-hdr)
+\begin{DoxyCompactList}\small\item\em Read and return gzip header information. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_a4af9bf84dd7ca9a60eb1d07bad4a7c76}{isal\-\_\-read\-\_\-zlib\-\_\-header} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state, struct \hyperlink{structisal__zlib__header}{isal\-\_\-zlib\-\_\-header} $\ast$zlib\-\_\-hdr)
+\begin{DoxyCompactList}\small\item\em Read and return zlib header information. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{isal\-\_\-inflate} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Fast data (deflate) decompression for storage applications. \end{DoxyCompactList}\item 
+int \hyperlink{igzip__lib_8h_adb59d093d9b8b621285fef81f82e4c0c}{isal\-\_\-inflate\-\_\-stateless} (struct \hyperlink{structinflate__state}{inflate\-\_\-state} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Fast data (deflate) stateless decompression for storage applications. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{igzip__lib_8h_ac2adc31ec28075401ffae270df525593}{isal\-\_\-adler32} (uint32\-\_\-t init, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Calculate Adler-\/32 checksum, runs appropriate version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file defines the igzip compression and decompression interface, a high performance deflate compression interface for storage applications. Deflate is a widely used compression standard that can be used standalone, it also forms the basis of gzip and zlib compression formats. Igzip supports the following flush features\-:
+
+
+\begin{DoxyItemize}
+\item No Flush\-: The default method where no special flush is performed.
+\item Sync flush\-: whereby \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()} finishes the current deflate block at the end of each input buffer. The deflate block is byte aligned by appending an empty stored block.
+\item Full flush\-: whereby \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()} finishes and aligns the deflate block as in sync flush but also ensures that subsequent block's history does not look back beyond this point and new blocks are fully independent.
+\end{DoxyItemize}
+
+Igzip also supports compression levels from I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-I\-N\-\_\-\-L\-E\-V\-E\-L to I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-A\-X\-\_\-\-L\-E\-V\-E\-L.
+
+Igzip contains some behavior configurable at compile time. These configurable options are\-:
+
+
+\begin{DoxyItemize}
+\item I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E -\/ Defines the window size. The default value is 32\-K (note K represents 1024), but 8\-K is also supported. Powers of 2 which are at most 32\-K may also work.
+\item L\-O\-N\-G\-E\-R\-\_\-\-H\-U\-F\-F\-T\-A\-B\-L\-E\-S -\/ Defines whether to use a larger hufftables structure which may increase performance with smaller I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E values. By default this option is not defined. This define sets I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E to be 8 if I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E $>$ 8\-K.
+
+As an example, to compile gzip with an 8\-K window size, in a terminal run \begin{DoxyVerb}gmake D="-D IGZIP_HIST_SIZE=8*1024" \end{DoxyVerb}
+ on Linux and Free\-B\-S\-D, or with\begin{DoxyVerb}nmake -f Makefile.nmake D="-D
+*   IGZIP_HIST_SIZE=8*1024" \end{DoxyVerb}
+ on Windows. 
+\end{DoxyItemize}
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-zstate\-\_\-state@{isal\-\_\-zstate\-\_\-state}}
+\index{isal\-\_\-zstate\-\_\-state@{isal\-\_\-zstate\-\_\-state}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-zstate\-\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf isal\-\_\-zstate\-\_\-state}}}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025}
+
+
+Compression State please note Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L only applies for G\-Z\-I\-P compression. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ae29ac79025884cb44734bf6cc1c2dc8a}{Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ae29ac79025884cb44734bf6cc1c2dc8a}
+}]Header to be written. \index{Z\-S\-T\-A\-T\-E\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-H\-D\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-H\-D\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a0732985b5f3f6326df79d3a9602a5d28}{Z\-S\-T\-A\-T\-E\-\_\-\-H\-D\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a0732985b5f3f6326df79d3a9602a5d28}
+}]Header state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa1f5cabded72c30de4d7d259045be9d6}{Z\-S\-T\-A\-T\-E\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa1f5cabded72c30de4d7d259045be9d6}
+}]Header to be created. \index{Z\-S\-T\-A\-T\-E\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-B\-O\-D\-Y}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-B\-O\-D\-Y}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a19eb4a317476d06fe3aeb5747b4bdd94}{Z\-S\-T\-A\-T\-E\-\_\-\-B\-O\-D\-Y}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a19eb4a317476d06fe3aeb5747b4bdd94}
+}]Body state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a109b2268f524b66c72e518926d6a50e1}{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a109b2268f524b66c72e518926d6a50e1}
+}]Flush buffer. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a5176ea8c48e72828d68a623e1c6adf8b}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a5176ea8c48e72828d68a623e1c6adf8b}
+}]Type0 block header to be written. Type0 block body to be written \index{Z\-S\-T\-A\-T\-E\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H@{Z\-S\-T\-A\-T\-E\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H@{Z\-S\-T\-A\-T\-E\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad1bc4b252110bf3a966b60bdf1e47933}{Z\-S\-T\-A\-T\-E\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad1bc4b252110bf3a966b60bdf1e47933}
+}]Write sync flush block. \index{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a06bfbb1c73e37a846f8d49444c77ef09}{Z\-S\-T\-A\-T\-E\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a06bfbb1c73e37a846f8d49444c77ef09}
+}]Flush bitbuf. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a88bfe2520b8b8075ac982cf78f299629}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-R\-L}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a88bfe2520b8b8075ac982cf78f299629}
+}]Trailer state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-E\-N\-D@{Z\-S\-T\-A\-T\-E\-\_\-\-E\-N\-D}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-E\-N\-D@{Z\-S\-T\-A\-T\-E\-\_\-\-E\-N\-D}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aed309f0832206a73cc9d3ca7ca1cefcc}{Z\-S\-T\-A\-T\-E\-\_\-\-E\-N\-D}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aed309f0832206a73cc9d3ca7ca1cefcc}
+}]End state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ac51b1849e58365ad73de62a6dd48d8af}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ac51b1849e58365ad73de62a6dd48d8af}
+}]Temporary Header to be written. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-H\-D\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-H\-D\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a9022a6088ebb9bd63824c30fdc9bb7e6}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-H\-D\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a9022a6088ebb9bd63824c30fdc9bb7e6}
+}]Temporary Header state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a4987d9d303e6fb02ec68b7279e561a5f}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-C\-R\-E\-A\-T\-E\-\_\-\-H\-D\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a4987d9d303e6fb02ec68b7279e561a5f}
+}]Temporary Header to be created state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-B\-O\-D\-Y}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-B\-O\-D\-Y}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad6f44c8d6ac1935f2ab547492dbfafc0}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-B\-O\-D\-Y}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad6f44c8d6ac1935f2ab547492dbfafc0}
+}]Temporary Body state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aef8435f222e77fa05a876babf8096922}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-R\-E\-A\-D\-\_\-\-B\-U\-F\-F\-E\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aef8435f222e77fa05a876babf8096922}
+}]Flush buffer. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a42d4ad449237e3adb254121514ffe552}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-Y\-P\-E0\-\_\-\-B\-O\-D\-Y}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a42d4ad449237e3adb254121514ffe552}
+}]Temporary Type0 block header to be written. Temporary Type0 block body to be written \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aeeab8dee9837e67fb0439e8c1b7bc8e2}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aeeab8dee9837e67fb0439e8c1b7bc8e2}
+}]Write sync flush block. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a206cc526da1927e20bbff7f1518c641c}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-F\-L\-U\-S\-H\-\_\-\-W\-R\-I\-T\-E\-\_\-\-B\-U\-F\-F\-E\-R}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025a206cc526da1927e20bbff7f1518c641c}
+}]Flush bitbuf. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-R\-L@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-R\-L}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-R\-L@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-R\-L}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa6a864ea51b7f866425ca5e5dc155194}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-T\-R\-L}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025aa6a864ea51b7f866425ca5e5dc155194}
+}]Temporary Trailer state. \index{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-E\-N\-D@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-E\-N\-D}!igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}}\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-E\-N\-D@{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-E\-N\-D}}\item[{\em 
+\hypertarget{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad7db4e6c908ed5949574b81a19f829f9}{Z\-S\-T\-A\-T\-E\-\_\-\-T\-M\-P\-\_\-\-E\-N\-D}\label{igzip__lib_8h_a15a192d6ccce5232a81e04a89e546025ad7db4e6c908ed5949574b81a19f829f9}
+}]Temporary End state. \end{description}
+\end{Desc}
+
+
+\subsection{Function Documentation}
+\hypertarget{igzip__lib_8h_ac2adc31ec28075401ffae270df525593}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-adler32@{isal\-\_\-adler32}}
+\index{isal\-\_\-adler32@{isal\-\_\-adler32}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-adler32}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t isal\-\_\-adler32 (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{init, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_ac2adc31ec28075401ffae270df525593}
+
+
+Calculate Adler-\/32 checksum, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em init,\-:} & initial Adler-\/32 value \\
+\hline
+{\em buf,\-:} & buffer to calculate checksum on \\
+\hline
+{\em len,\-:} & buffer length in bytes\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32-\/bit Adler-\/32 checksum 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a4d4699267b60c1b57c034b2adc612ee7}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-create\-\_\-hufftables@{isal\-\_\-create\-\_\-hufftables}}
+\index{isal\-\_\-create\-\_\-hufftables@{isal\-\_\-create\-\_\-hufftables}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-create\-\_\-hufftables}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-create\-\_\-hufftables (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-hufftables} $\ast$}]{hufftables, }
+\item[{struct {\bf isal\-\_\-huff\-\_\-histogram} $\ast$}]{histogram}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a4d4699267b60c1b57c034b2adc612ee7}
+
+
+Creates a custom huffman code for the given histograms in which every literal and repeat length is assigned a code and all possible lookback distances are assigned a code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hufftables,\-:} & the output structure containing the huffman code \\
+\hline
+{\em histogram,\-:} & histogram containing frequency of literal symbols, repeat lengths and lookback distances \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a non zero value if an invalid huffman code was created. 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_aa45350d816cfdcbad55ec95284776af3}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-create\-\_\-hufftables\-\_\-subset@{isal\-\_\-create\-\_\-hufftables\-\_\-subset}}
+\index{isal\-\_\-create\-\_\-hufftables\-\_\-subset@{isal\-\_\-create\-\_\-hufftables\-\_\-subset}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-create\-\_\-hufftables\-\_\-subset}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-create\-\_\-hufftables\-\_\-subset (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-hufftables} $\ast$}]{hufftables, }
+\item[{struct {\bf isal\-\_\-huff\-\_\-histogram} $\ast$}]{histogram}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_aa45350d816cfdcbad55ec95284776af3}
+
+
+Creates a custom huffman code for the given histograms like \hyperlink{igzip__lib_8h_a4d4699267b60c1b57c034b2adc612ee7}{isal\-\_\-create\-\_\-hufftables()} except literals with 0 frequency in the histogram are not assigned a code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hufftables,\-:} & the output structure containing the huffman code \\
+\hline
+{\em histogram,\-:} & histogram containing frequency of literal symbols, repeat lengths and lookback distances \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a non zero value if an invalid huffman code was created. 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate@{isal\-\_\-deflate}}
+\index{isal\-\_\-deflate@{isal\-\_\-deflate}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-deflate (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}
+
+
+Fast data (deflate) compression for storage applications. 
+
+The call to \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()} will take data from the input buffer (updating next\-\_\-in, avail\-\_\-in and write a compressed stream to the output buffer (updating next\-\_\-out and avail\-\_\-out). The function returns when either the input buffer is empty or the output buffer is full.
+
+On entry to \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()}, next\-\_\-in points to an input buffer and avail\-\_\-in indicates the length of that buffer. Similarly next\-\_\-out points to an empty output buffer and avail\-\_\-out indicates the size of that buffer.
+
+The fields total\-\_\-in and total\-\_\-out start at 0 and are updated by \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()}. These reflect the total number of bytes read or written so far.
+
+When the last input buffer is passed in, signaled by setting the end\-\_\-of\-\_\-stream, the routine will complete compression at the end of the input buffer, as long as the output buffer is big enough.
+
+The compression level can be set by setting level to any value between I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-I\-N\-\_\-\-L\-E\-V\-E\-L and I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-A\-X\-\_\-\-L\-E\-V\-E\-L. When the compression level is I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-I\-N\-\_\-\-L\-E\-V\-E\-L, hufftables can be set to a table trained for the the specific data type being compressed to achieve better compression. When a higher compression level is desired, a larger generic memory buffer needs to be supplied by setting level\-\_\-buf and level\-\_\-buf\-\_\-size to represent the chunk of memory. For level x, the suggest size for this buffer this buffer is I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-\_\-\-L\-V\-Lx\-\_\-\-D\-E\-F\-A\-U\-L\-T. The defines I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-\_\-\-L\-V\-Lx\-\_\-\-M\-I\-N, I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-\_\-\-L\-V\-Lx\-\_\-\-S\-M\-A\-L\-L, I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-\_\-\-L\-V\-Lx\-\_\-\-M\-E\-D\-I\-U\-M, I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-\_\-\-L\-V\-Lx\-\_\-\-L\-A\-R\-G\-E, and I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-\_\-\-L\-V\-Lx\-\_\-\-E\-X\-T\-R\-A\-\_\-\-L\-A\-R\-G\-E are also provided as other suggested sizes.
+
+The equivalent of the zlib F\-L\-U\-S\-H\-\_\-\-S\-Y\-N\-C operation is currently supported. Flush types can be N\-O\-\_\-\-F\-L\-U\-S\-H, S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H or F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H. Default flush type is N\-O\-\_\-\-F\-L\-U\-S\-H. A S\-Y\-N\-C\-\_\- O\-R F\-U\-L\-L\-\_\- flush will byte align the deflate block by appending an empty stored block once all input has been compressed, including the buffered input. Checking that the out\-\_\-buffer is not empty or that internal\-\_\-state.\-state = Z\-S\-T\-A\-T\-E\-\_\-\-N\-E\-W\-\_\-\-H\-D\-R is sufficient to guarantee all input has been flushed. Additionally F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H will ensure look back history does not include previous blocks so new blocks are fully independent. Switching between flush types is supported.
+
+If a compression dictionary is required, the dictionary can be set calling isal\-\_\-deflate\-\_\-set\-\_\-dictionary before calling isal\-\_\-deflate.
+
+If the gzip\-\_\-flag is set to I\-G\-Z\-I\-P\-\_\-\-G\-Z\-I\-P, a generic gzip header and the gzip trailer are written around the deflate compressed data. If gzip\-\_\-flag is set to I\-G\-Z\-I\-P\-\_\-\-G\-Z\-I\-P\-\_\-\-N\-O\-\_\-\-H\-D\-R, then only the gzip trailer is written. A full-\/featured header is supported by the isal\-\_\-write\-\_\-\{gzip,zlib\}\-\_\-header() functions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C\-O\-M\-P\-\_\-\-O\-K (if everything is ok), I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-L\-U\-S\-H (if an invalid F\-L\-U\-S\-H is selected), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-L\-E\-V\-E\-L (if an invalid compression level is selected), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-F (if the level buffer is not large enough). 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a6d311328df613652c3d1606d4a0297c7}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-init@{isal\-\_\-deflate\-\_\-init}}
+\index{isal\-\_\-deflate\-\_\-init@{isal\-\_\-deflate\-\_\-init}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-deflate\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a6d311328df613652c3d1606d4a0297c7}
+
+
+Initialize compression stream data structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a15edadeb459a40840e6c2f4baa59fb12}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-process\-\_\-dict@{isal\-\_\-deflate\-\_\-process\-\_\-dict}}
+\index{isal\-\_\-deflate\-\_\-process\-\_\-dict@{isal\-\_\-deflate\-\_\-process\-\_\-dict}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-process\-\_\-dict}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-deflate\-\_\-process\-\_\-dict (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream, }
+\item[{struct {\bf isal\-\_\-dict} $\ast$}]{dict\-\_\-str, }
+\item[{uint8\-\_\-t $\ast$}]{dict, }
+\item[{uint32\-\_\-t}]{dict\-\_\-len}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a15edadeb459a40840e6c2f4baa59fb12}
+
+
+Process dictionary to reuse later. 
+
+Processes a dictionary so that the generated output can be reused to reset a new deflate stream more quickly than \hyperlink{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}{isal\-\_\-deflate\-\_\-set\-\_\-dict()} alone. This function is paired with \hyperlink{igzip__lib_8h_a36116973797161ef4243c49c68b64cc2}{isal\-\_\-deflate\-\_\-reset\-\_\-dict()} when using the same dictionary on multiple deflate objects. The stream.\-level must be set prior to calling this function to process the dictionary correctly. If the dictionary is longer than I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E, only the last I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E bytes will be used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+{\em dict\-\_\-str,\-:} & Structure to hold processed dictionary info to reuse later. \\
+\hline
+{\em dict,\-:} & Array containing dictionary to use. \\
+\hline
+{\em dict\-\_\-len,\-:} & Length of dict. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C\-O\-M\-P\-\_\-\-O\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-T\-A\-T\-E (dictionary could not be processed) 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_ae582f5e4fc6a35ab8796949660259178}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-reset@{isal\-\_\-deflate\-\_\-reset}}
+\index{isal\-\_\-deflate\-\_\-reset@{isal\-\_\-deflate\-\_\-reset}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-reset}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-deflate\-\_\-reset (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_ae582f5e4fc6a35ab8796949660259178}
+
+
+Reinitialize compression stream data structure. Performs the same action as isal\-\_\-deflate\-\_\-init, but does not change user supplied input such as the level, flush type, compression wrapper (like gzip), hufftables, and end\-\_\-of\-\_\-stream\-\_\-flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a36116973797161ef4243c49c68b64cc2}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-reset\-\_\-dict@{isal\-\_\-deflate\-\_\-reset\-\_\-dict}}
+\index{isal\-\_\-deflate\-\_\-reset\-\_\-dict@{isal\-\_\-deflate\-\_\-reset\-\_\-dict}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-reset\-\_\-dict}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-deflate\-\_\-reset\-\_\-dict (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream, }
+\item[{struct {\bf isal\-\_\-dict} $\ast$}]{dict\-\_\-str}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a36116973797161ef4243c49c68b64cc2}
+
+
+Reset compression dictionary to use. 
+
+Similar to \hyperlink{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}{isal\-\_\-deflate\-\_\-set\-\_\-dict()} but on pre-\/processed dictionary data. Pairing with \hyperlink{igzip__lib_8h_a15edadeb459a40840e6c2f4baa59fb12}{isal\-\_\-deflate\-\_\-process\-\_\-dict()} can reduce the processing time on subsequent compression with dictionary especially on small files.
+
+Like \hyperlink{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}{isal\-\_\-deflate\-\_\-set\-\_\-dict()}, this function is to be called after isal\-\_\-deflate\-\_\-init, or after completing a S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H or F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H and before the next call do isal\-\_\-deflate. Changing compression level between dictionary process and reset will cause return of I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-T\-A\-T\-E.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+{\em dict\-\_\-str,\-:} & Structure with pre-\/processed dictionary info. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C\-O\-M\-P\-\_\-\-O\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-T\-A\-T\-E or other (dictionary could not be reset) 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-set\-\_\-dict@{isal\-\_\-deflate\-\_\-set\-\_\-dict}}
+\index{isal\-\_\-deflate\-\_\-set\-\_\-dict@{isal\-\_\-deflate\-\_\-set\-\_\-dict}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-set\-\_\-dict}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-deflate\-\_\-set\-\_\-dict (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream, }
+\item[{uint8\-\_\-t $\ast$}]{dict, }
+\item[{uint32\-\_\-t}]{dict\-\_\-len}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a645ee0a2ceecb012c2f5db98541d6bd7}
+
+
+Set compression dictionary to use. 
+
+This function is to be called after isal\-\_\-deflate\-\_\-init, or after completing a S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H or F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H and before the next call do isal\-\_\-deflate. If the dictionary is longer than I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E, only the last I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E bytes will be used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+{\em dict,\-:} & Array containing dictionary to use. \\
+\hline
+{\em dict\-\_\-len,\-:} & Length of dict. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C\-O\-M\-P\-\_\-\-O\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-T\-A\-T\-E (dictionary could not be set) 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a142e998c9897b815135742ff04102978}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-set\-\_\-hufftables@{isal\-\_\-deflate\-\_\-set\-\_\-hufftables}}
+\index{isal\-\_\-deflate\-\_\-set\-\_\-hufftables@{isal\-\_\-deflate\-\_\-set\-\_\-hufftables}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-set\-\_\-hufftables}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-deflate\-\_\-set\-\_\-hufftables (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream, }
+\item[{struct {\bf isal\-\_\-hufftables} $\ast$}]{hufftables, }
+\item[{int}]{type}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a142e998c9897b815135742ff04102978}
+
+
+Set stream to use a new Huffman code. 
+
+Sets the Huffman code to be used in compression before compression start or after the successful completion of a S\-Y\-N\-C\-\_\-\-F\-L\-U\-S\-H or F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H. If type has value I\-G\-Z\-I\-P\-\_\-\-H\-U\-F\-F\-T\-A\-B\-L\-E\-\_\-\-D\-E\-F\-A\-U\-L\-T, the stream is set to use the default Huffman code. If type has value I\-G\-Z\-I\-P\-\_\-\-H\-U\-F\-F\-T\-A\-B\-L\-E\-\_\-\-S\-T\-A\-T\-I\-C, the stream is set to use the deflate standard static Huffman code, or if type has value I\-G\-Z\-I\-P\-\_\-\-H\-U\-F\-F\-T\-A\-B\-L\-E\-\_\-\-C\-U\-S\-T\-O\-M, the stream is set to sue the \hyperlink{structisal__hufftables}{isal\-\_\-hufftables} structure input to isal\-\_\-deflate\-\_\-set\-\_\-hufftables.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream,\-:} & Structure holding state information on the compression stream. \\
+\hline
+{\em hufftables,\-:} & new huffman code to use if type is set to I\-G\-Z\-I\-P\-\_\-\-H\-U\-F\-F\-T\-A\-B\-L\-E\-\_\-\-C\-U\-S\-T\-O\-M. \\
+\hline
+{\em type,\-:} & Flag specifying what hufftable to use.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns I\-N\-V\-A\-L\-I\-D\-\_\-\-O\-P\-E\-R\-A\-T\-I\-O\-N if the stream was unmodified. This may be due to the stream being in a state where changing the huffman code is not allowed or an invalid input is provided. 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a2dd4d4c13d44fe96ca0d37d169fbf525}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-stateless@{isal\-\_\-deflate\-\_\-stateless}}
+\index{isal\-\_\-deflate\-\_\-stateless@{isal\-\_\-deflate\-\_\-stateless}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-stateless}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-deflate\-\_\-stateless (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a2dd4d4c13d44fe96ca0d37d169fbf525}
+
+
+Fast data (deflate) stateless compression for storage applications. 
+
+Stateless (one shot) compression routine with a similar interface to \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()} but operates on entire input buffer at one time. Parameter avail\-\_\-out must be large enough to fit the entire compressed output. Max expansion is limited to the input size plus the header size of a stored/raw block.
+
+When the compression level is set to 1, unlike in \hyperlink{igzip__lib_8h_a3a6d8cde91439b0aeb10b357075560e0}{isal\-\_\-deflate()}, level\-\_\-buf may be optionally set depending on what what performance is desired.
+
+For stateless the flush types N\-O\-\_\-\-F\-L\-U\-S\-H and F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H are supported. F\-U\-L\-L\-\_\-\-F\-L\-U\-S\-H will byte align the output deflate block so additional blocks can be easily appended.
+
+If the gzip\-\_\-flag is set to I\-G\-Z\-I\-P\-\_\-\-G\-Z\-I\-P, a generic gzip header and the gzip trailer are written around the deflate compressed data. If gzip\-\_\-flag is set to I\-G\-Z\-I\-P\-\_\-\-G\-Z\-I\-P\-\_\-\-N\-O\-\_\-\-H\-D\-R, then only the gzip trailer is written.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C\-O\-M\-P\-\_\-\-O\-K (if everything is ok), I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-L\-U\-S\-H (if an invalid F\-L\-U\-S\-H is selected), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-L\-E\-V\-E\-L (if an invalid compression level is selected), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-L\-E\-V\-E\-L\-\_\-\-B\-U\-F (if the level buffer is not large enough), S\-T\-A\-T\-E\-L\-E\-S\-S\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W (if output buffer will not fit output). 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_aeae02071c5f41de12b7350dc90b314fc}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-deflate\-\_\-stateless\-\_\-init@{isal\-\_\-deflate\-\_\-stateless\-\_\-init}}
+\index{isal\-\_\-deflate\-\_\-stateless\-\_\-init@{isal\-\_\-deflate\-\_\-stateless\-\_\-init}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-deflate\-\_\-stateless\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-deflate\-\_\-stateless\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_aeae02071c5f41de12b7350dc90b314fc}
+
+
+Initialize compression stream data structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_aafa595cf3fdcb8f40f5ded192944c54b}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-gzip\-\_\-header\-\_\-init@{isal\-\_\-gzip\-\_\-header\-\_\-init}}
+\index{isal\-\_\-gzip\-\_\-header\-\_\-init@{isal\-\_\-gzip\-\_\-header\-\_\-init}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-gzip\-\_\-header\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-gzip\-\_\-header\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-gzip\-\_\-header} $\ast$}]{gz\-\_\-hdr}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_aafa595cf3fdcb8f40f5ded192944c54b}
+
+
+Set gzip header default values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gz\-\_\-hdr,\-:} & Gzip header to initialize. \\
+\hline
+\end{DoxyParams}
+\hypertarget{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-inflate@{isal\-\_\-inflate}}
+\index{isal\-\_\-inflate@{isal\-\_\-inflate}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-inflate}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-inflate (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}
+
+
+Fast data (deflate) decompression for storage applications. 
+
+On entry to \hyperlink{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{isal\-\_\-inflate()}, next\-\_\-in points to an input buffer and avail\-\_\-in indicates the length of that buffer. Similarly next\-\_\-out points to an empty output buffer and avail\-\_\-out indicates the size of that buffer.
+
+The field total\-\_\-out starts at 0 and is updated by \hyperlink{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{isal\-\_\-inflate()}. This reflects the total number of bytes written so far.
+
+The call to \hyperlink{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{isal\-\_\-inflate()} will take data from the input buffer (updating next\-\_\-in, avail\-\_\-in and write a decompressed stream to the output buffer (updating next\-\_\-out and avail\-\_\-out). The function returns when the input buffer is empty, the output buffer is full, invalid data is found, or in the case of zlib formatted data if a dictionary is specified. The current state of the decompression on exit can be read from state-\/$>$block-\/state.
+
+If the crc\-\_\-flag is set to I\-S\-A\-L\-\_\-\-G\-Z\-I\-P\-\_\-\-N\-O\-\_\-\-H\-D\-R the gzip crc of the output is stored in state-\/$>$crc. Alternatively, if the crc\-\_\-flag is set to I\-S\-A\-L\-\_\-\-Z\-L\-I\-B\-\_\-\-N\-O\-\_\-\-H\-D\-R the adler32 of the output is stored in state-\/$>$crc (checksum may not be updated until decompression is complete). When the crc\-\_\-flag is set to I\-S\-A\-L\-\_\-\-G\-Z\-I\-P\-\_\-\-N\-O\-\_\-\-H\-D\-R\-\_\-\-V\-E\-R or I\-S\-A\-L\-\_\-\-Z\-L\-I\-B\-\_\-\-N\-O\-\_\-\-H\-D\-R\-\_\-\-V\-E\-R, the behavior is the same, except the checksum is verified with the checksum after immediately following the deflate data. If the crc\-\_\-flag is set to I\-S\-A\-L\-\_\-\-G\-Z\-I\-P or I\-S\-A\-L\-\_\-\-Z\-L\-I\-B, the gzip/zlib header is parsed, state-\/$>$crc is set to the appropriate checksum, and the checksum is verified. If the crc\-\_\-flag is set to I\-S\-A\-L\-\_\-\-D\-E\-F\-L\-A\-T\-E (default), then the data is treated as a raw deflate block.
+
+The element state-\/$>$hist\-\_\-bits has values from 0 to 15, where values of 1 to 15 are the log base 2 size of the matching window and 0 is the default with maximum history size.
+
+If a dictionary is required, a call to isal\-\_\-inflate\-\_\-set\-\_\-dict will set the dictionary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+I\-S\-A\-L\-\_\-\-D\-E\-C\-O\-M\-P\-\_\-\-O\-K (if everything is ok), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-B\-L\-O\-C\-K, I\-S\-A\-L\-\_\-\-N\-E\-E\-D\-\_\-\-D\-I\-C\-T, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-Y\-M\-B\-O\-L, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-L\-O\-O\-K\-B\-A\-C\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-W\-R\-A\-P\-P\-E\-R, I\-S\-A\-L\-\_\-\-U\-N\-S\-U\-P\-P\-O\-R\-T\-E\-D\-\_\-\-M\-E\-T\-H\-O\-D, I\-S\-A\-L\-\_\-\-I\-N\-C\-O\-R\-R\-E\-C\-T\-\_\-\-C\-H\-E\-C\-K\-S\-U\-M. 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a00513fdbbc6688c613d1a41b694ad168}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-inflate\-\_\-init@{isal\-\_\-inflate\-\_\-init}}
+\index{isal\-\_\-inflate\-\_\-init@{isal\-\_\-inflate\-\_\-init}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-inflate\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-inflate\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a00513fdbbc6688c613d1a41b694ad168}
+
+
+Initialize decompression state data structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_af6d86fe1b62a34074e908390b17e5a31}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-inflate\-\_\-reset@{isal\-\_\-inflate\-\_\-reset}}
+\index{isal\-\_\-inflate\-\_\-reset@{isal\-\_\-inflate\-\_\-reset}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-inflate\-\_\-reset}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-inflate\-\_\-reset (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_af6d86fe1b62a34074e908390b17e5a31}
+
+
+Reinitialize decompression state data structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a5a5a24dc5d4f9a9ca3bf08b5bb0274ff}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-inflate\-\_\-set\-\_\-dict@{isal\-\_\-inflate\-\_\-set\-\_\-dict}}
+\index{isal\-\_\-inflate\-\_\-set\-\_\-dict@{isal\-\_\-inflate\-\_\-set\-\_\-dict}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-inflate\-\_\-set\-\_\-dict}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-inflate\-\_\-set\-\_\-dict (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state, }
+\item[{uint8\-\_\-t $\ast$}]{dict, }
+\item[{uint32\-\_\-t}]{dict\-\_\-len}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a5a5a24dc5d4f9a9ca3bf08b5bb0274ff}
+
+
+Set decompression dictionary to use. 
+
+This function is to be called after isal\-\_\-inflate\-\_\-init. If the dictionary is longer than I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E, only the last I\-G\-Z\-I\-P\-\_\-\-H\-I\-S\-T\-\_\-\-S\-I\-Z\-E bytes will be used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state,\-:} & Structure holding state information on the decompression stream. \\
+\hline
+{\em dict,\-:} & Array containing dictionary to use. \\
+\hline
+{\em dict\-\_\-len,\-:} & Length of dict. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C\-O\-M\-P\-\_\-\-O\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-T\-A\-T\-E (dictionary could not be set) 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_adb59d093d9b8b621285fef81f82e4c0c}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-inflate\-\_\-stateless@{isal\-\_\-inflate\-\_\-stateless}}
+\index{isal\-\_\-inflate\-\_\-stateless@{isal\-\_\-inflate\-\_\-stateless}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-inflate\-\_\-stateless}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-inflate\-\_\-stateless (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_adb59d093d9b8b621285fef81f82e4c0c}
+
+
+Fast data (deflate) stateless decompression for storage applications. 
+
+Stateless (one shot) decompression routine with a similar interface to \hyperlink{igzip__lib_8h_ad8842e2100d3b52b94943afa5a0c5979}{isal\-\_\-inflate()} but operates on entire input buffer at one time. Parameter avail\-\_\-out must be large enough to fit the entire decompressed output. Dictionaries are not supported.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Structure holding state information on the compression streams. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+I\-S\-A\-L\-\_\-\-D\-E\-C\-O\-M\-P\-\_\-\-O\-K (if everything is ok), I\-S\-A\-L\-\_\-\-E\-N\-D\-\_\-\-I\-N\-P\-U\-T (if all input was decompressed), I\-S\-A\-L\-\_\-\-N\-E\-E\-D\-\_\-\-D\-I\-C\-T, I\-S\-A\-L\-\_\-\-O\-U\-T\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W (if output buffer ran out of space), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-B\-L\-O\-C\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-S\-Y\-M\-B\-O\-L, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-L\-O\-O\-K\-B\-A\-C\-K, I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-W\-R\-A\-P\-P\-E\-R, I\-S\-A\-L\-\_\-\-U\-N\-S\-U\-P\-P\-O\-R\-T\-E\-D\-\_\-\-M\-E\-T\-H\-O\-D, I\-S\-A\-L\-\_\-\-I\-N\-C\-O\-R\-R\-E\-C\-T\-\_\-\-C\-H\-E\-C\-K\-S\-U\-M. 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a7fd333cf5024c376599a3fd8fb616b7d}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-read\-\_\-gzip\-\_\-header@{isal\-\_\-read\-\_\-gzip\-\_\-header}}
+\index{isal\-\_\-read\-\_\-gzip\-\_\-header@{isal\-\_\-read\-\_\-gzip\-\_\-header}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-read\-\_\-gzip\-\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-read\-\_\-gzip\-\_\-header (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state, }
+\item[{struct {\bf isal\-\_\-gzip\-\_\-header} $\ast$}]{gz\-\_\-hdr}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a7fd333cf5024c376599a3fd8fb616b7d}
+
+
+Read and return gzip header information. 
+
+On entry state must be initialized and next\-\_\-in pointing to a gzip compressed buffer. The buffers gz\-\_\-hdr-\/$>$extra, gz\-\_\-hdr-\/$>$name, gz\-\_\-hdr-\/$>$comments and the buffer lengths must be set to record the corresponding field, or set to N\-U\-L\-L to disregard that gzip header information. If one of these buffers overflows, the user can reallocate a larger buffer and call this function again to continue reading the header information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state,\-:} & Structure holding state information on the decompression stream. \\
+\hline
+{\em gz\-\_\-hdr,\-:} & Structure to return data encoded in the gzip header \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+I\-S\-A\-L\-\_\-\-D\-E\-C\-O\-M\-P\-\_\-\-O\-K (header was successfully parsed) I\-S\-A\-L\-\_\-\-E\-N\-D\-\_\-\-I\-N\-P\-U\-T (all input was parsed), I\-S\-A\-L\-\_\-\-N\-A\-M\-E\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W (gz\-\_\-hdr-\/$>$name overflowed while parsing), I\-S\-A\-L\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W (gz\-\_\-hdr-\/$>$comment overflowed while parsing), I\-S\-A\-L\-\_\-\-E\-X\-T\-R\-A\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W (gz\-\_\-hdr-\/$>$extra overflowed while parsing), I\-S\-A\-L\-\_\-\-I\-N\-V\-A\-L\-I\-D\-\_\-\-W\-R\-A\-P\-P\-E\-R (invalid gzip header found), I\-S\-A\-L\-\_\-\-U\-N\-S\-U\-P\-P\-O\-R\-T\-E\-D\-\_\-\-M\-E\-T\-H\-O\-D (deflate is not the compression method), I\-S\-A\-L\-\_\-\-I\-N\-C\-O\-R\-R\-E\-C\-T\-\_\-\-C\-H\-E\-C\-K\-S\-U\-M (gzip header checksum was incorrect) 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_a4af9bf84dd7ca9a60eb1d07bad4a7c76}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-read\-\_\-zlib\-\_\-header@{isal\-\_\-read\-\_\-zlib\-\_\-header}}
+\index{isal\-\_\-read\-\_\-zlib\-\_\-header@{isal\-\_\-read\-\_\-zlib\-\_\-header}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-read\-\_\-zlib\-\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}int isal\-\_\-read\-\_\-zlib\-\_\-header (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inflate\-\_\-state} $\ast$}]{state, }
+\item[{struct {\bf isal\-\_\-zlib\-\_\-header} $\ast$}]{zlib\-\_\-hdr}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a4af9bf84dd7ca9a60eb1d07bad4a7c76}
+
+
+Read and return zlib header information. 
+
+On entry state must be initialized and next\-\_\-in pointing to a zlib compressed buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state,\-:} & Structure holding state information on the decompression stream. \\
+\hline
+{\em zlib\-\_\-hdr,\-:} & Structure to return data encoded in the zlib header \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+I\-S\-A\-L\-\_\-\-D\-E\-C\-O\-M\-P\-\_\-\-O\-K (header was successfully parsed), I\-S\-A\-L\-\_\-\-E\-N\-D\-\_\-\-I\-N\-P\-U\-T (all input was parsed), I\-S\-A\-L\-\_\-\-U\-N\-S\-U\-P\-P\-O\-R\-T\-E\-D\-\_\-\-M\-E\-T\-H\-O\-D (deflate is not the compression method), I\-S\-A\-L\-\_\-\-I\-N\-C\-O\-R\-R\-E\-C\-T\-\_\-\-C\-H\-E\-C\-K\-S\-U\-M (zlib header checksum was incorrect) 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_abcf32e76e2b6802792a5ceb4b51f1c4e}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-update\-\_\-histogram@{isal\-\_\-update\-\_\-histogram}}
+\index{isal\-\_\-update\-\_\-histogram@{isal\-\_\-update\-\_\-histogram}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-update\-\_\-histogram}]{\setlength{\rightskip}{0pt plus 5cm}void isal\-\_\-update\-\_\-histogram (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t $\ast$}]{in\-\_\-stream, }
+\item[{int}]{length, }
+\item[{struct {\bf isal\-\_\-huff\-\_\-histogram} $\ast$}]{histogram}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_abcf32e76e2b6802792a5ceb4b51f1c4e}
+
+
+Updates histograms to include the symbols found in the input stream. Since this function only updates the histograms, it can be called on multiple streams to get a histogram better representing the desired data set. When first using histogram it must be initialized by zeroing the structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\-\_\-stream,\-:} & Input stream of data. \\
+\hline
+{\em length,\-:} & The length of start\-\_\-stream. \\
+\hline
+{\em histogram,\-:} & The returned histogram of lit/len/dist symbols. \\
+\hline
+\end{DoxyParams}
+\hypertarget{igzip__lib_8h_a2e5fe18579896416b7477e6598489b28}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-write\-\_\-gzip\-\_\-header@{isal\-\_\-write\-\_\-gzip\-\_\-header}}
+\index{isal\-\_\-write\-\_\-gzip\-\_\-header@{isal\-\_\-write\-\_\-gzip\-\_\-header}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-write\-\_\-gzip\-\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t isal\-\_\-write\-\_\-gzip\-\_\-header (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream, }
+\item[{struct {\bf isal\-\_\-gzip\-\_\-header} $\ast$}]{gz\-\_\-hdr}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_a2e5fe18579896416b7477e6598489b28}
+
+
+Write gzip header to output stream. 
+
+Writes the gzip header to the output stream. On entry this function assumes that the output buffer has been initialized, so stream-\/$>$next\-\_\-out, stream-\/$>$avail\-\_\-out and stream-\/$>$total\-\_\-out have been set. If the output buffer contains insufficient space, stream is not modified.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream,\-:} & Structure holding state information on the compression stream. \\
+\hline
+{\em gz\-\_\-hdr,\-:} & Structure holding the gzip header information to encode.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if the header is successfully written, otherwise returns the minimum size required to successfully write the gzip header to the output buffer. 
+\end{DoxyReturn}
+\hypertarget{igzip__lib_8h_ac6409a35e068fc012e37f85fa189a999}{\index{igzip\-\_\-lib.\-h@{igzip\-\_\-lib.\-h}!isal\-\_\-write\-\_\-zlib\-\_\-header@{isal\-\_\-write\-\_\-zlib\-\_\-header}}
+\index{isal\-\_\-write\-\_\-zlib\-\_\-header@{isal\-\_\-write\-\_\-zlib\-\_\-header}!igzip_lib.h@{igzip\-\_\-lib.\-h}}
+\subsubsection[{isal\-\_\-write\-\_\-zlib\-\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t isal\-\_\-write\-\_\-zlib\-\_\-header (
+\begin{DoxyParamCaption}
+\item[{struct {\bf isal\-\_\-zstream} $\ast$}]{stream, }
+\item[{struct {\bf isal\-\_\-zlib\-\_\-header} $\ast$}]{z\-\_\-hdr}
+\end{DoxyParamCaption}
+)}}\label{igzip__lib_8h_ac6409a35e068fc012e37f85fa189a999}
+
+
+Write zlib header to output stream. 
+
+Writes the zlib header to the output stream. On entry this function assumes that the output buffer has been initialized, so stream-\/$>$next\-\_\-out, stream-\/$>$avail\-\_\-out and stream-\/$>$total\-\_\-out have been set. If the output buffer contains insufficient space, stream is not modified.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream,\-:} & Structure holding state information on the compression stream. \\
+\hline
+{\em z\-\_\-hdr,\-:} & Structure holding the zlib header information to encode.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if the header is successfully written, otherwise returns the minimum size required to successfully write the zlib header to the output buffer. 
+\end{DoxyReturn}

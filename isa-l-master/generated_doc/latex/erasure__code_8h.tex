@@ -1,0 +1,442 @@
+\hypertarget{erasure__code_8h}{\section{erasure\-\_\-code.\-h File Reference}
+\label{erasure__code_8h}\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}}
+}
+
+
+Interface to functions supporting erasure code encode and decode.  
+
+
+{\ttfamily \#include \char`\"{}gf\-\_\-vect\-\_\-mul.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}{ec\-\_\-init\-\_\-tables} (int k, int rows, unsigned char $\ast$a, unsigned char $\ast$gftbls)
+\begin{DoxyCompactList}\small\item\em Initialize tables for fast Erasure Code encode and decode. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_a590b5c35075aeea1243a9e4ef73a49d4}{ec\-\_\-encode\-\_\-data} (int len, int k, int rows, unsigned char $\ast$gftbls, unsigned char $\ast$$\ast$data, unsigned char $\ast$$\ast$coding)
+\begin{DoxyCompactList}\small\item\em Generate or decode erasure codes on blocks of data, runs appropriate version. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_aa486278c409735df8001096ac2b487dd}{ec\-\_\-encode\-\_\-data\-\_\-base} (int len, int srcs, int dests, unsigned char $\ast$v, unsigned char $\ast$$\ast$src, unsigned char $\ast$$\ast$dest)
+\begin{DoxyCompactList}\small\item\em Generate or decode erasure codes on blocks of data, runs baseline version. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_a0fa4553065d7e00c1984621e7e1af9ae}{ec\-\_\-encode\-\_\-data\-\_\-update} (int len, int k, int rows, int vec\-\_\-i, unsigned char $\ast$g\-\_\-tbls, unsigned char $\ast$data, unsigned char $\ast$$\ast$coding)
+\begin{DoxyCompactList}\small\item\em Generate update for encode or decode of erasure codes from single source, runs appropriate version. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_a1cc2a6a0f0d32db4079ceb07b0482625}{ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base} (int len, int k, int rows, int vec\-\_\-i, unsigned char $\ast$v, unsigned char $\ast$data, unsigned char $\ast$$\ast$dest)
+\begin{DoxyCompactList}\small\item\em Generate update for encode or decode of erasure codes from single source. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_a17799d49d9b83861322ebf314a55f77f}{gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base} (int len, int vlen, unsigned char $\ast$gftbls, unsigned char $\ast$$\ast$src, unsigned char $\ast$dest)
+\begin{DoxyCompactList}\small\item\em G\-F(2$^\wedge$8) vector dot product, runs baseline version. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_a6ce05684e168d73773847a3c2c13c175}{gf\-\_\-vect\-\_\-dot\-\_\-prod} (int len, int vlen, unsigned char $\ast$gftbls, unsigned char $\ast$$\ast$src, unsigned char $\ast$dest)
+\begin{DoxyCompactList}\small\item\em G\-F(2$^\wedge$8) vector dot product, runs appropriate version. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_ae9f15336f98bcbdbc529a4ff6b0eda5e}{gf\-\_\-vect\-\_\-mad} (int len, int vec, int vec\-\_\-i, unsigned char $\ast$gftbls, unsigned char $\ast$src, unsigned char $\ast$dest)
+\begin{DoxyCompactList}\small\item\em G\-F(2$^\wedge$8) vector multiply accumulate, runs appropriate version. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_af2c7c97f0822bbb4803a6fb6b98db8e5}{gf\-\_\-vect\-\_\-mad\-\_\-base} (int len, int vec, int vec\-\_\-i, unsigned char $\ast$v, unsigned char $\ast$src, unsigned char $\ast$dest)
+\begin{DoxyCompactList}\small\item\em G\-F(2$^\wedge$8) vector multiply accumulate, baseline version. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{erasure__code_8h_ac73ea8358bc3155c7f3a6c078a7d6d35}{gf\-\_\-mul} (unsigned char a, unsigned char b)
+\begin{DoxyCompactList}\small\item\em Single element G\-F(2$^\wedge$8) multiply. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{erasure__code_8h_a484460566a8c888fda3d769324461345}{gf\-\_\-inv} (unsigned char a)
+\begin{DoxyCompactList}\small\item\em Single element G\-F(2$^\wedge$8) inverse. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_a81be18ea979e8a32f384e1a7856badcf}{gf\-\_\-gen\-\_\-rs\-\_\-matrix} (unsigned char $\ast$a, int m, int k)
+\begin{DoxyCompactList}\small\item\em Generate a matrix of coefficients to be used for encoding. \end{DoxyCompactList}\item 
+void \hyperlink{erasure__code_8h_afd549f435ee28276b5a9408a3a6256b1}{gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix} (unsigned char $\ast$a, int m, int k)
+\begin{DoxyCompactList}\small\item\em Generate a Cauchy matrix of coefficients to be used for encoding. \end{DoxyCompactList}\item 
+int \hyperlink{erasure__code_8h_ad808efb2e8af3803571c0a6c7c9faf39}{gf\-\_\-invert\-\_\-matrix} (unsigned char $\ast$in, unsigned char $\ast$out, const int n)
+\begin{DoxyCompactList}\small\item\em Invert a matrix in G\-F(2$^\wedge$8) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface to functions supporting erasure code encode and decode. This file defines the interface to optimized functions used in erasure codes. Encode and decode of erasures in G\-F(2$^\wedge$8) are made by calculating the dot product of the symbols (bytes in G\-F(2$^\wedge$8)) across a set of buffers and a set of coefficients. Values for the coefficients are determined by the type of erasure code. Using a general dot product means that any sequence of coefficients may be used including erasure codes based on random coefficients. Multiple versions of dot product are supplied to calculate 1-\/6 output vectors in one pass. Base G\-F multiply and divide functions can be sped up by defining G\-F\-\_\-\-L\-A\-R\-G\-E\-\_\-\-T\-A\-B\-L\-E\-S at the expense of memory size. 
+
+\subsection{Function Documentation}
+\hypertarget{erasure__code_8h_a590b5c35075aeea1243a9e4ef73a49d4}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!ec\-\_\-encode\-\_\-data@{ec\-\_\-encode\-\_\-data}}
+\index{ec\-\_\-encode\-\_\-data@{ec\-\_\-encode\-\_\-data}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{ec\-\_\-encode\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void ec\-\_\-encode\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{k, }
+\item[{int}]{rows, }
+\item[{unsigned char $\ast$}]{gftbls, }
+\item[{unsigned char $\ast$$\ast$}]{data, }
+\item[{unsigned char $\ast$$\ast$}]{coding}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a590b5c35075aeea1243a9e4ef73a49d4}
+
+
+Generate or decode erasure codes on blocks of data, runs appropriate version. 
+
+Given a list of source data blocks, generate one or multiple blocks of encoded data as specified by a matrix of G\-F(2$^\wedge$8) coefficients. When given a suitable set of coefficients, this function will perform the fast generation or decoding of Reed-\/\-Solomon type erasure codes.
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of each block of data (vector) of source or dest data. \\
+\hline
+{\em k} & The number of vector sources or rows in the generator matrix for coding. \\
+\hline
+{\em rows} & The number of output vectors to concurrently encode/decode. \\
+\hline
+{\em gftbls} & Pointer to array of input tables generated from coding coefficients in \hyperlink{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}{ec\-\_\-init\-\_\-tables()}. Must be of size 32$\ast$k$\ast$rows \\
+\hline
+{\em data} & Array of pointers to source input buffers. \\
+\hline
+{\em coding} & Array of pointers to coded output buffers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_aa486278c409735df8001096ac2b487dd}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!ec\-\_\-encode\-\_\-data\-\_\-base@{ec\-\_\-encode\-\_\-data\-\_\-base}}
+\index{ec\-\_\-encode\-\_\-data\-\_\-base@{ec\-\_\-encode\-\_\-data\-\_\-base}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{ec\-\_\-encode\-\_\-data\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}void ec\-\_\-encode\-\_\-data\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{srcs, }
+\item[{int}]{dests, }
+\item[{unsigned char $\ast$}]{v, }
+\item[{unsigned char $\ast$$\ast$}]{src, }
+\item[{unsigned char $\ast$$\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_aa486278c409735df8001096ac2b487dd}
+
+
+Generate or decode erasure codes on blocks of data, runs baseline version. 
+
+Baseline version of \hyperlink{erasure__code_8h_a590b5c35075aeea1243a9e4ef73a49d4}{ec\-\_\-encode\-\_\-data()} with same parameters. \hypertarget{erasure__code_8h_a0fa4553065d7e00c1984621e7e1af9ae}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!ec\-\_\-encode\-\_\-data\-\_\-update@{ec\-\_\-encode\-\_\-data\-\_\-update}}
+\index{ec\-\_\-encode\-\_\-data\-\_\-update@{ec\-\_\-encode\-\_\-data\-\_\-update}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{ec\-\_\-encode\-\_\-data\-\_\-update}]{\setlength{\rightskip}{0pt plus 5cm}void ec\-\_\-encode\-\_\-data\-\_\-update (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{k, }
+\item[{int}]{rows, }
+\item[{int}]{vec\-\_\-i, }
+\item[{unsigned char $\ast$}]{g\-\_\-tbls, }
+\item[{unsigned char $\ast$}]{data, }
+\item[{unsigned char $\ast$$\ast$}]{coding}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a0fa4553065d7e00c1984621e7e1af9ae}
+
+
+Generate update for encode or decode of erasure codes from single source, runs appropriate version. 
+
+Given one source data block, update one or multiple blocks of encoded data as specified by a matrix of G\-F(2$^\wedge$8) coefficients. When given a suitable set of coefficients, this function will perform the fast generation or decoding of Reed-\/\-Solomon type erasure codes from one input source at a time.
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of each block of data (vector) of source or dest data. \\
+\hline
+{\em k} & The number of vector sources or rows in the generator matrix for coding. \\
+\hline
+{\em rows} & The number of output vectors to concurrently encode/decode. \\
+\hline
+{\em vec\-\_\-i} & The vector index corresponding to the single input source. \\
+\hline
+{\em g\-\_\-tbls} & Pointer to array of input tables generated from coding coefficients in \hyperlink{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}{ec\-\_\-init\-\_\-tables()}. Must be of size 32$\ast$k$\ast$rows \\
+\hline
+{\em data} & Pointer to single input source used to update output parity. \\
+\hline
+{\em coding} & Array of pointers to coded output buffers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_a1cc2a6a0f0d32db4079ceb07b0482625}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base@{ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base}}
+\index{ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base@{ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}void ec\-\_\-encode\-\_\-data\-\_\-update\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{k, }
+\item[{int}]{rows, }
+\item[{int}]{vec\-\_\-i, }
+\item[{unsigned char $\ast$}]{v, }
+\item[{unsigned char $\ast$}]{data, }
+\item[{unsigned char $\ast$$\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a1cc2a6a0f0d32db4079ceb07b0482625}
+
+
+Generate update for encode or decode of erasure codes from single source. 
+
+Baseline version of \hyperlink{erasure__code_8h_a0fa4553065d7e00c1984621e7e1af9ae}{ec\-\_\-encode\-\_\-data\-\_\-update()}. \hypertarget{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!ec\-\_\-init\-\_\-tables@{ec\-\_\-init\-\_\-tables}}
+\index{ec\-\_\-init\-\_\-tables@{ec\-\_\-init\-\_\-tables}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{ec\-\_\-init\-\_\-tables}]{\setlength{\rightskip}{0pt plus 5cm}void ec\-\_\-init\-\_\-tables (
+\begin{DoxyParamCaption}
+\item[{int}]{k, }
+\item[{int}]{rows, }
+\item[{unsigned char $\ast$}]{a, }
+\item[{unsigned char $\ast$}]{gftbls}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}
+
+
+Initialize tables for fast Erasure Code encode and decode. 
+
+Generates the expanded tables needed for fast encode or decode for erasure codes on blocks of data. 32bytes is generated for each input coefficient.
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & The number of vector sources or rows in the generator matrix for coding. \\
+\hline
+{\em rows} & The number of output vectors to concurrently encode/decode. \\
+\hline
+{\em a} & Pointer to sets of arrays of input coefficients used to encode or decode data. \\
+\hline
+{\em gftbls} & Pointer to start of space for concatenated output tables generated from input coefficients. Must be of size 32$\ast$k$\ast$rows. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_afd549f435ee28276b5a9408a3a6256b1}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix@{gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix}}
+\index{gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix@{gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-gen\-\_\-cauchy1\-\_\-matrix (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{a, }
+\item[{int}]{m, }
+\item[{int}]{k}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_afd549f435ee28276b5a9408a3a6256b1}
+
+
+Generate a Cauchy matrix of coefficients to be used for encoding. 
+
+Cauchy matrix example of encoding coefficients where high portion of matrix is identity matrix I and lower portion is constructed as 1/(i + j) $|$ i != j, i\-:\{0,k-\/1\} j\-:\{k,m-\/1\}. Any sub-\/matrix of a Cauchy matrix should be invertable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \mbox{[}m x k\mbox{]} array to hold coefficients \\
+\hline
+{\em m} & number of rows in matrix corresponding to srcs + parity. \\
+\hline
+{\em k} & number of columns in matrix corresponding to srcs. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_a81be18ea979e8a32f384e1a7856badcf}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-gen\-\_\-rs\-\_\-matrix@{gf\-\_\-gen\-\_\-rs\-\_\-matrix}}
+\index{gf\-\_\-gen\-\_\-rs\-\_\-matrix@{gf\-\_\-gen\-\_\-rs\-\_\-matrix}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-gen\-\_\-rs\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-gen\-\_\-rs\-\_\-matrix (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{a, }
+\item[{int}]{m, }
+\item[{int}]{k}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a81be18ea979e8a32f384e1a7856badcf}
+
+
+Generate a matrix of coefficients to be used for encoding. 
+
+Vandermonde matrix example of encoding coefficients where high portion of matrix is identity matrix I and lower portion is constructed as 2$^\wedge$\{i$\ast$(j-\/k+1)\} i\-:\{0,k-\/1\} j\-:\{k,m-\/1\}. Commonly used method for choosing coefficients in erasure encoding but does not guarantee invertable for every sub matrix. For large pairs of m and k it is possible to find cases where the decode matrix chosen from sources and parity is not invertable. Users may want to adjust for certain pairs m and k. If m and k satisfy one of the following inequalities, no adjustment is required\-:
+
+
+\begin{DoxyItemize}
+\item k $<$= 3
+\item k = 4, m $<$= 25
+\item k = 5, m $<$= 10
+\item k $<$= 21, m-\/k = 4
+\item m -\/ k $<$= 3.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \mbox{[}m x k\mbox{]} array to hold coefficients \\
+\hline
+{\em m} & number of rows in matrix corresponding to srcs + parity. \\
+\hline
+{\em k} & number of columns in matrix corresponding to srcs. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_a484460566a8c888fda3d769324461345}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-inv@{gf\-\_\-inv}}
+\index{gf\-\_\-inv@{gf\-\_\-inv}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-inv}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char gf\-\_\-inv (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{a}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a484460566a8c888fda3d769324461345}
+
+
+Single element G\-F(2$^\wedge$8) inverse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Input element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Field element b such that a x b = \{1\} 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_ad808efb2e8af3803571c0a6c7c9faf39}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-invert\-\_\-matrix@{gf\-\_\-invert\-\_\-matrix}}
+\index{gf\-\_\-invert\-\_\-matrix@{gf\-\_\-invert\-\_\-matrix}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-invert\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}int gf\-\_\-invert\-\_\-matrix (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{in, }
+\item[{unsigned char $\ast$}]{out, }
+\item[{const int}]{n}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_ad808efb2e8af3803571c0a6c7c9faf39}
+
+
+Invert a matrix in G\-F(2$^\wedge$8) 
+
+Attempts to construct an n x n inverse of the input matrix. Returns non-\/zero if singular. Will always destroy input matrix in process.
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & input matrix, destroyed by invert process \\
+\hline
+{\em out} & output matrix such that \mbox{[}in\mbox{]} x \mbox{[}out\mbox{]} = \mbox{[}I\mbox{]} -\/ identity matrix \\
+\hline
+{\em n} & size of matrix \mbox{[}nxn\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 successful, other fail on singular input matrix 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_ac73ea8358bc3155c7f3a6c078a7d6d35}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-mul@{gf\-\_\-mul}}
+\index{gf\-\_\-mul@{gf\-\_\-mul}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-mul}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char gf\-\_\-mul (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{a, }
+\item[{unsigned char}]{b}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_ac73ea8358bc3155c7f3a6c078a7d6d35}
+
+
+Single element G\-F(2$^\wedge$8) multiply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Multiplicand a \\
+\hline
+{\em b} & Multiplicand b \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Product of a and b in G\-F(2$^\wedge$8) 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_a6ce05684e168d73773847a3c2c13c175}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-vect\-\_\-dot\-\_\-prod@{gf\-\_\-vect\-\_\-dot\-\_\-prod}}
+\index{gf\-\_\-vect\-\_\-dot\-\_\-prod@{gf\-\_\-vect\-\_\-dot\-\_\-prod}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-dot\-\_\-prod}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-vect\-\_\-dot\-\_\-prod (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{vlen, }
+\item[{unsigned char $\ast$}]{gftbls, }
+\item[{unsigned char $\ast$$\ast$}]{src, }
+\item[{unsigned char $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a6ce05684e168d73773847a3c2c13c175}
+
+
+G\-F(2$^\wedge$8) vector dot product, runs appropriate version. 
+
+Does a G\-F(2$^\wedge$8) dot product across each byte of the input array and a constant set of coefficients to produce each byte of the output. Can be used for erasure coding encode and decode. Function requires pre-\/calculation of a 32$\ast$vlen byte constant array based on the input coefficients.
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of each vector in bytes. Must be $>$= 32. \\
+\hline
+{\em vlen} & Number of vector sources. \\
+\hline
+{\em gftbls} & Pointer to 32$\ast$vlen byte array of pre-\/calculated constants based on the array of input coefficients. \\
+\hline
+{\em src} & Array of pointers to source inputs. \\
+\hline
+{\em dest} & Pointer to destination data array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_a17799d49d9b83861322ebf314a55f77f}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base@{gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base}}
+\index{gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base@{gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-vect\-\_\-dot\-\_\-prod\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{vlen, }
+\item[{unsigned char $\ast$}]{gftbls, }
+\item[{unsigned char $\ast$$\ast$}]{src, }
+\item[{unsigned char $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_a17799d49d9b83861322ebf314a55f77f}
+
+
+G\-F(2$^\wedge$8) vector dot product, runs baseline version. 
+
+Does a G\-F(2$^\wedge$8) dot product across each byte of the input array and a constant set of coefficients to produce each byte of the output. Can be used for erasure coding encode and decode. Function requires pre-\/calculation of a 32$\ast$vlen byte constant array based on the input coefficients.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of each vector in bytes. Must be $>$= 16. \\
+\hline
+{\em vlen} & Number of vector sources. \\
+\hline
+{\em gftbls} & Pointer to 32$\ast$vlen byte array of pre-\/calculated constants based on the array of input coefficients. Only elements 32$\ast$\-C\-O\-N\-S\-T$\ast$j + 1 of this array are used, where j = (0, 1, 2...) and C\-O\-N\-S\-T is the number of elements in the array of input coefficients. The elements used correspond to the original input coefficients. \\
+\hline
+{\em src} & Array of pointers to source inputs. \\
+\hline
+{\em dest} & Pointer to destination data array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_ae9f15336f98bcbdbc529a4ff6b0eda5e}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-vect\-\_\-mad@{gf\-\_\-vect\-\_\-mad}}
+\index{gf\-\_\-vect\-\_\-mad@{gf\-\_\-vect\-\_\-mad}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-mad}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-vect\-\_\-mad (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{vec, }
+\item[{int}]{vec\-\_\-i, }
+\item[{unsigned char $\ast$}]{gftbls, }
+\item[{unsigned char $\ast$}]{src, }
+\item[{unsigned char $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_ae9f15336f98bcbdbc529a4ff6b0eda5e}
+
+
+G\-F(2$^\wedge$8) vector multiply accumulate, runs appropriate version. 
+
+Does a G\-F(2$^\wedge$8) multiply across each byte of input source with expanded constant and add to destination array. Can be used for erasure coding encode and decode update when only one source is available at a time. Function requires pre-\/calculation of a 32$\ast$vec byte constant array based on the input coefficients.
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of each vector in bytes. Must be $>$= 64. \\
+\hline
+{\em vec} & The number of vector sources or rows in the generator matrix for coding. \\
+\hline
+{\em vec\-\_\-i} & The vector index corresponding to the single input source. \\
+\hline
+{\em gftbls} & Pointer to array of input tables generated from coding coefficients in \hyperlink{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}{ec\-\_\-init\-\_\-tables()}. Must be of size 32$\ast$vec. \\
+\hline
+{\em src} & Array of pointers to source inputs. \\
+\hline
+{\em dest} & Pointer to destination data array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{erasure__code_8h_af2c7c97f0822bbb4803a6fb6b98db8e5}{\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}!gf\-\_\-vect\-\_\-mad\-\_\-base@{gf\-\_\-vect\-\_\-mad\-\_\-base}}
+\index{gf\-\_\-vect\-\_\-mad\-\_\-base@{gf\-\_\-vect\-\_\-mad\-\_\-base}!erasure_code.h@{erasure\-\_\-code.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-mad\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-vect\-\_\-mad\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{int}]{vec, }
+\item[{int}]{vec\-\_\-i, }
+\item[{unsigned char $\ast$}]{v, }
+\item[{unsigned char $\ast$}]{src, }
+\item[{unsigned char $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{erasure__code_8h_af2c7c97f0822bbb4803a6fb6b98db8e5}
+
+
+G\-F(2$^\wedge$8) vector multiply accumulate, baseline version. 
+
+Baseline version of \hyperlink{erasure__code_8h_ae9f15336f98bcbdbc529a4ff6b0eda5e}{gf\-\_\-vect\-\_\-mad()} with same parameters. 

@@ -1,0 +1,224 @@
+\hypertarget{erasure__code_8h}{\section{erasure\-\_\-code.\-h}
+\label{erasure__code_8h}\index{erasure\-\_\-code.\-h@{erasure\-\_\-code.\-h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/**********************************************************************}
+00002 \textcolor{comment}{  Copyright(c) 2011-2015 Intel Corporation All rights reserved.}
+00003 \textcolor{comment}{}
+00004 \textcolor{comment}{  Redistribution and use in source and binary forms, with or without}
+00005 \textcolor{comment}{  modification, are permitted provided that the following conditions}
+00006 \textcolor{comment}{  are met:}
+00007 \textcolor{comment}{    * Redistributions of source code must retain the above copyright}
+00008 \textcolor{comment}{      notice, this list of conditions and the following disclaimer.}
+00009 \textcolor{comment}{    * Redistributions in binary form must reproduce the above copyright}
+00010 \textcolor{comment}{      notice, this list of conditions and the following disclaimer in}
+00011 \textcolor{comment}{      the documentation and/or other materials provided with the}
+00012 \textcolor{comment}{      distribution.}
+00013 \textcolor{comment}{    * Neither the name of Intel Corporation nor the names of its}
+00014 \textcolor{comment}{      contributors may be used to endorse or promote products derived}
+00015 \textcolor{comment}{      from this software without specific prior written permission.}
+00016 \textcolor{comment}{}
+00017 \textcolor{comment}{  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00018 \textcolor{comment}{  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00019 \textcolor{comment}{  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00020 \textcolor{comment}{  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00021 \textcolor{comment}{  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00022 \textcolor{comment}{  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00023 \textcolor{comment}{  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00024 \textcolor{comment}{  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00025 \textcolor{comment}{  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00026 \textcolor{comment}{  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00027 \textcolor{comment}{  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+00028 \textcolor{comment}{**********************************************************************/}
+00029 
+00030 
+00031 \textcolor{preprocessor}{#ifndef \_ERASURE\_CODE\_H\_}
+00032 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define \_ERASURE\_CODE\_H\_}
+00033 \textcolor{preprocessor}{}
+00052 \textcolor{preprocessor}{#include "\hyperlink{gf__vect__mul_8h}{gf\_vect\_mul.h}"}
+00053 
+00054 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00055 \textcolor{preprocessor}{}\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00056 \textcolor{preprocessor}{#endif}
+00057 \textcolor{preprocessor}{}
+00074 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a22b53cd4103da9ed88c351e7045ff313}{ec\_init\_tables}(\textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* a, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* gftbls);
+00075 
+00098 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a590b5c35075aeea1243a9e4ef73a49d4}{ec\_encode\_data}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **data,
+00099                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00100 \textcolor{keywordtype}{void} ec\_encode\_data\_multi(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} srcs, \textcolor{keywordtype}{int} dests, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *v,
+00101             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest,\textcolor{keywordtype}{int} begin);
+00107 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_aa486278c409735df8001096ac2b487dd}{ec\_encode\_data\_base}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} srcs, \textcolor{keywordtype}{int} dests, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *v, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *
+      *src,
+00108                          \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00109 \textcolor{keywordtype}{void} ec\_encode\_data\_base\_multi(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} srcs, \textcolor{keywordtype}{int} dests, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *v,
+00110                                \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest, \textcolor{keywordtype}{int} begin);
+00133 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a0fa4553065d7e00c1984621e7e1af9ae}{ec\_encode\_data\_update}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *g\_tbls,
+00134                            \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00135 
+00142 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a1cc2a6a0f0d32db4079ceb07b0482625}{ec\_encode\_data\_update\_base}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{
+      char} *v,
+00143                                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00144 
+00166 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a17799d49d9b83861322ebf314a55f77f}{gf\_vect\_dot\_prod\_base}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00167                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00168 
+00189 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a6ce05684e168d73773847a3c2c13c175}{gf\_vect\_dot\_prod}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00190                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00191 
+00215 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_ae9f15336f98bcbdbc529a4ff6b0eda5e}{gf\_vect\_mad}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00216                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00217 
+00224 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_af2c7c97f0822bbb4803a6fb6b98db8e5}{gf\_vect\_mad\_base}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *v, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00225                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00226 
+00227 \textcolor{comment}{// x86 only}
+00228 \textcolor{preprocessor}{#if defined(\_\_i386\_\_) || defined(\_\_x86\_64\_\_)}
+00229 \textcolor{preprocessor}{}
+00236 \textcolor{keywordtype}{void} ec\_encode\_data\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **data,
+00237                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00238 
+00245 \textcolor{keywordtype}{void} ec\_encode\_data\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **data,
+00246                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00247 
+00254 \textcolor{keywordtype}{void} ec\_encode\_data\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **data,
+00255                          \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00256 
+00264 \textcolor{keywordtype}{void} ec\_encode\_data\_update\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *g\_tbls,
+00265                                \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00266 
+00274 \textcolor{keywordtype}{void} ec\_encode\_data\_update\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *g\_tbls,
+00275                                \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00276 
+00284 \textcolor{keywordtype}{void} ec\_encode\_data\_update\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} rows, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *g\_tbls,
+00285                                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **coding);
+00286 
+00305 \textcolor{keywordtype}{void} gf\_vect\_dot\_prod\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00306                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00307 
+00326 \textcolor{keywordtype}{void} gf\_vect\_dot\_prod\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00327                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00328 
+00347 \textcolor{keywordtype}{void} gf\_vect\_dot\_prod\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00348                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00349 
+00369 \textcolor{keywordtype}{void} gf\_2vect\_dot\_prod\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00370                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00371 
+00391 \textcolor{keywordtype}{void} gf\_2vect\_dot\_prod\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00392                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00393 
+00413 \textcolor{keywordtype}{void} gf\_2vect\_dot\_prod\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00414                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00415 
+00435 \textcolor{keywordtype}{void} gf\_3vect\_dot\_prod\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00436                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00437 
+00457 \textcolor{keywordtype}{void} gf\_3vect\_dot\_prod\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00458                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00459 
+00479 \textcolor{keywordtype}{void} gf\_3vect\_dot\_prod\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00480                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00481 
+00501 \textcolor{keywordtype}{void} gf\_4vect\_dot\_prod\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00502                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00503 
+00523 \textcolor{keywordtype}{void} gf\_4vect\_dot\_prod\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00524                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00525 
+00545 \textcolor{keywordtype}{void} gf\_4vect\_dot\_prod\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00546                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00547 
+00567 \textcolor{keywordtype}{void} gf\_5vect\_dot\_prod\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00568                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00569 
+00589 \textcolor{keywordtype}{void} gf\_5vect\_dot\_prod\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00590                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00591 
+00611 \textcolor{keywordtype}{void} gf\_5vect\_dot\_prod\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00612                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00613 
+00633 \textcolor{keywordtype}{void} gf\_6vect\_dot\_prod\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00634                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00635 
+00655 \textcolor{keywordtype}{void} gf\_6vect\_dot\_prod\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00656                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00657 
+00677 \textcolor{keywordtype}{void} gf\_6vect\_dot\_prod\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vlen, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls,
+00678                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00679 
+00687 \textcolor{keywordtype}{void} gf\_vect\_mad\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00688                      \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00696 \textcolor{keywordtype}{void} gf\_vect\_mad\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00697                      \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00698 
+00706 \textcolor{keywordtype}{void} gf\_vect\_mad\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00707                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00708 
+00709 
+00731 \textcolor{keywordtype}{void} gf\_2vect\_mad\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00732                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00733 
+00738 \textcolor{keywordtype}{void} gf\_2vect\_mad\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00739                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00744 \textcolor{keywordtype}{void} gf\_2vect\_mad\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00745                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00746 
+00768 \textcolor{keywordtype}{void} gf\_3vect\_mad\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00769                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00770 
+00775 \textcolor{keywordtype}{void} gf\_3vect\_mad\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00776                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00777 
+00782 \textcolor{keywordtype}{void} gf\_3vect\_mad\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00783                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00784 
+00806 \textcolor{keywordtype}{void} gf\_4vect\_mad\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00807                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00808 
+00813 \textcolor{keywordtype}{void} gf\_4vect\_mad\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00814                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00819 \textcolor{keywordtype}{void} gf\_4vect\_mad\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00820                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00821 
+00826 \textcolor{keywordtype}{void} gf\_5vect\_mad\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00827                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00828 
+00833 \textcolor{keywordtype}{void} gf\_5vect\_mad\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00834                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00839 \textcolor{keywordtype}{void} gf\_5vect\_mad\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00840                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00841 
+00846 \textcolor{keywordtype}{void} gf\_6vect\_mad\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00847                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00852 \textcolor{keywordtype}{void} gf\_6vect\_mad\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00853                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00854 
+00859 \textcolor{keywordtype}{void} gf\_6vect\_mad\_avx2(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} vec, \textcolor{keywordtype}{int} vec\_i, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbls, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00860                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} **dest);
+00861 
+00862 \textcolor{preprocessor}{#endif}
+00863 \textcolor{preprocessor}{}
+00864 \textcolor{comment}{/**********************************************************************}
+00865 \textcolor{comment}{ * The remaining are lib support functions used in GF(2^8) operations.}
+00866 \textcolor{comment}{ */}
+00867 
+00876 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \hyperlink{erasure__code_8h_ac73ea8358bc3155c7f3a6c078a7d6d35}{gf\_mul}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} a, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} b);
+00877 
+00885 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \hyperlink{erasure__code_8h_a484460566a8c888fda3d769324461345}{gf\_inv}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} a);
+00886 
+00911 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_a81be18ea979e8a32f384e1a7856badcf}{gf\_gen\_rs\_matrix}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *a, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} k);
+00912 
+00926 \textcolor{keywordtype}{void} \hyperlink{erasure__code_8h_afd549f435ee28276b5a9408a3a6256b1}{gf\_gen\_cauchy1\_matrix}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *a, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} k);
+00927 
+00940 \textcolor{keywordtype}{int} \hyperlink{erasure__code_8h_ad808efb2e8af3803571c0a6c7c9faf39}{gf\_invert\_matrix}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *in, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *out, \textcolor{keyword}{const} \textcolor{keywordtype}{int} n);
+00941 
+00942 
+00943 \textcolor{comment}{/*************************************************************/}
+00944 
+00945 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00946 \textcolor{preprocessor}{}\}
+00947 \textcolor{preprocessor}{#endif}
+00948 \textcolor{preprocessor}{}
+00949 \textcolor{preprocessor}{#endif //\_ERASURE\_CODE\_H\_}
+\end{DoxyCode}

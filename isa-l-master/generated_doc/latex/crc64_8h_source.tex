@@ -1,0 +1,163 @@
+\hypertarget{crc64_8h}{\section{crc64.\-h}
+\label{crc64_8h}\index{crc64.\-h@{crc64.\-h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/**********************************************************************}
+00002 \textcolor{comment}{  Copyright(c) 2011-2016 Intel Corporation All rights reserved.}
+00003 \textcolor{comment}{}
+00004 \textcolor{comment}{  Redistribution and use in source and binary forms, with or without}
+00005 \textcolor{comment}{  modification, are permitted provided that the following conditions}
+00006 \textcolor{comment}{  are met:}
+00007 \textcolor{comment}{    * Redistributions of source code must retain the above copyright}
+00008 \textcolor{comment}{      notice, this list of conditions and the following disclaimer.}
+00009 \textcolor{comment}{    * Redistributions in binary form must reproduce the above copyright}
+00010 \textcolor{comment}{      notice, this list of conditions and the following disclaimer in}
+00011 \textcolor{comment}{      the documentation and/or other materials provided with the}
+00012 \textcolor{comment}{      distribution.}
+00013 \textcolor{comment}{    * Neither the name of Intel Corporation nor the names of its}
+00014 \textcolor{comment}{      contributors may be used to endorse or promote products derived}
+00015 \textcolor{comment}{      from this software without specific prior written permission.}
+00016 \textcolor{comment}{}
+00017 \textcolor{comment}{  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00018 \textcolor{comment}{  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00019 \textcolor{comment}{  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00020 \textcolor{comment}{  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00021 \textcolor{comment}{  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00022 \textcolor{comment}{  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00023 \textcolor{comment}{  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00024 \textcolor{comment}{  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00025 \textcolor{comment}{  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00026 \textcolor{comment}{  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00027 \textcolor{comment}{  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+00028 \textcolor{comment}{**********************************************************************/}
+00029 
+00030 
+00037 \textcolor{preprocessor}{#ifndef \_CRC64\_H\_}
+00038 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define \_CRC64\_H\_}
+00039 \textcolor{preprocessor}{}
+00040 \textcolor{preprocessor}{#include <stdint.h>}
+00041 
+00042 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00043 \textcolor{preprocessor}{}\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00044 \textcolor{preprocessor}{#endif}
+00045 \textcolor{preprocessor}{}
+00046 
+00047 \textcolor{comment}{/* Multi-binary functions */}
+00048 
+00057 uint64\_t \hyperlink{crc64_8h_a42377cd388265b5acaf179dd38c35b58}{crc64\_ecma\_refl}(
+00058         uint64\_t init\_crc,        
+00059         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00060         uint64\_t len              
+00061         );
+00062 
+00071 uint64\_t \hyperlink{crc64_8h_aaf6f9e430ec56e90b986cfa9a707932b}{crc64\_ecma\_norm}(
+00072         uint64\_t init\_crc,        
+00073         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00074         uint64\_t len              
+00075         );
+00076 
+00085 uint64\_t \hyperlink{crc64_8h_a56f6c198b899ffe2bf59edb9d239bd4e}{crc64\_iso\_refl}(
+00086         uint64\_t init\_crc,        
+00087         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00088         uint64\_t len              
+00089         );
+00090 
+00099 uint64\_t \hyperlink{crc64_8h_a15df0a81d2ddd6b9aba71c4b2baa118a}{crc64\_iso\_norm}(
+00100         uint64\_t init\_crc,        
+00101         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00102         uint64\_t len              
+00103         );
+00104 
+00113 uint64\_t \hyperlink{crc64_8h_ae4a01937872438ad8ad3c60a2ba2cc26}{crc64\_jones\_refl}(
+00114         uint64\_t init\_crc,        
+00115         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00116         uint64\_t len              
+00117         );
+00118 
+00127 uint64\_t \hyperlink{crc64_8h_a02a2fab5433c40d1de97d36dcda12d01}{crc64\_jones\_norm}(
+00128         uint64\_t init\_crc,        
+00129         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00130         uint64\_t len              
+00131         );
+00132 
+00133 \textcolor{comment}{/* Arch specific versions */}
+00134 
+00142 uint64\_t \hyperlink{crc64_8h_adc78657fb69293e42e3342dd91cdf276}{crc64\_ecma\_refl\_by8}(
+00143         uint64\_t init\_crc,        
+00144         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00145         uint64\_t len              
+00146         );
+00147 
+00155 uint64\_t \hyperlink{crc64_8h_a3b5c3fed6a1f4eff80a7e490cdcf791e}{crc64\_ecma\_norm\_by8}(
+00156         uint64\_t init\_crc,        
+00157         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00158         uint64\_t len              
+00159         );
+00160 
+00165 uint64\_t \hyperlink{crc64_8h_aafe7a3eeb66a1f0da67b6a0051090609}{crc64\_ecma\_refl\_base}(
+00166         uint64\_t init\_crc,        
+00167         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00168         uint64\_t len              
+00169         );
+00170 
+00175 uint64\_t \hyperlink{crc64_8h_ac370a0c7e91f9b8a0483a921e28355e5}{crc64\_ecma\_norm\_base}(
+00176         uint64\_t init\_crc,        
+00177         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00178         uint64\_t len              
+00179         );
+00180 
+00188 uint64\_t \hyperlink{crc64_8h_a6907794fb06fa2a7d33fa6eefd10cdab}{crc64\_iso\_refl\_by8}(
+00189         uint64\_t init\_crc,        
+00190         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00191         uint64\_t len              
+00192         );
+00193 
+00201 uint64\_t \hyperlink{crc64_8h_a38b2855bc39d8bf3063b44ada5b94534}{crc64\_iso\_norm\_by8}(
+00202         uint64\_t init\_crc,        
+00203         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00204         uint64\_t len              
+00205         );
+00206 
+00211 uint64\_t \hyperlink{crc64_8h_a88e8cf6f9b4486439975a27804c592b8}{crc64\_iso\_refl\_base}(
+00212         uint64\_t init\_crc,        
+00213         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00214         uint64\_t len              
+00215         );
+00216 
+00221 uint64\_t \hyperlink{crc64_8h_a7793825e1c042024f0b373a71272a909}{crc64\_iso\_norm\_base}(
+00222         uint64\_t init\_crc,        
+00223         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00224         uint64\_t len              
+00225         );
+00226 
+00234 uint64\_t \hyperlink{crc64_8h_a18d5eec58187293479dcecbead835563}{crc64\_jones\_refl\_by8}(
+00235         uint64\_t init\_crc,        
+00236         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00237         uint64\_t len              
+00238         );
+00239 
+00247 uint64\_t \hyperlink{crc64_8h_a8d7d5c6b8aaac198b326bdc1bc9d33c4}{crc64\_jones\_norm\_by8}(
+00248         uint64\_t init\_crc,        
+00249         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00250         uint64\_t len              
+00251         );
+00252 
+00257 uint64\_t \hyperlink{crc64_8h_ad9016e37b5a0c88baa4a3dddd6b1ff14}{crc64\_jones\_refl\_base}(
+00258         uint64\_t init\_crc,        
+00259         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00260         uint64\_t len              
+00261         );
+00262 
+00267 uint64\_t \hyperlink{crc64_8h_a3e4408b58fdafc0bb110b537327e4eb8}{crc64\_jones\_norm\_base}(
+00268         uint64\_t init\_crc,        
+00269         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf, 
+00270         uint64\_t len              
+00271         );
+00272 
+00273 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00274 \textcolor{preprocessor}{}\}
+00275 \textcolor{preprocessor}{#endif}
+00276 \textcolor{preprocessor}{}
+00277 \textcolor{preprocessor}{#endif // \_CRC64\_H\_}
+\end{DoxyCode}

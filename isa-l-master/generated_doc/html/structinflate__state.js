@@ -1,0 +1,27 @@
+var structinflate__state =
+[
+    [ "avail_in", "structinflate__state.html#a93274af406747bdd3f94b5546a67bd07", null ],
+    [ "avail_out", "structinflate__state.html#a8806b67f8aa044f345f64a510fa7ee45", null ],
+    [ "bfinal", "structinflate__state.html#acf6d2c8ab990a35b45057f592051c7be", null ],
+    [ "block_state", "structinflate__state.html#ac0bb6a4a584fb515a000d6f1be0f2711", null ],
+    [ "copy_overflow_distance", "structinflate__state.html#a9eb789eea7581efad31ebd10fc09cbc6", null ],
+    [ "copy_overflow_length", "structinflate__state.html#a69940c6f7c20c4817dc395217d052594", null ],
+    [ "count", "structinflate__state.html#a587977c569fe163e400b91dcd8a55849", null ],
+    [ "crc", "structinflate__state.html#a3b6a7581b596c2ad3c0e797805d02955", null ],
+    [ "crc_flag", "structinflate__state.html#ab2d3dac9eb492d567e151e8301a92b79", null ],
+    [ "dict_length", "structinflate__state.html#a7a359006ca174357e69db75fd9e038fe", null ],
+    [ "dist_huff_code", "structinflate__state.html#ae8f5da00291599b6f19c4a145d8b5738", null ],
+    [ "hist_bits", "structinflate__state.html#a38879a59194da05b16beb16ac1753843", null ],
+    [ "lit_huff_code", "structinflate__state.html#ac582f8f6e53188b366260c7f38931731", null ],
+    [ "next_in", "structinflate__state.html#a65069a2b7e931db174234fcf68a5a746", null ],
+    [ "next_out", "structinflate__state.html#abbf4f563f2d72a00d96ff4fc684d02c6", null ],
+    [ "read_in", "structinflate__state.html#a7b31d8a1e82de2e303c61d291e899e28", null ],
+    [ "read_in_length", "structinflate__state.html#a20599afa006cb6544d3d6ade67b67c62", null ],
+    [ "tmp_in_buffer", "structinflate__state.html#aca852f3fbb23de387aa789f572303cf8", null ],
+    [ "tmp_in_size", "structinflate__state.html#ab6a6c36c9bda624f3b15f380f6dfd563", null ],
+    [ "tmp_out_buffer", "structinflate__state.html#abf70896b8d99c6fbb91c5bb2ff1c2337", null ],
+    [ "tmp_out_processed", "structinflate__state.html#aa4c82daf12d611bca6cb28905a4c5168", null ],
+    [ "tmp_out_valid", "structinflate__state.html#ad7a6734e5267eac4769b125cc3c3edb4", null ],
+    [ "total_out", "structinflate__state.html#aa8fe90014653de7ec8b843e2fe4ae7e9", null ],
+    [ "type0_block_len", "structinflate__state.html#ade86a18378d63c8d5d55308a2a8b2baf", null ]
+];

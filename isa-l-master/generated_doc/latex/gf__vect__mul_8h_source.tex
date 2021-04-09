@@ -1,0 +1,67 @@
+\hypertarget{gf__vect__mul_8h}{\section{gf\-\_\-vect\-\_\-mul.\-h}
+\label{gf__vect__mul_8h}\index{gf\-\_\-vect\-\_\-mul.\-h@{gf\-\_\-vect\-\_\-mul.\-h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/**********************************************************************}
+00002 \textcolor{comment}{  Copyright(c) 2011-2015 Intel Corporation All rights reserved.}
+00003 \textcolor{comment}{}
+00004 \textcolor{comment}{  Redistribution and use in source and binary forms, with or without}
+00005 \textcolor{comment}{  modification, are permitted provided that the following conditions}
+00006 \textcolor{comment}{  are met:}
+00007 \textcolor{comment}{    * Redistributions of source code must retain the above copyright}
+00008 \textcolor{comment}{      notice, this list of conditions and the following disclaimer.}
+00009 \textcolor{comment}{    * Redistributions in binary form must reproduce the above copyright}
+00010 \textcolor{comment}{      notice, this list of conditions and the following disclaimer in}
+00011 \textcolor{comment}{      the documentation and/or other materials provided with the}
+00012 \textcolor{comment}{      distribution.}
+00013 \textcolor{comment}{    * Neither the name of Intel Corporation nor the names of its}
+00014 \textcolor{comment}{      contributors may be used to endorse or promote products derived}
+00015 \textcolor{comment}{      from this software without specific prior written permission.}
+00016 \textcolor{comment}{}
+00017 \textcolor{comment}{  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00018 \textcolor{comment}{  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00019 \textcolor{comment}{  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00020 \textcolor{comment}{  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00021 \textcolor{comment}{  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00022 \textcolor{comment}{  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00023 \textcolor{comment}{  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00024 \textcolor{comment}{  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00025 \textcolor{comment}{  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00026 \textcolor{comment}{  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00027 \textcolor{comment}{  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+00028 \textcolor{comment}{**********************************************************************/}
+00029 
+00030 
+00031 \textcolor{preprocessor}{#ifndef \_GF\_VECT\_MUL\_H}
+00032 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define \_GF\_VECT\_MUL\_H}
+00033 \textcolor{preprocessor}{}
+00042 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00043 \textcolor{preprocessor}{}\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00044 \textcolor{preprocessor}{#endif}
+00045 \textcolor{preprocessor}{}
+00046 \textcolor{comment}{// x86 only}
+00047 \textcolor{preprocessor}{#if defined(\_\_i386\_\_) || defined(\_\_x86\_64\_\_)}
+00048 \textcolor{preprocessor}{}
+00067 \textcolor{keywordtype}{int} gf\_vect\_mul\_sse(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbl, \textcolor{keywordtype}{void} *src, \textcolor{keywordtype}{void} *dest);
+00068 
+00069 
+00088 \textcolor{keywordtype}{int} gf\_vect\_mul\_avx(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbl, \textcolor{keywordtype}{void} *src, \textcolor{keywordtype}{void} *dest);
+00089 
+00090 \textcolor{preprocessor}{#endif}
+00091 \textcolor{preprocessor}{}
+00112 \textcolor{keywordtype}{int} \hyperlink{gf__vect__mul_8h_aa7a737b69a0a77dc29aa28d0f17421a1}{gf\_vect\_mul}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *gftbl, \textcolor{keywordtype}{void} *src, \textcolor{keywordtype}{void} *dest);
+00113 
+00114 
+00125 \textcolor{keywordtype}{void} \hyperlink{gf__vect__mul_8h_a84eb9ca31c934f05a8e3fa7a02fa71dc}{gf\_vect\_mul\_init}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} c, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* gftbl);
+00126 
+00127 
+00145 \textcolor{keywordtype}{void} \hyperlink{gf__vect__mul_8h_a8f3e57729c3382514325612c54e20eaa}{gf\_vect\_mul\_base}(\textcolor{keywordtype}{int} len, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *a, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src,
+00146                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dest);
+00147 
+00148 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00149 \textcolor{preprocessor}{}\}
+00150 \textcolor{preprocessor}{#endif}
+00151 \textcolor{preprocessor}{}
+00152 \textcolor{preprocessor}{#endif //\_GF\_VECT\_MUL\_H}
+\end{DoxyCode}

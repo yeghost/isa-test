@@ -1,0 +1,528 @@
+\hypertarget{crc64_8h}{\section{crc64.\-h File Reference}
+\label{crc64_8h}\index{crc64.\-h@{crc64.\-h}}
+}
+
+
+C\-R\-C64 functions.  
+
+
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a42377cd388265b5acaf179dd38c35b58}{crc64\-\_\-ecma\-\_\-refl} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from E\-C\-M\-A-\/182 standard in reflected format, runs appropriate version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_aaf6f9e430ec56e90b986cfa9a707932b}{crc64\-\_\-ecma\-\_\-norm} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from E\-C\-M\-A-\/182 standard in normal format, runs appropriate version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a56f6c198b899ffe2bf59edb9d239bd4e}{crc64\-\_\-iso\-\_\-refl} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from I\-S\-O standard in reflected format, runs appropriate version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a15df0a81d2ddd6b9aba71c4b2baa118a}{crc64\-\_\-iso\-\_\-norm} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from I\-S\-O standard in normal format, runs appropriate version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_ae4a01937872438ad8ad3c60a2ba2cc26}{crc64\-\_\-jones\-\_\-refl} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in reflected format, runs appropriate version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a02a2fab5433c40d1de97d36dcda12d01}{crc64\-\_\-jones\-\_\-norm} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in normal format, runs appropriate version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_adc78657fb69293e42e3342dd91cdf276}{crc64\-\_\-ecma\-\_\-refl\-\_\-by8} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from E\-C\-M\-A-\/182 standard in reflected format. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a3b5c3fed6a1f4eff80a7e490cdcf791e}{crc64\-\_\-ecma\-\_\-norm\-\_\-by8} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from E\-C\-M\-A-\/182 standard in normal format. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_aafe7a3eeb66a1f0da67b6a0051090609}{crc64\-\_\-ecma\-\_\-refl\-\_\-base} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from E\-C\-M\-A-\/182 standard in reflected format, runs baseline version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_ac370a0c7e91f9b8a0483a921e28355e5}{crc64\-\_\-ecma\-\_\-norm\-\_\-base} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from E\-C\-M\-A-\/182 standard in normal format, runs baseline version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a6907794fb06fa2a7d33fa6eefd10cdab}{crc64\-\_\-iso\-\_\-refl\-\_\-by8} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from I\-S\-O standard in reflected format. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a38b2855bc39d8bf3063b44ada5b94534}{crc64\-\_\-iso\-\_\-norm\-\_\-by8} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from I\-S\-O standard in normal format. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a88e8cf6f9b4486439975a27804c592b8}{crc64\-\_\-iso\-\_\-refl\-\_\-base} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from I\-S\-O standard in reflected format, runs baseline version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a7793825e1c042024f0b373a71272a909}{crc64\-\_\-iso\-\_\-norm\-\_\-base} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from I\-S\-O standard in normal format, runs baseline version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a18d5eec58187293479dcecbead835563}{crc64\-\_\-jones\-\_\-refl\-\_\-by8} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in reflected format. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a8d7d5c6b8aaac198b326bdc1bc9d33c4}{crc64\-\_\-jones\-\_\-norm\-\_\-by8} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in normal format. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_ad9016e37b5a0c88baa4a3dddd6b1ff14}{crc64\-\_\-jones\-\_\-refl\-\_\-base} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in reflected format, runs baseline version. \end{DoxyCompactList}\item 
+uint64\-\_\-t \hyperlink{crc64_8h_a3e4408b58fdafc0bb110b537327e4eb8}{crc64\-\_\-jones\-\_\-norm\-\_\-base} (uint64\-\_\-t init\-\_\-crc, const unsigned char $\ast$buf, uint64\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in normal format, runs baseline version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C\-R\-C64 functions. 
+
+\subsection{Function Documentation}
+\hypertarget{crc64_8h_aaf6f9e430ec56e90b986cfa9a707932b}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-ecma\-\_\-norm@{crc64\-\_\-ecma\-\_\-norm}}
+\index{crc64\-\_\-ecma\-\_\-norm@{crc64\-\_\-ecma\-\_\-norm}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-ecma\-\_\-norm}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-ecma\-\_\-norm (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_aaf6f9e430ec56e90b986cfa9a707932b}
+
+
+Generate C\-R\-C from E\-C\-M\-A-\/182 standard in normal format, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. \begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_ac370a0c7e91f9b8a0483a921e28355e5}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-ecma\-\_\-norm\-\_\-base@{crc64\-\_\-ecma\-\_\-norm\-\_\-base}}
+\index{crc64\-\_\-ecma\-\_\-norm\-\_\-base@{crc64\-\_\-ecma\-\_\-norm\-\_\-base}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-ecma\-\_\-norm\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-ecma\-\_\-norm\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_ac370a0c7e91f9b8a0483a921e28355e5}
+
+
+Generate C\-R\-C from E\-C\-M\-A-\/182 standard in normal format, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a3b5c3fed6a1f4eff80a7e490cdcf791e}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-ecma\-\_\-norm\-\_\-by8@{crc64\-\_\-ecma\-\_\-norm\-\_\-by8}}
+\index{crc64\-\_\-ecma\-\_\-norm\-\_\-by8@{crc64\-\_\-ecma\-\_\-norm\-\_\-by8}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-ecma\-\_\-norm\-\_\-by8}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-ecma\-\_\-norm\-\_\-by8 (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a3b5c3fed6a1f4eff80a7e490cdcf791e}
+
+
+Generate C\-R\-C from E\-C\-M\-A-\/182 standard in normal format. 
+
+\begin{DoxyRefDesc}{Requires}
+\item[\hyperlink{requires__requires000002}{Requires}]S\-S\-E3, C\-L\-M\-U\-L\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a42377cd388265b5acaf179dd38c35b58}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-ecma\-\_\-refl@{crc64\-\_\-ecma\-\_\-refl}}
+\index{crc64\-\_\-ecma\-\_\-refl@{crc64\-\_\-ecma\-\_\-refl}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-ecma\-\_\-refl}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-ecma\-\_\-refl (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a42377cd388265b5acaf179dd38c35b58}
+
+
+Generate C\-R\-C from E\-C\-M\-A-\/182 standard in reflected format, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. \begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_aafe7a3eeb66a1f0da67b6a0051090609}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-ecma\-\_\-refl\-\_\-base@{crc64\-\_\-ecma\-\_\-refl\-\_\-base}}
+\index{crc64\-\_\-ecma\-\_\-refl\-\_\-base@{crc64\-\_\-ecma\-\_\-refl\-\_\-base}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-ecma\-\_\-refl\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-ecma\-\_\-refl\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_aafe7a3eeb66a1f0da67b6a0051090609}
+
+
+Generate C\-R\-C from E\-C\-M\-A-\/182 standard in reflected format, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_adc78657fb69293e42e3342dd91cdf276}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-ecma\-\_\-refl\-\_\-by8@{crc64\-\_\-ecma\-\_\-refl\-\_\-by8}}
+\index{crc64\-\_\-ecma\-\_\-refl\-\_\-by8@{crc64\-\_\-ecma\-\_\-refl\-\_\-by8}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-ecma\-\_\-refl\-\_\-by8}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-ecma\-\_\-refl\-\_\-by8 (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_adc78657fb69293e42e3342dd91cdf276}
+
+
+Generate C\-R\-C from E\-C\-M\-A-\/182 standard in reflected format. 
+
+\begin{DoxyRefDesc}{Requires}
+\item[\hyperlink{requires__requires000001}{Requires}]S\-S\-E3, C\-L\-M\-U\-L\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a15df0a81d2ddd6b9aba71c4b2baa118a}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-iso\-\_\-norm@{crc64\-\_\-iso\-\_\-norm}}
+\index{crc64\-\_\-iso\-\_\-norm@{crc64\-\_\-iso\-\_\-norm}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-iso\-\_\-norm}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-iso\-\_\-norm (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a15df0a81d2ddd6b9aba71c4b2baa118a}
+
+
+Generate C\-R\-C from I\-S\-O standard in normal format, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. \begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a7793825e1c042024f0b373a71272a909}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-iso\-\_\-norm\-\_\-base@{crc64\-\_\-iso\-\_\-norm\-\_\-base}}
+\index{crc64\-\_\-iso\-\_\-norm\-\_\-base@{crc64\-\_\-iso\-\_\-norm\-\_\-base}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-iso\-\_\-norm\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-iso\-\_\-norm\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a7793825e1c042024f0b373a71272a909}
+
+
+Generate C\-R\-C from I\-S\-O standard in normal format, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a38b2855bc39d8bf3063b44ada5b94534}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-iso\-\_\-norm\-\_\-by8@{crc64\-\_\-iso\-\_\-norm\-\_\-by8}}
+\index{crc64\-\_\-iso\-\_\-norm\-\_\-by8@{crc64\-\_\-iso\-\_\-norm\-\_\-by8}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-iso\-\_\-norm\-\_\-by8}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-iso\-\_\-norm\-\_\-by8 (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a38b2855bc39d8bf3063b44ada5b94534}
+
+
+Generate C\-R\-C from I\-S\-O standard in normal format. 
+
+\begin{DoxyRefDesc}{Requires}
+\item[\hyperlink{requires__requires000004}{Requires}]S\-S\-E3, C\-L\-M\-U\-L\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a56f6c198b899ffe2bf59edb9d239bd4e}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-iso\-\_\-refl@{crc64\-\_\-iso\-\_\-refl}}
+\index{crc64\-\_\-iso\-\_\-refl@{crc64\-\_\-iso\-\_\-refl}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-iso\-\_\-refl}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-iso\-\_\-refl (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a56f6c198b899ffe2bf59edb9d239bd4e}
+
+
+Generate C\-R\-C from I\-S\-O standard in reflected format, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. \begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a88e8cf6f9b4486439975a27804c592b8}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-iso\-\_\-refl\-\_\-base@{crc64\-\_\-iso\-\_\-refl\-\_\-base}}
+\index{crc64\-\_\-iso\-\_\-refl\-\_\-base@{crc64\-\_\-iso\-\_\-refl\-\_\-base}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-iso\-\_\-refl\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-iso\-\_\-refl\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a88e8cf6f9b4486439975a27804c592b8}
+
+
+Generate C\-R\-C from I\-S\-O standard in reflected format, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a6907794fb06fa2a7d33fa6eefd10cdab}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-iso\-\_\-refl\-\_\-by8@{crc64\-\_\-iso\-\_\-refl\-\_\-by8}}
+\index{crc64\-\_\-iso\-\_\-refl\-\_\-by8@{crc64\-\_\-iso\-\_\-refl\-\_\-by8}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-iso\-\_\-refl\-\_\-by8}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-iso\-\_\-refl\-\_\-by8 (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a6907794fb06fa2a7d33fa6eefd10cdab}
+
+
+Generate C\-R\-C from I\-S\-O standard in reflected format. 
+
+\begin{DoxyRefDesc}{Requires}
+\item[\hyperlink{requires__requires000003}{Requires}]S\-S\-E3, C\-L\-M\-U\-L\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a02a2fab5433c40d1de97d36dcda12d01}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-jones\-\_\-norm@{crc64\-\_\-jones\-\_\-norm}}
+\index{crc64\-\_\-jones\-\_\-norm@{crc64\-\_\-jones\-\_\-norm}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-jones\-\_\-norm}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-jones\-\_\-norm (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a02a2fab5433c40d1de97d36dcda12d01}
+
+
+Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in normal format, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. \begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a3e4408b58fdafc0bb110b537327e4eb8}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-jones\-\_\-norm\-\_\-base@{crc64\-\_\-jones\-\_\-norm\-\_\-base}}
+\index{crc64\-\_\-jones\-\_\-norm\-\_\-base@{crc64\-\_\-jones\-\_\-norm\-\_\-base}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-jones\-\_\-norm\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-jones\-\_\-norm\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a3e4408b58fdafc0bb110b537327e4eb8}
+
+
+Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in normal format, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a8d7d5c6b8aaac198b326bdc1bc9d33c4}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-jones\-\_\-norm\-\_\-by8@{crc64\-\_\-jones\-\_\-norm\-\_\-by8}}
+\index{crc64\-\_\-jones\-\_\-norm\-\_\-by8@{crc64\-\_\-jones\-\_\-norm\-\_\-by8}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-jones\-\_\-norm\-\_\-by8}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-jones\-\_\-norm\-\_\-by8 (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a8d7d5c6b8aaac198b326bdc1bc9d33c4}
+
+
+Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in normal format. 
+
+\begin{DoxyRefDesc}{Requires}
+\item[\hyperlink{requires__requires000006}{Requires}]S\-S\-E3, C\-L\-M\-U\-L\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_ae4a01937872438ad8ad3c60a2ba2cc26}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-jones\-\_\-refl@{crc64\-\_\-jones\-\_\-refl}}
+\index{crc64\-\_\-jones\-\_\-refl@{crc64\-\_\-jones\-\_\-refl}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-jones\-\_\-refl}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-jones\-\_\-refl (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_ae4a01937872438ad8ad3c60a2ba2cc26}
+
+
+Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in reflected format, runs appropriate version. 
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime. \begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_ad9016e37b5a0c88baa4a3dddd6b1ff14}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-jones\-\_\-refl\-\_\-base@{crc64\-\_\-jones\-\_\-refl\-\_\-base}}
+\index{crc64\-\_\-jones\-\_\-refl\-\_\-base@{crc64\-\_\-jones\-\_\-refl\-\_\-base}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-jones\-\_\-refl\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-jones\-\_\-refl\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_ad9016e37b5a0c88baa4a3dddd6b1ff14}
+
+
+Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in reflected format, runs baseline version. 
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}
+\hypertarget{crc64_8h_a18d5eec58187293479dcecbead835563}{\index{crc64.\-h@{crc64.\-h}!crc64\-\_\-jones\-\_\-refl\-\_\-by8@{crc64\-\_\-jones\-\_\-refl\-\_\-by8}}
+\index{crc64\-\_\-jones\-\_\-refl\-\_\-by8@{crc64\-\_\-jones\-\_\-refl\-\_\-by8}!crc64.h@{crc64.\-h}}
+\subsubsection[{crc64\-\_\-jones\-\_\-refl\-\_\-by8}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t crc64\-\_\-jones\-\_\-refl\-\_\-by8 (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{init\-\_\-crc, }
+\item[{const unsigned char $\ast$}]{buf, }
+\item[{uint64\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{crc64_8h_a18d5eec58187293479dcecbead835563}
+
+
+Generate C\-R\-C from \char`\"{}\-Jones\char`\"{} coefficients in reflected format. 
+
+\begin{DoxyRefDesc}{Requires}
+\item[\hyperlink{requires__requires000005}{Requires}]S\-S\-E3, C\-L\-M\-U\-L\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+64 bit C\-R\-C 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em init\-\_\-crc} & initial C\-R\-C value, 64 bits \\
+\hline
+{\em buf} & buffer to calculate C\-R\-C on \\
+\hline
+{\em len} & buffer length in bytes (64-\/bit data) \\
+\hline
+\end{DoxyParams}

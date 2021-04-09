@@ -1,0 +1,50 @@
+\hypertarget{structisal__hufftables}{\section{isal\-\_\-hufftables Struct Reference}
+\label{structisal__hufftables}\index{isal\-\_\-hufftables@{isal\-\_\-hufftables}}
+}
+
+
+Holds the huffman tree used to huffman encode the input stream.  
+
+
+
+
+{\ttfamily \#include $<$igzip\-\_\-lib.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structisal__hufftables_a1b087bbe2a68e745de3f3e07f32325d0}{uint8\-\_\-t \hyperlink{structisal__hufftables_a1b087bbe2a68e745de3f3e07f32325d0}{deflate\-\_\-hdr} \mbox{[}I\-S\-A\-L\-\_\-\-D\-E\-F\-\_\-\-M\-A\-X\-\_\-\-H\-D\-R\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structisal__hufftables_a1b087bbe2a68e745de3f3e07f32325d0}
+
+\begin{DoxyCompactList}\small\item\em deflate huffman tree header \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_acb2b9fe9c6f2f9f349653bb4ff1b2ff1}{uint32\-\_\-t \hyperlink{structisal__hufftables_acb2b9fe9c6f2f9f349653bb4ff1b2ff1}{deflate\-\_\-hdr\-\_\-count}}\label{structisal__hufftables_acb2b9fe9c6f2f9f349653bb4ff1b2ff1}
+
+\begin{DoxyCompactList}\small\item\em Number of whole bytes in deflate\-\_\-huff\-\_\-hdr. \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_ad0a67b1eba3b08dc4b29881cdb3b7a91}{uint32\-\_\-t \hyperlink{structisal__hufftables_ad0a67b1eba3b08dc4b29881cdb3b7a91}{deflate\-\_\-hdr\-\_\-extra\-\_\-bits}}\label{structisal__hufftables_ad0a67b1eba3b08dc4b29881cdb3b7a91}
+
+\begin{DoxyCompactList}\small\item\em Number of bits in the partial byte in header. \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_a31b696f195715ec9fb3a03fcedb3b42c}{uint32\-\_\-t \hyperlink{structisal__hufftables_a31b696f195715ec9fb3a03fcedb3b42c}{dist\-\_\-table} \mbox{[}I\-G\-Z\-I\-P\-\_\-\-D\-I\-S\-T\-\_\-\-T\-A\-B\-L\-E\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structisal__hufftables_a31b696f195715ec9fb3a03fcedb3b42c}
+
+\begin{DoxyCompactList}\small\item\em bits 4\-:0 are the code length, bits 31\-:5 are the code \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_a214f59643e7904ab0b7c9e278a0172d6}{uint32\-\_\-t \hyperlink{structisal__hufftables_a214f59643e7904ab0b7c9e278a0172d6}{len\-\_\-table} \mbox{[}I\-G\-Z\-I\-P\-\_\-\-L\-E\-N\-\_\-\-T\-A\-B\-L\-E\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structisal__hufftables_a214f59643e7904ab0b7c9e278a0172d6}
+
+\begin{DoxyCompactList}\small\item\em bits 4\-:0 are the code length, bits 31\-:5 are the code \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_aa4eb4c670579e7f3dde5171684771b37}{uint16\-\_\-t \hyperlink{structisal__hufftables_aa4eb4c670579e7f3dde5171684771b37}{lit\-\_\-table} \mbox{[}I\-G\-Z\-I\-P\-\_\-\-L\-I\-T\-\_\-\-T\-A\-B\-L\-E\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structisal__hufftables_aa4eb4c670579e7f3dde5171684771b37}
+
+\begin{DoxyCompactList}\small\item\em literal code \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_abbba034c819d09a5e135d9de6d27fc96}{uint8\-\_\-t \hyperlink{structisal__hufftables_abbba034c819d09a5e135d9de6d27fc96}{lit\-\_\-table\-\_\-sizes} \mbox{[}I\-G\-Z\-I\-P\-\_\-\-L\-I\-T\-\_\-\-T\-A\-B\-L\-E\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{structisal__hufftables_abbba034c819d09a5e135d9de6d27fc96}
+
+\begin{DoxyCompactList}\small\item\em literal code length \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_a92bcda751f360088f782cf468c95a858}{uint16\-\_\-t \hyperlink{structisal__hufftables_a92bcda751f360088f782cf468c95a858}{dcodes} \mbox{[}30-\/I\-G\-Z\-I\-P\-\_\-\-D\-E\-C\-O\-D\-E\-\_\-\-O\-F\-F\-S\-E\-T\mbox{]}}\label{structisal__hufftables_a92bcda751f360088f782cf468c95a858}
+
+\begin{DoxyCompactList}\small\item\em distance code \end{DoxyCompactList}\item 
+\hypertarget{structisal__hufftables_ab2e78b7c6d91762112bf530caf54ae60}{uint8\-\_\-t \hyperlink{structisal__hufftables_ab2e78b7c6d91762112bf530caf54ae60}{dcodes\-\_\-sizes} \mbox{[}30-\/I\-G\-Z\-I\-P\-\_\-\-D\-E\-C\-O\-D\-E\-\_\-\-O\-F\-F\-S\-E\-T\mbox{]}}\label{structisal__hufftables_ab2e78b7c6d91762112bf530caf54ae60}
+
+\begin{DoxyCompactList}\small\item\em distance code length \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds the huffman tree used to huffman encode the input stream. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{igzip__lib_8h}{igzip\-\_\-lib.\-h}\end{DoxyCompactItemize}

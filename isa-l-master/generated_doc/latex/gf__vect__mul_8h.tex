@@ -1,0 +1,101 @@
+\hypertarget{gf__vect__mul_8h}{\section{gf\-\_\-vect\-\_\-mul.\-h File Reference}
+\label{gf__vect__mul_8h}\index{gf\-\_\-vect\-\_\-mul.\-h@{gf\-\_\-vect\-\_\-mul.\-h}}
+}
+
+
+Interface to functions for vector (block) multiplication in G\-F(2$^\wedge$8).  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{gf__vect__mul_8h_aa7a737b69a0a77dc29aa28d0f17421a1}{gf\-\_\-vect\-\_\-mul} (int len, unsigned char $\ast$gftbl, void $\ast$src, void $\ast$dest)
+\begin{DoxyCompactList}\small\item\em G\-F(2$^\wedge$8) vector multiply by constant, runs appropriate version. \end{DoxyCompactList}\item 
+void \hyperlink{gf__vect__mul_8h_a84eb9ca31c934f05a8e3fa7a02fa71dc}{gf\-\_\-vect\-\_\-mul\-\_\-init} (unsigned char c, unsigned char $\ast$gftbl)
+\begin{DoxyCompactList}\small\item\em Initialize 32-\/byte constant array for G\-F(2$^\wedge$8) vector multiply. \end{DoxyCompactList}\item 
+void \hyperlink{gf__vect__mul_8h_a8f3e57729c3382514325612c54e20eaa}{gf\-\_\-vect\-\_\-mul\-\_\-base} (int len, unsigned char $\ast$a, unsigned char $\ast$src, unsigned char $\ast$dest)
+\begin{DoxyCompactList}\small\item\em G\-F(2$^\wedge$8) vector multiply by constant, runs baseline version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface to functions for vector (block) multiplication in G\-F(2$^\wedge$8). This file defines the interface to routines used in fast R\-A\-I\-D rebuild and erasure codes. 
+
+\subsection{Function Documentation}
+\hypertarget{gf__vect__mul_8h_aa7a737b69a0a77dc29aa28d0f17421a1}{\index{gf\-\_\-vect\-\_\-mul.\-h@{gf\-\_\-vect\-\_\-mul.\-h}!gf\-\_\-vect\-\_\-mul@{gf\-\_\-vect\-\_\-mul}}
+\index{gf\-\_\-vect\-\_\-mul@{gf\-\_\-vect\-\_\-mul}!gf_vect_mul.h@{gf\-\_\-vect\-\_\-mul.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-mul}]{\setlength{\rightskip}{0pt plus 5cm}int gf\-\_\-vect\-\_\-mul (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{unsigned char $\ast$}]{gftbl, }
+\item[{void $\ast$}]{src, }
+\item[{void $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{gf__vect__mul_8h_aa7a737b69a0a77dc29aa28d0f17421a1}
+
+
+G\-F(2$^\wedge$8) vector multiply by constant, runs appropriate version. 
+
+Does a G\-F(2$^\wedge$8) vector multiply b = Ca where a and b are arrays and C is a single field element in G\-F(2$^\wedge$8). Can be used for R\-A\-I\-D6 rebuild and partial write functions. Function requires pre-\/calculation of a 32-\/element constant array based on constant C. gftbl(\-C) = \{C\{00\}, C\{01\}, C\{02\}, ... , C\{0f\} \}, \{C\{00\}, C\{10\}, C\{20\}, ... , C\{f0\} \}. Len and src must be aligned to 32\-B.
+
+This function determines what instruction sets are enabled and selects the appropriate version at runtime.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of vector in bytes. Must be aligned to 32\-B. \\
+\hline
+{\em gftbl} & Pointer to 32-\/byte array of pre-\/calculated constants based on C. \\
+\hline
+{\em src} & Pointer to src data array. Must be aligned to 32\-B. \\
+\hline
+{\em dest} & Pointer to destination data array. Must be aligned to 32\-B. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 pass, other fail 
+\end{DoxyReturn}
+\hypertarget{gf__vect__mul_8h_a8f3e57729c3382514325612c54e20eaa}{\index{gf\-\_\-vect\-\_\-mul.\-h@{gf\-\_\-vect\-\_\-mul.\-h}!gf\-\_\-vect\-\_\-mul\-\_\-base@{gf\-\_\-vect\-\_\-mul\-\_\-base}}
+\index{gf\-\_\-vect\-\_\-mul\-\_\-base@{gf\-\_\-vect\-\_\-mul\-\_\-base}!gf_vect_mul.h@{gf\-\_\-vect\-\_\-mul.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-mul\-\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-vect\-\_\-mul\-\_\-base (
+\begin{DoxyParamCaption}
+\item[{int}]{len, }
+\item[{unsigned char $\ast$}]{a, }
+\item[{unsigned char $\ast$}]{src, }
+\item[{unsigned char $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}}\label{gf__vect__mul_8h_a8f3e57729c3382514325612c54e20eaa}
+
+
+G\-F(2$^\wedge$8) vector multiply by constant, runs baseline version. 
+
+Does a G\-F(2$^\wedge$8) vector multiply b = Ca where a and b are arrays and C is a single field element in G\-F(2$^\wedge$8). Can be used for R\-A\-I\-D6 rebuild and partial write functions. Function requires pre-\/calculation of a 32-\/element constant array based on constant C. gftbl(\-C) = \{C\{00\}, C\{01\}, C\{02\}, ... , C\{0f\} \}, \{C\{00\}, C\{10\}, C\{20\}, ... , C\{f0\} \}. Len and src must be aligned to 32\-B.
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Length of vector in bytes. Must be aligned to 32\-B. \\
+\hline
+{\em a} & Pointer to 32-\/byte array of pre-\/calculated constants based on C. only use 2nd element is used. \\
+\hline
+{\em src} & Pointer to src data array. Must be aligned to 32\-B. \\
+\hline
+{\em dest} & Pointer to destination data array. Must be aligned to 32\-B. \\
+\hline
+\end{DoxyParams}
+\hypertarget{gf__vect__mul_8h_a84eb9ca31c934f05a8e3fa7a02fa71dc}{\index{gf\-\_\-vect\-\_\-mul.\-h@{gf\-\_\-vect\-\_\-mul.\-h}!gf\-\_\-vect\-\_\-mul\-\_\-init@{gf\-\_\-vect\-\_\-mul\-\_\-init}}
+\index{gf\-\_\-vect\-\_\-mul\-\_\-init@{gf\-\_\-vect\-\_\-mul\-\_\-init}!gf_vect_mul.h@{gf\-\_\-vect\-\_\-mul.\-h}}
+\subsubsection[{gf\-\_\-vect\-\_\-mul\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void gf\-\_\-vect\-\_\-mul\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{c, }
+\item[{unsigned char $\ast$}]{gftbl}
+\end{DoxyParamCaption}
+)}}\label{gf__vect__mul_8h_a84eb9ca31c934f05a8e3fa7a02fa71dc}
+
+
+Initialize 32-\/byte constant array for G\-F(2$^\wedge$8) vector multiply. 
+
+Calculates array \{C\{00\}, C\{01\}, C\{02\}, ... , C\{0f\} \}, \{C\{00\}, C\{10\}, C\{20\}, ... , C\{f0\} \} as required by other fast vector multiply functions. 
+\begin{DoxyParams}{Parameters}
+{\em c} & Constant input. \\
+\hline
+{\em gftbl} & Table output. \\
+\hline
+\end{DoxyParams}

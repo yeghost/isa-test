@@ -1,0 +1,99 @@
+\hypertarget{raid_8h}{\section{raid.\-h}
+\label{raid_8h}\index{raid.\-h@{raid.\-h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/**********************************************************************}
+00002 \textcolor{comment}{  Copyright(c) 2011-2015 Intel Corporation All rights reserved.}
+00003 \textcolor{comment}{}
+00004 \textcolor{comment}{  Redistribution and use in source and binary forms, with or without}
+00005 \textcolor{comment}{  modification, are permitted provided that the following conditions}
+00006 \textcolor{comment}{  are met:}
+00007 \textcolor{comment}{    * Redistributions of source code must retain the above copyright}
+00008 \textcolor{comment}{      notice, this list of conditions and the following disclaimer.}
+00009 \textcolor{comment}{    * Redistributions in binary form must reproduce the above copyright}
+00010 \textcolor{comment}{      notice, this list of conditions and the following disclaimer in}
+00011 \textcolor{comment}{      the documentation and/or other materials provided with the}
+00012 \textcolor{comment}{      distribution.}
+00013 \textcolor{comment}{    * Neither the name of Intel Corporation nor the names of its}
+00014 \textcolor{comment}{      contributors may be used to endorse or promote products derived}
+00015 \textcolor{comment}{      from this software without specific prior written permission.}
+00016 \textcolor{comment}{}
+00017 \textcolor{comment}{  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00018 \textcolor{comment}{  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00019 \textcolor{comment}{  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00020 \textcolor{comment}{  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00021 \textcolor{comment}{  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00022 \textcolor{comment}{  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00023 \textcolor{comment}{  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00024 \textcolor{comment}{  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00025 \textcolor{comment}{  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00026 \textcolor{comment}{  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00027 \textcolor{comment}{  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+00028 \textcolor{comment}{**********************************************************************/}
+00029 
+00030 
+00031 \textcolor{preprocessor}{#ifndef \_RAID\_H\_}
+00032 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define \_RAID\_H\_}
+00033 \textcolor{preprocessor}{}
+00043 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00044 \textcolor{preprocessor}{}\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00045 \textcolor{preprocessor}{#endif}
+00046 \textcolor{preprocessor}{}
+00047 \textcolor{comment}{/* Multi-binary functions */}
+00048 
+00064 \textcolor{keywordtype}{int} \hyperlink{raid_8h_afe3180e1fefab9a892cadaac903fe197}{xor\_gen}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00065 
+00066 
+00081 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a0174206318adc9bf9bdd48ebd67ddd46}{xor\_check}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00082 
+00083 
+00101 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a5493e93296c68d6e6e1a5c0a63e78e62}{pq\_gen}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00102 
+00103 
+00119 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a7fe68ec6df2d903d7611daf2d5c7b3cc}{pq\_check}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00120 
+00121 
+00122 \textcolor{comment}{/* Arch specific versions */}
+00123 \textcolor{comment}{// x86 only}
+00124 \textcolor{preprocessor}{#if defined(\_\_i386\_\_) || defined(\_\_x86\_64\_\_)}
+00125 \textcolor{preprocessor}{}
+00139 \textcolor{keywordtype}{int} xor\_gen\_sse(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00140 
+00141 
+00155 \textcolor{keywordtype}{int} xor\_gen\_avx(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00156 
+00157 
+00170 \textcolor{keywordtype}{int} xor\_check\_sse(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00171 
+00172 
+00188 \textcolor{keywordtype}{int} pq\_gen\_sse(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00189 
+00190 
+00206 \textcolor{keywordtype}{int} pq\_gen\_avx(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00207 
+00208 
+00224 \textcolor{keywordtype}{int} pq\_gen\_avx2(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00225 
+00226 
+00239 \textcolor{keywordtype}{int} pq\_check\_sse(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00240 
+00241 \textcolor{preprocessor}{#endif}
+00242 \textcolor{preprocessor}{}
+00256 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a49d42025de6401ec1586abaa886b91f8}{pq\_gen\_base}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00257 
+00258 
+00270 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a3ed85ca849e93a1641392c3c64e93f98}{xor\_gen\_base}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00271 
+00272 
+00284 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a23917d3ac151358d5e66f474e92f1ae8}{xor\_check\_base}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00285 
+00286 
+00299 \textcolor{keywordtype}{int} \hyperlink{raid_8h_a02a57871d8822dc77b3841471ab5ffca}{pq\_check\_base}(\textcolor{keywordtype}{int} vects, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{void} **array);
+00300 
+00301 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00302 \textcolor{preprocessor}{}\}
+00303 \textcolor{preprocessor}{#endif}
+00304 \textcolor{preprocessor}{}
+00305 \textcolor{preprocessor}{#endif //\_RAID\_H\_}
+\end{DoxyCode}

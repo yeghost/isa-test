@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="isa_l_master"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Code/final-design/isa-l-master/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="isa_l_master">
+				<Option output="D:/Code/final-design/isa-l-master/cmake-build-debug/isa_l_master.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Code/final-design/isa-l-master/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Code/final-design/isa-l-master/crc"/>
+					<Add directory="D:/Code/final-design/isa-l-master/crc/aarch64"/>
+					<Add directory="D:/Code/final-design/isa-l-master/erasure_code"/>
+					<Add directory="D:/Code/final-design/isa-l-master/erasure_code/ppc64le"/>
+					<Add directory="D:/Code/final-design/isa-l-master/igzip"/>
+					<Add directory="D:/Code/final-design/isa-l-master/igzip/aarch64"/>
+					<Add directory="D:/Code/final-design/isa-l-master/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 isa_l_master"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="isa_l_master/fast">
+				<Option output="D:/Code/final-design/isa-l-master/cmake-build-debug/isa_l_master.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Code/final-design/isa-l-master/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Code/final-design/isa-l-master/crc"/>
+					<Add directory="D:/Code/final-design/isa-l-master/crc/aarch64"/>
+					<Add directory="D:/Code/final-design/isa-l-master/erasure_code"/>
+					<Add directory="D:/Code/final-design/isa-l-master/erasure_code/ppc64le"/>
+					<Add directory="D:/Code/final-design/isa-l-master/igzip"/>
+					<Add directory="D:/Code/final-design/isa-l-master/igzip/aarch64"/>
+					<Add directory="D:/Code/final-design/isa-l-master/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 isa_l_master/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Code/final-design/isa-l-master/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Code/final-design/isa-l-master/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Code/final-design/isa-l-master/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc32_aarch64_common.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc32_gzip_refl_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc32_ieee_norm_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc32_iscsi_refl_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc32_norm_common_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc32_refl_common_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_ecma_norm_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_ecma_refl_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_iso_norm_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_iso_refl_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_jones_norm_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_jones_refl_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_norm_common_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc64_refl_common_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc_aarch64_dispatcher.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/aarch64/crc_common_pmull.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc16_t10dif_copy_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc16_t10dif_copy_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc16_t10dif_op_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc16_t10dif_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc16_t10dif_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc32_funcs_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc32_gzip_refl_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc32_ieee_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc32_iscsi_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc64_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc64_example.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc64_funcs_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc64_funcs_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc64_ref.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc_base_aliases.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc_ref.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/crc/crc_simple_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/aarch64/ec_aarch64_dispatcher.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/aarch64/ec_aarch64_highlevel_func.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ec_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ec_base.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ec_base_aliases.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ec_highlevel_func.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/erasure_code_base_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/erasure_code_base_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/erasure_code_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/erasure_code_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/erasure_code_update_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/erasure_code_update_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gen_rs_matrix_limits.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_inverse_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_dot_prod_1tbl.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_dot_prod_base_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_dot_prod_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_dot_prod_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_mad_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_mul_base_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_mul_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/gf_vect_mul_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/ec_base_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/ec_base_vsx.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_2vect_dot_prod_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_2vect_mad_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_3vect_dot_prod_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_3vect_mad_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_4vect_dot_prod_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_4vect_mad_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_5vect_dot_prod_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_5vect_mad_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_6vect_dot_prod_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_6vect_mad_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_vect_dot_prod_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_vect_mad_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/erasure_code/ppc64le/gf_vect_mul_vsx.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/examples/ec/ec_piggyback_example.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/examples/ec/ec_simple_example.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/bitbuf2_aarch64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/data_struct_aarch64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/huffman_aarch64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/igzip_multibinary_aarch64_dispatcher.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/lz0a_const_aarch64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/options_aarch64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/aarch64/stdmac_aarch64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/adler32_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/adler32_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/bitbuf2.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/checksum32_funcs_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/checksum_test_ref.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/encode_df.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/encode_df.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/flatten_ll.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/flatten_ll.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/generate_custom_hufftables.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/generate_static_inflate.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/huff_codes.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/huff_codes.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/huffman.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/hufftables_c.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_base_aliases.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_build_hash_table_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_checksums.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_example.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_file_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_hist_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_icf_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_icf_body.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_inflate.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_inflate_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_level_buf_structs.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_rand_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_semi_dyn_file_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_sync_flush_example.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_wrapper.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/igzip_wrapper_hdr_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/inflate_std_vects.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/proc_heap_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/repeated_char_result.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/igzip/static_inflate.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/aarch64_multibinary.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/crc.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/crc64.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/erasure_code.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/gf_vect_mul.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/igzip_lib.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/mem_routines.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/raid.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/test.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/types.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/include/unaligned.h">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/mem/aarch64/mem_aarch64_dispatcher.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/mem/mem_zero_detect_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/mem/mem_zero_detect_base_aliases.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/mem/mem_zero_detect_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/mem/mem_zero_detect_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/programs/igzip_cli.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/aarch64/raid_aarch64_dispatcher.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/pq_check_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/pq_gen_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/pq_gen_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/raid_base.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/raid_base_aliases.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/xor_check_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/xor_example.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/xor_gen_perf.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/raid/xor_gen_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/tests/fuzz/igzip_checked_inflate_fuzz_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/tests/fuzz/igzip_dump_inflate_corpus.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/tests/fuzz/igzip_fuzz_inflate.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/tests/fuzz/igzip_simple_inflate_fuzz_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/tests/fuzz/igzip_simple_round_trip_fuzz_test.c">
+			<Option target="isa_l_master"/>
+		</Unit>
+		<Unit filename="D:/Code/final-design/isa-l-master/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

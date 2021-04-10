@@ -269,15 +269,7 @@ int main(int argc, char *argv[])
     }
     printf("\n");
     //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k],0);
-	//ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k],0);
-    for(i=0;i<k+p;i++)
-    {
-        for(j=0;j<len;j++)
-        {
-            printf("%d",frag_ptrs[i][j]);
-        }
-        printf("\n");
-    }
+
 	if (nerrs <= 0)
 		return 0;
 
@@ -339,25 +331,6 @@ int main(int argc, char *argv[])
     //fprintf(fp, "%ld %ld %ld %ld %ld \n",cauchy_matrix,en_init,en_code,de_init,de_code);
     fprintf(fp, "%ld %ld \n",en_code,de_code);
     fclose(fp);
-    for(i=0;i<nerrs;i++)
-    {
-        for(j=0;j<len;j++)
-        {
-            printf("%d ",frag_ptrs[frag_err_list[i]][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    for(i=0 ;i < nerrs;i++)
-    {
-        for(j = 0;j < len;j++)
-        {
-            printf("%d ",recover_outp[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
 	// Check that recovered buffers are the same as original
 	printf(" check recovery of block {");
 	for (i = 0; i < nerrs; i++) {

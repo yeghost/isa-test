@@ -299,13 +299,13 @@ void gf_vect_mad_base(int len, int vec, int vec_i,
 }
 
 void ec_encode_data_base(int len, int srcs, int dests, unsigned char *v,
-			 unsigned char **src, unsigned char **dest,int begin)
+			 unsigned char **src, unsigned char **dest)
 {
 	int i, j, l;
 	unsigned char s;
 
 	for (l = 0; l < dests; l++) {
-		for (i = begin; i < begin + len; i++) {
+		for (i = 0; i < len; i++) {
 			s = 0;
 			for (j = 0; j < srcs; j++)
 				s ^= gf_mul(src[j][i], v[j * 32 + l * srcs * 32 + 1]);

@@ -230,7 +230,7 @@ void gf_vect_mad_base(int len, int vec, int vec_i, unsigned char *v, unsigned ch
  * @requires SSE4.1
  */
 void ec_encode_data_sse(int len, int k, int rows, unsigned char *gftbls, unsigned char **data,
-			unsigned char **coding,int begin);
+			unsigned char **coding);
 
 /**
  * @brief Generate or decode erasure codes on blocks of data.
@@ -239,7 +239,7 @@ void ec_encode_data_sse(int len, int k, int rows, unsigned char *gftbls, unsigne
  * @requires AVX
  */
 void ec_encode_data_avx(int len, int k, int rows, unsigned char *gftbls, unsigned char **data,
-			unsigned char **coding,int begin);
+			unsigned char **coding);
 
 /**
  * @brief Generate or decode erasure codes on blocks of data.
@@ -248,7 +248,7 @@ void ec_encode_data_avx(int len, int k, int rows, unsigned char *gftbls, unsigne
  * @requires AVX2
  */
 void ec_encode_data_avx2(int len, int k, int rows, unsigned char *gftbls, unsigned char **data,
-			 unsigned char **coding,int begin);
+			 unsigned char **coding);
 
 /**
  * @brief Generate update for encode or decode of erasure codes from single source.

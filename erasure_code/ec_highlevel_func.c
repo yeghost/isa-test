@@ -31,11 +31,11 @@
 
 #if __x86_64__  || __i386__ || _M_X64 || _M_IX86
 void ec_encode_data_sse(int len, int k, int rows, unsigned char *g_tbls, unsigned char **data,
-			unsigned char **coding)
+			unsigned char **coding,int begin)
 {
 
 	if (len < 16) {
-		ec_encode_data_base(len, k, rows, g_tbls, data, coding,0);
+		ec_encode_data_base(len, k, rows, g_tbls, data, coding,begin);
 		return;
 	}
 
@@ -68,10 +68,10 @@ void ec_encode_data_sse(int len, int k, int rows, unsigned char *g_tbls, unsigne
 }
 
 void ec_encode_data_avx(int len, int k, int rows, unsigned char *g_tbls, unsigned char **data,
-			unsigned char **coding)
+			unsigned char **coding,int begin)
 {
 	if (len < 16) {
-		ec_encode_data_base(len, k, rows, g_tbls, data, coding,0);
+		ec_encode_data_base(len, k, rows, g_tbls, data, coding,begin);
 		return;
 	}
 
@@ -104,11 +104,11 @@ void ec_encode_data_avx(int len, int k, int rows, unsigned char *g_tbls, unsigne
 }
 
 void ec_encode_data_avx2(int len, int k, int rows, unsigned char *g_tbls, unsigned char **data,
-			 unsigned char **coding)
+			 unsigned char **coding,int begin)
 {
 
 	if (len < 32) {
-		ec_encode_data_base(len, k, rows, g_tbls, data, coding,0);
+		ec_encode_data_base(len, k, rows, g_tbls, data, coding,begin);
 		return;
 	}
 
@@ -168,11 +168,11 @@ extern void gf_6vect_mad_avx512(int len, int vec, int vec_i, unsigned char *gftb
 				unsigned char *src, unsigned char **dest);
 
 void ec_encode_data_avx512(int len, int k, int rows, unsigned char *g_tbls,
-			   unsigned char **data, unsigned char **coding)
+			   unsigned char **data, unsigned char **coding,int begin)
 {
 
 	if (len < 64) {
-		ec_encode_data_base(len, k, rows, g_tbls, data, coding,0);
+		ec_encode_data_base(len, k, rows, g_tbls, data, coding,begin);
 		return;
 	}
 

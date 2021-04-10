@@ -44,7 +44,7 @@ void gf_vect_mad(int len, int vec, int vec_i,
 void ec_encode_data(int len, int srcs, int dests, unsigned char *v,
 		    unsigned char **src, unsigned char **dest,int begin)
 {
-	ec_encode_data_base(len, srcs, dests, v, src, dest,begin);
+	ec_encode_data_base(len, srcs, dests, v, src, dest, begin);
 }
 
 void ec_encode_data_multi(int len, int srcs, int dests, unsigned char *v,

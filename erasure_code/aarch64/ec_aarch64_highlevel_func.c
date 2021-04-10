@@ -56,7 +56,7 @@ void ec_encode_data_neon(int len, int k, int rows, unsigned char *g_tbls, unsign
 			 unsigned char **coding)
 {
 	if (len < 16) {
-		ec_encode_data_base(len, k, rows, g_tbls, data, coding);
+		ec_encode_data_base(len, k, rows, g_tbls, data, coding,0);
 		return;
 	}
 

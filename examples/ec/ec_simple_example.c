@@ -259,15 +259,6 @@ int main(int argc, char *argv[])
     }
     clock_gettime(CLOCK_REALTIME, &time2);
     en_code = time2.tv_nsec-time1.tv_nsec;
-    for(i=0;i<k+p;i++)
-    {
-        for(j=0;j<len;j++)
-        {
-            printf("%d",frag_ptrs[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
     //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k],0);
 
 	if (nerrs <= 0)

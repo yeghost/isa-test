@@ -96,18 +96,14 @@ void ec_init_tables(int k, int rows, unsigned char* a, unsigned char* gftbls);
  */
 
 void ec_encode_data(int len, int k, int rows, unsigned char *gftbls, unsigned char **data,
-		    unsigned char **coding,int begin);
-void ec_encode_data_multi(int len, int srcs, int dests, unsigned char *v,
-            unsigned char **src, unsigned char **dest,int begin);
+		    unsigned char **coding);
 /**
  * @brief Generate or decode erasure codes on blocks of data, runs baseline version.
  *
  * Baseline version of ec_encode_data() with same parameters.
  */
 void ec_encode_data_base(int len, int srcs, int dests, unsigned char *v, unsigned char **src,
-			 unsigned char **dest,int begin);
-void ec_encode_data_base_multi(int len, int srcs, int dests, unsigned char *v,
-                               unsigned char **src, unsigned char **dest, int begin);
+			 unsigned char **dest);
 /**
  * @brief Generate update for encode or decode of erasure codes from single source, runs appropriate version.
  *

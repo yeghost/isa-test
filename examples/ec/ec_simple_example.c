@@ -80,7 +80,6 @@ void encode(void *p) //void *p可以保存任何类型的指针
     cpu_set_t mask;  //CPU核的集合
     CPU_ZERO(&mask);    //置空
     CPU_SET(20 + pinfo->id,&mask);
-
     ec_encode_data(pinfo->len, pinfo->k, pinfo->p, pinfo->g_tbls, *pinfo->frag_ptrs, pinfo->frag_ptrs[pinfo->k],pinfo->begin);
 }
 
@@ -95,7 +94,7 @@ void decode(void *p) //void *p可以保存任何类型的指针
 int main(int argc, char *argv[])
 {
 	int i, j, m, c, e, ret;
-	int k = 4, p = 2, len = 128 * 1024 * 1024 / 4;	// Default params
+	int k = 4, p = 2, len = 256 / 4;	// Default params
 	int nerrs = 0;
 	int num_of_thread=2;
     struct Myinfo myp[num_of_thread];
@@ -224,13 +223,13 @@ int main(int argc, char *argv[])
 
     ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
 
-    //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k],0);
+    ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k],0);
 
-	//gf_gen_cauchy1_matrix(encode_matrix, m, k);
+	gf_gen_cauchy1_matrix(encode_matrix, m, k);
 
 	// Initialize g_tbls from encode matrix
     //clock_gettime(CLOCK_REALTIME, &time1);
-	//ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
+	ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //en_init = time2.tv_nsec-time1.tv_nsec;
     for(i=0 ; i < num_of_thread; i++)

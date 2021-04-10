@@ -314,22 +314,7 @@ void ec_encode_data_base(int len, int srcs, int dests, unsigned char *v,
 		}
 	}
 }
-void ec_encode_data_base_multi(int len, int srcs, int dests, unsigned char *v,
-                         unsigned char **src, unsigned char **dest, int begin)
-{
-    int i, j, l;
-    unsigned char s;
 
-    for (l = 0; l < dests; l++) {
-        for (i = begin; i < begin + len; i++) {
-            s = 0;
-            for (j = 0; j < srcs; j++)
-                s ^= gf_mul(src[j][i], v[j * 32 + l * srcs * 32 + 1]);
-
-            dest[l][i] = s;
-        }
-    }
-}
 void ec_encode_data_update_base(int len, int k, int rows, int vec_i, unsigned char *v,
 				unsigned char *data, unsigned char **dest)
 {

@@ -52,44 +52,6 @@ void ec_encode_data(int len, int srcs, int dests, unsigned char *v,
 	}
 }
 
-void ec_encode_data_multi(int len, int srcs, int dests, unsigned char *v,
-                    unsigned char **src, unsigned char **dest ,int begin)
-{
-    if (len < 64) {
-        ec_encode_data_base_multi(len, srcs, dests, v, src, dest,begin);
-        return;
-    }
-
-    while (dests >= 6) {
-        gf_6vect_dot_prod_vsx(len, srcs, v, src, dest);
-        v += 6 * srcs * 32;
-        dest += 6;
-        dests -= 6;
-    }
-    switch (dests) {
-        case 6:
-            gf_6vect_dot_prod_vsx(len, srcs, v, src, dest);
-            break;
-        case 5:
-            gf_5vect_dot_prod_vsx(len, srcs, v, src, dest);
-            break;
-        case 4:
-            gf_4vect_dot_prod_vsx(len, srcs, v, src, dest);
-            break;
-        case 3:
-            gf_3vect_dot_prod_vsx(len, srcs, v, src, dest);
-            break;
-        case 2:
-            gf_2vect_dot_prod_vsx(len, srcs, v, src, dest);
-            break;
-        case 1:
-            gf_vect_dot_prod_vsx(len, srcs, v, src, *dest);
-            break;
-        case 0:
-            break;
-    }
-}
-
 void ec_encode_data_update(int len, int k, int rows, int vec_i, unsigned char *v,
 			   unsigned char *data, unsigned char **dest)
 {

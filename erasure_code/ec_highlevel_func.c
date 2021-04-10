@@ -168,7 +168,7 @@ extern void gf_6vect_mad_avx512(int len, int vec, int vec_i, unsigned char *gftb
 				unsigned char *src, unsigned char **dest);
 
 void ec_encode_data_avx512(int len, int k, int rows, unsigned char *g_tbls,
-			   unsigned char **data, unsigned char **coding,int begin)
+			   unsigned char **data, unsigned char **coding)
 {
 
 	if (len < 64) {

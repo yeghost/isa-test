@@ -62,14 +62,6 @@ static int gf_gen_decode_matrix_simple(u8 * encode_matrix,
 				       u8 * frag_err_list, int nerrs, int k, int m);
 struct Myinfo
 {
-    int len;//长度
-    int k;
-    int p;
-    u8 *g_tbls;
-    u8 *frag_ptrs[MMAX];
-    u8 *recover_outp[KMAX];
-    u8 *recover_srcs[KMAX];
-    int nerrs;
     int id;//线程编号
 };
 cpu_set_t mask;  //CPU核的集合
@@ -89,27 +81,26 @@ u8 decode_index[MMAX];
 
 int k = 4, p = 2, len = 128 * 1024 * 1024 / 4;	// Default params
 int nerrs = 0;
+int num_of_thread=1;
 
 void encode(void *p) //void *p可以保存任何类型的指针
 {
     struct Myinfo *pinfo = p;
-    CPU_ZERO(&mask);    //置空
     CPU_SET(20 + pinfo->id,&mask);
-    ec_encode_data(pinfo->len, pinfo->k, pinfo->p, pinfo->g_tbls, *pinfo->frag_ptrs, pinfo->frag_ptrs[pinfo->k]);
+    printf("\n%d\n",len/num_of_thread);
+    ec_encode_data(len/num_of_thread , k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
 }
 
 void decode(void *p) //void *p可以保存任何类型的指针
 {
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
-    CPU_ZERO(&mask);    //置空
     CPU_SET(20 + pinfo->id,&mask);
-    ec_encode_data(pinfo->len, pinfo->k, pinfo->nerrs, pinfo->g_tbls, *pinfo->recover_srcs, *pinfo->recover_outp);
+    ec_encode_data(len/num_of_thread, k, nerrs, g_tbls, recover_srcs, recover_outp);
 }
 int main(int argc, char *argv[])
 {
 	int i, j, m, c, e, ret;
-	int num_of_thread=8;
     struct Myinfo myp[num_of_thread];
 	long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
 	long cauchy_sse=0 , init_sse = 0, code_sse=0;
@@ -233,17 +224,6 @@ int main(int argc, char *argv[])
 	ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //en_init = time2.tv_nsec-time1.tv_nsec;
-    for(i=0 ; i < num_of_thread; i++)
-    {
-        myp[i].p = p;
-        myp[i].g_tbls = g_tbls;
-        myp[i].k = k;
-        for(j=0;j<MMAX;j++)
-        {
-            myp[i].frag_ptrs[j] = &frag_ptrs[j];
-        }
-        myp[i].len = len / num_of_thread;
-    }
 
     pthread_t tid[num_of_thread];
 	// Generate EC parity blocks from sources
@@ -258,7 +238,10 @@ int main(int argc, char *argv[])
     }
     clock_gettime(CLOCK_REALTIME, &time2);
     en_code = time2.tv_nsec-time1.tv_nsec;
-    //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
+    clock_gettime(CLOCK_REALTIME, &time1);
+    ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
+    clock_gettime(CLOCK_REALTIME, &time2);
+    long help = time2.tv_nsec-time1.tv_nsec;
 
 	if (nerrs <= 0)
 		return 0;
@@ -282,10 +265,6 @@ int main(int argc, char *argv[])
 	for (i = 0; i < k; i++)
     {
         recover_srcs[i] = frag_ptrs[decode_index[i]];
-        for(j = 0; j<num_of_thread; j++)
-        {
-            myp[j].recover_srcs[i] = &recover_srcs[i];
-        }
     }
 
 	// Recover data
@@ -293,14 +272,6 @@ int main(int argc, char *argv[])
 	ec_init_tables(k, nerrs, decode_matrix, g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //de_init = time2.tv_nsec-time1.tv_nsec;
-    for( i = 0 ;i < num_of_thread; i++)
-    {
-        myp[i].nerrs = nerrs;
-        for(j = 0;j < MMAX; j++)
-        {
-            myp[i].recover_outp[j] = &recover_outp[j];
-        }
-    }
     clock_gettime(CLOCK_REALTIME, &time1);
     // Generate EC parity blocks from sources
     for(i = 0; i < num_of_thread; i++)
@@ -313,12 +284,12 @@ int main(int argc, char *argv[])
     }
     clock_gettime(CLOCK_REALTIME, &time2);
     de_code = time2.tv_nsec-time1.tv_nsec;
-    //clock_gettime(CLOCK_REALTIME, &time1);
-	//ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
-   // clock_gettime(CLOCK_REALTIME, &time2);
-    //de_code = time2.tv_nsec-time1.tv_nsec;
+    clock_gettime(CLOCK_REALTIME, &time1);
+	ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
+    clock_gettime(CLOCK_REALTIME, &time2);
+    long com = time2.tv_nsec-time1.tv_nsec;
     //fprintf(fp, "%ld %ld %ld %ld %ld \n",cauchy_matrix,en_init,en_code,de_init,de_code);
-    fprintf(fp, "%ld %ld \n",en_code,de_code);
+    fprintf(fp, "%ld %ld %ld %ld\n",en_code,help,de_code,com);
     fclose(fp);
 	// Check that recovered buffers are the same as original
 	printf(" check recovery of block {");

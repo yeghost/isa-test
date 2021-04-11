@@ -62,57 +62,91 @@ static int gf_gen_decode_matrix_simple(u8 * encode_matrix,
 				       u8 * frag_err_list, int nerrs, int k, int m);
 struct Myinfo
 {
+    int len;//长度
+    int k;
+    int p;
+    u8 *g_tbls;
+    u8 *frag_ptrs[MMAX];
+    int nerrs;
     int id;//线程编号
 };
-cpu_set_t mask;  //CPU核的集合
-struct timespec time1 = {0, 0};
-struct timespec time2 = {0, 0};
-
-u8 *frag_ptrs[MMAX];
-u8 *recover_srcs[KMAX];
-u8 *recover_outp[KMAX];
-u8 frag_err_list[MMAX];
-
-// Coefficient matrices
-u8 *encode_matrix, *decode_matrix;
-u8 *invert_matrix, *temp_matrix;
-u8 *g_tbls;
-u8 decode_index[MMAX];
-
-int k = 4, p = 2, len = 128 * 1024 * 1024 / 4;	// Default params
-int nerrs = 0;
-int num_of_thread=1;
 
 void encode(void *p) //void *p可以保存任何类型的指针
 {
     struct Myinfo *pinfo = p;
-    CPU_SET(20 + pinfo->id,&mask);
-    printf("\n%d\n",len/num_of_thread);
-    ec_encode_data(len/num_of_thread , k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
+    cpu_set_t mask;  //CPU核的集合
+    CPU_ZERO(&mask);    //置空
+    CPU_SET(20+pinfo->id,&mask);
+    if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
+        printf("Set CPU affinity failue\n");
+    }
+    FILE *fp = NULL;
+    char s[40]= "en_4_2_mul_8_";
+    char id[10];
+    sprintf(id,"%d",pinfo->id);
+    strcat(s,id);
+    char type[5]=".txt";
+    strcat(s,type);
+    fp = fopen(s, "a+");
+    struct timespec time1 = {0, 0};
+    struct timespec time2 = {0, 0};
+    clock_gettime(CLOCK_REALTIME, &time1);
+    ec_encode_data(pinfo->len, pinfo->k, pinfo->p, pinfo->g_tbls, *pinfo->frag_ptrs, pinfo->frag_ptrs[pinfo->k]);
+    clock_gettime(CLOCK_REALTIME, &time2);
+    long ans = time2.tv_nsec-time1.tv_nsec;
+    fprintf(fp,"%ld %ld\n",pinfo->len,ans);
+    fclose(fp);
 }
-
+u8 *recover_srcs[KMAX];
+u8 *recover_outp[KMAX];
 void decode(void *p) //void *p可以保存任何类型的指针
 {
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
+    CPU_ZERO(&mask);    //置空
     CPU_SET(20 + pinfo->id,&mask);
-    ec_encode_data(len/num_of_thread, k, nerrs, g_tbls, recover_srcs, recover_outp);
+    if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
+        printf("Set CPU affinity failue\n");
+    }
+    FILE *fp = NULL;
+    char s[40]= "de_4_2_mul_8_";
+    char id[10];
+    sprintf(id,"%d",pinfo->id);
+    strcat(s,id);
+    char type[5]=".txt";
+    strcat(s,type);
+    fp = fopen(s, "a+");
+    struct timespec time1 = {0, 0};
+    struct timespec time2 = {0, 0};
+    clock_gettime(CLOCK_REALTIME, &time1);
+    ec_encode_data(pinfo->len, pinfo->k, pinfo->nerrs, pinfo->g_tbls, recover_srcs, recover_outp);
+    clock_gettime(CLOCK_REALTIME, &time2);
+    long ans = time2.tv_nsec-time1.tv_nsec;
+    fprintf(fp,"%ld %ld\n",pinfo->len,ans);
+    fclose(fp);
 }
 int main(int argc, char *argv[])
 {
-	int i, j, m, c, e, ret;
+    int i, j, m, c, e, ret;
+    int num_of_thread = 8;
+    int k = 4, p = 2, len =  2 * 1024 / 4 / num_of_thread;	// Default params
+    int nerrs = 0;
     struct Myinfo myp[num_of_thread];
-	long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
-	long cauchy_sse=0 , init_sse = 0, code_sse=0;
+    long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
+    long cauchy_sse=0 , init_sse = 0, code_sse=0;
     long en_cauchy_matrix = 0,de_cauchy_matrix = 0;
-    /*cpu_set_t mask;  //CPU核的集合
-    CPU_ZERO(&mask);    //置空
-    CPU_SET(20,&mask);
-    if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
-        printf("Set CPU affinity failue\n");
-        return -1;
-    }*/
+    struct timespec time1 = {0, 0};
+    struct timespec time2 = {0, 0};
+
 	// Fragment buffer pointers
+    u8 *frag_ptrs[MMAX];
+    u8 frag_err_list[MMAX];
+
+    // Coefficient matrices
+    u8 *encode_matrix, *decode_matrix;
+    u8 *invert_matrix, *temp_matrix;
+    u8 *g_tbls;
+    u8 decode_index[MMAX];
 
 	if (argc == 1)
 		for (i = 0; i < p; i++)
@@ -206,8 +240,8 @@ int main(int argc, char *argv[])
 			frag_ptrs[i][j] = rand();
 
 	printf(" encode (m,k,p)=(%d,%d,%d) len=%d\n", m, k, p, len);
-    FILE *fp = NULL;
-    fp = fopen("cauchy_4_2_mul.txt", "a+");
+    //FILE *fp = NULL;
+    //fp = fopen("4_2_mul_1.txt", "a+");
 	// Pick an encode matrix. A Cauchy matrix is a good choice as even
 	// large k are always invertable keeping the recovery rule simple.
 	// remove sse
@@ -224,11 +258,21 @@ int main(int argc, char *argv[])
 	ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //en_init = time2.tv_nsec-time1.tv_nsec;
+    for(i=0 ; i < num_of_thread; i++)
+    {
+        myp[i].p = p;
+        myp[i].g_tbls = g_tbls;
+        myp[i].k = k;
+        for(j=0;j<MMAX;j++)
+        {
+            myp[i].frag_ptrs[j] = &frag_ptrs[j];
+        }
+        myp[i].len = len;
+    }
 
     pthread_t tid[num_of_thread];
 	// Generate EC parity blocks from sources
-    clock_gettime(CLOCK_REALTIME, &time1);
-	for(i = 0;i < num_of_thread ; i++)
+    for(i = 0 ; i < num_of_thread ; i++)
     {
         myp[i].id = i;
         pthread_create(&tid[i],NULL,encode,&myp[i]);
@@ -236,12 +280,13 @@ int main(int argc, char *argv[])
     for(i = 0 ; i < num_of_thread ; i++){
         pthread_join(tid[i],NULL);//等待线程结束
     }
-    clock_gettime(CLOCK_REALTIME, &time2);
-    en_code = time2.tv_nsec-time1.tv_nsec;
     clock_gettime(CLOCK_REALTIME, &time1);
-    ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
+    for(i = 0;i<num_of_thread;i++)
+    {
+        ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
+    }
     clock_gettime(CLOCK_REALTIME, &time2);
-    long help = time2.tv_nsec-time1.tv_nsec;
+    long en_com = time2.tv_nsec-time1.tv_nsec;
 
 	if (nerrs <= 0)
 		return 0;
@@ -268,29 +313,33 @@ int main(int argc, char *argv[])
     }
 
 	// Recover data
-    //clock_gettime(CLOCK_REALTIME, &time1);
 	ec_init_tables(k, nerrs, decode_matrix, g_tbls);
-    //clock_gettime(CLOCK_REALTIME, &time2);
-    //de_init = time2.tv_nsec-time1.tv_nsec;
-    clock_gettime(CLOCK_REALTIME, &time1);
+
+    for( i = 0 ;i < num_of_thread; i++)
+    {
+        myp[i].nerrs = nerrs;
+    }
+    ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
     // Generate EC parity blocks from sources
     for(i = 0; i < num_of_thread; i++)
     {
         myp[i].id = i;
         pthread_create(&tid[i],NULL,decode,&myp[i]);
     }
-    for(i = 0 ;i<num_of_thread;i++){
+    for(i = 0 ; i < num_of_thread ; i++){
         pthread_join(tid[i],NULL);//等待线程结束
     }
-    clock_gettime(CLOCK_REALTIME, &time2);
-    de_code = time2.tv_nsec-time1.tv_nsec;
+
     clock_gettime(CLOCK_REALTIME, &time1);
-	ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
+    for(i=0; i < num_of_thread; i++)
+    {
+        ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
+    }
     clock_gettime(CLOCK_REALTIME, &time2);
-    long com = time2.tv_nsec-time1.tv_nsec;
+    long de_com = time2.tv_nsec-time1.tv_nsec;
+    //de_code = time2.tv_nsec-time1.tv_nsec;
     //fprintf(fp, "%ld %ld %ld %ld %ld \n",cauchy_matrix,en_init,en_code,de_init,de_code);
-    fprintf(fp, "%ld %ld %ld %ld\n",en_code,help,de_code,com);
-    fclose(fp);
+    //fclose(fp);
 	// Check that recovered buffers are the same as original
 	printf(" check recovery of block {");
 	for (i = 0; i < nerrs; i++) {

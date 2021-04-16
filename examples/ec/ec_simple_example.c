@@ -76,12 +76,12 @@ void encode(void *p) //void *p可以保存任何类型的指针
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
     CPU_ZERO(&mask);    //置空
-    CPU_SET(20+pinfo->id,&mask);
+    CPU_SET(pinfo->id % 29,&mask);
     if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
         printf("Set CPU affinity failue\n");
     }
     FILE *fp = NULL;
-    char s[40]= "en_4_2_mul_8_";
+    char s[40]= "10_4_mul/en_10_4_mul_32_";
     char id[10];
     sprintf(id,"%d",pinfo->id);
     strcat(s,id);
@@ -104,12 +104,12 @@ void decode(void *p) //void *p可以保存任何类型的指针
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
     CPU_ZERO(&mask);    //置空
-    CPU_SET(20 + pinfo->id,&mask);
+    CPU_SET(pinfo->id % 29,&mask);
     if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
         printf("Set CPU affinity failue\n");
     }
     FILE *fp = NULL;
-    char s[40]= "de_4_2_mul_8_";
+    char s[40]= "10_4_mul/de_10_4_mul_32_";
     char id[10];
     sprintf(id,"%d",pinfo->id);
     strcat(s,id);
@@ -128,13 +128,13 @@ void decode(void *p) //void *p可以保存任何类型的指针
 int main(int argc, char *argv[])
 {
     int i, j, m, c, e, ret;
-    int num_of_thread = 8;
-    int k = 4, p = 2, len =  2 * 1024 / 4 / num_of_thread;	// Default params
+    int num_of_thread = 32;
+    int k = 10, p = 4, len = 128 * 1024 * 1024 / 10 / num_of_thread;	// Default params
     int nerrs = 0;
     struct Myinfo myp[num_of_thread];
-    long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
-    long cauchy_sse=0 , init_sse = 0, code_sse=0;
-    long en_cauchy_matrix = 0,de_cauchy_matrix = 0;
+    //long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
+    //long cauchy_sse=0 , init_sse = 0, code_sse=0;
+    //long en_cauchy_matrix = 0,de_cauchy_matrix = 0;
     struct timespec time1 = {0, 0};
     struct timespec time2 = {0, 0};
 
@@ -286,7 +286,7 @@ int main(int argc, char *argv[])
         ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
     }
     clock_gettime(CLOCK_REALTIME, &time2);
-    long en_com = time2.tv_nsec-time1.tv_nsec;
+    //long en_com = time2.tv_nsec-time1.tv_nsec;
 
 	if (nerrs <= 0)
 		return 0;
@@ -336,7 +336,7 @@ int main(int argc, char *argv[])
         ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
     }
     clock_gettime(CLOCK_REALTIME, &time2);
-    long de_com = time2.tv_nsec-time1.tv_nsec;
+    //long de_com = time2.tv_nsec-time1.tv_nsec;
     //de_code = time2.tv_nsec-time1.tv_nsec;
     //fprintf(fp, "%ld %ld %ld %ld %ld \n",cauchy_matrix,en_init,en_code,de_init,de_code);
     //fclose(fp);

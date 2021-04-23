@@ -261,12 +261,49 @@ func(gf_2vect_dot_prod_avx2)
 	vpinsrb	xmask0fx, xmask0fx, tmp.w, 0
 	vpbroadcastb xmask0f, xmask0fx	;Construct mask 0x0f0f0f...
 
+    push rax
+	push rdi
+
+	push rbx
+	push rcx
+	push rdx
+    push rsp
+
+    RDTSC
+    mov rbx,rdx
+
 	sal	vec, LOG_PS		;vec *= PS. Make vec_i count by PS
 	SLDR	dest1, dest1_m
 	mov	dest2, [dest1+PS]
 	SSTR	dest2_m, dest2
 	mov	dest1, [dest1]
 	SSTR	dest1_m, dest1
+
+    RDTSC
+    sub rdx,rbx
+
+    mov rax,20
+    mov rbx,10
+    div rbx
+
+    add rax,48
+    mov [sum],rax
+
+    mov rax,1 ;系统调用1
+    mov rdi,1 ;unsigned int fd
+    push rsi
+    mov rsi,sum ;const char *buf
+    mov rdx,1 ;size_t count
+
+    syscall
+    pop rsi
+    pop rsp
+    pop rdx
+    pop rcx
+    pop rbx
+
+    pop rdi
+    pop rax
 
 .loop32:
 	vpxor	xp1, xp1
@@ -351,6 +388,7 @@ func(gf_2vect_dot_prod_avx2)
 endproc_frame
 
 section .data
-
+    ans db 97
+    sum dd 80000000h
 ;;;       func                   core, ver, snum
 slversion gf_2vect_dot_prod_avx2, 04,  05,  0196

@@ -270,7 +270,10 @@ func(gf_2vect_dot_prod_avx2)
     push rsp
 
     RDTSC
-    mov rbx,rdx
+    xor rbx,rbx
+    mov ebx,edx
+    shl rbx,32
+    mov ebx,eax
 
 	sal	vec, LOG_PS		;vec *= PS. Make vec_i count by PS
 	SLDR	dest1, dest1_m
@@ -280,22 +283,49 @@ func(gf_2vect_dot_prod_avx2)
 	SSTR	dest1_m, dest1
 
     RDTSC
-    sub rdx,rbx
+    push rsi
 
-    mov rax,20
+    shl rdx,32
+    mov edx,eax
+    mov rax,rdx
+    sub rax,rbx
+    ;输出最终结果
+
     mov rbx,10
+    xor rcx,rcx
+
+.out:
+    mov rdx,0
     div rbx
 
-    add rax,48
-    mov [sum],rax
+    add rdx,48
+    push rdx
+    inc rcx
+    cmp rax,0
+    jne .out
 
+    ;将结果存入数组
+    mov [count],rcx
+    mov rbx,sum
+    mov rsi,0
+    xor rdx,rdx
+
+.mystore:
+    pop rax
+    mov [rbx+rsi],rax
+    inc rsi
+    inc rdx
+    dec rcx
+    cmp rcx,0
+    jne .mystore
+    ;将数组输出
     mov rax,1 ;系统调用1
     mov rdi,1 ;unsigned int fd
-    push rsi
     mov rsi,sum ;const char *buf
-    mov rdx,1 ;size_t count
+    ;mov rdx,[count] ;size_t count
 
     syscall
+
     pop rsi
     pop rsp
     pop rdx
@@ -388,7 +418,8 @@ func(gf_2vect_dot_prod_avx2)
 endproc_frame
 
 section .data
-    ans db 97
-    sum dd 80000000h
+    count dd 0
+    sum times 64 dd 0
+    ;,'$'
 ;;;       func                   core, ver, snum
 slversion gf_2vect_dot_prod_avx2, 04,  05,  0196

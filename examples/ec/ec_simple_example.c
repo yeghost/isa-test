@@ -148,6 +148,13 @@ int main(int argc, char *argv[])
     u8 *g_tbls;
     u8 decode_index[MMAX];
 
+    cpu_set_t mask;  //CPU核的集合
+    CPU_ZERO(&mask);    //置空
+    CPU_SET(20,&mask);
+    if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
+        printf("Set CPU affinity failue\n");
+    }
+
 	if (argc == 1)
 		for (i = 0; i < p; i++)
 			frag_err_list[nerrs++] = rand() % (k + p);
@@ -251,11 +258,11 @@ int main(int argc, char *argv[])
 
     ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
 
-	gf_gen_cauchy1_matrix(encode_matrix, m, k);
+	//gf_gen_cauchy1_matrix(encode_matrix, m, k);
 
 	// Initialize g_tbls from encode matrix
     //clock_gettime(CLOCK_REALTIME, &time1);
-	ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
+	//ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //en_init = time2.tv_nsec-time1.tv_nsec;
     /*for(i=0 ; i < num_of_thread; i++)
@@ -287,7 +294,7 @@ int main(int argc, char *argv[])
     }
     clock_gettime(CLOCK_REALTIME, &time2);*/
     //long en_com = time2.tv_nsec-time1.tv_nsec;
-    ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
+    //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
 
 	if (nerrs <= 0)
 		return 0;
@@ -297,10 +304,6 @@ int main(int argc, char *argv[])
     ret = gf_gen_decode_matrix_simple(encode_matrix, decode_matrix,
                                       invert_matrix, temp_matrix, decode_index,
                                       frag_err_list, nerrs, k, m);
-
-	ret = gf_gen_decode_matrix_simple(encode_matrix, decode_matrix,
-					  invert_matrix, temp_matrix, decode_index,
-					  frag_err_list, nerrs, k, m);
 
     //de_cauchy_matrix = time2.tv_nsec-time1.tv_nsec;
 	if (ret != 0) {

@@ -302,7 +302,6 @@ section .text
 align 16
 mk_global gf_3vect_dot_prod_avx2, function
 func(gf_3vect_dot_prod_avx2)
-    GETTIME1
 	FUNC_SAVE
 	SLDR	len, len_m
 	sub	len, 32
@@ -322,22 +321,9 @@ func(gf_3vect_dot_prod_avx2)
 	mov	dest1, [dest1]
 	SSTR	dest1_m, dest1
 
-    GETTIME2
-    push rax
-    push rbx
-
-    mov rax,[time2]
-    mov rbx,[time1]
-
-    sub rax,rbx
-    call .COUT
-
-    pop rbx
-    pop rax
-
+.loop32:
     GETTIME1
 
-.loop32:
 	vpxor	xp1, xp1
 	vpxor	xp2, xp2
 	vpxor	xp3, xp3
@@ -413,24 +399,6 @@ func(gf_3vect_dot_prod_avx2)
 	SLDR	dest3, dest3_m
 	XSTR	[dest3+pos], xp3
 
-	SLDR	len, len_m
-	add	pos, 32			;Loop on 32 bytes at a time
-	cmp	pos, len
-	jle	.loop32
-
-    GETTIME1
-
-	lea	tmp, [len + 32]
-	cmp	pos, tmp
-	je	.return_pass
-
-	;; Tail len
-	mov	pos, len	;Overlapped offset length-16
-	jmp	.loop32		;Do one more overlap pass
-
-.return_pass:
-	mov	return, 0
-	FUNC_RESTORE
     GETTIME2
     push rax
     push rbx
@@ -443,6 +411,24 @@ func(gf_3vect_dot_prod_avx2)
 
     pop rbx
     pop rax
+
+	SLDR	len, len_m
+	add	pos, 32			;Loop on 32 bytes at a time
+	cmp	pos, len
+	jle	.loop32
+
+
+	lea	tmp, [len + 32]
+	cmp	pos, tmp
+	je	.return_pass
+
+	;; Tail len
+	mov	pos, len	;Overlapped offset length-16
+	jmp	.loop32		;Do one more overlap pass
+
+.return_pass:
+	mov	return, 0
+	FUNC_RESTORE
     ret
 
 .return_fail:

@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 {
     int i, j, m, c, e, ret;
     //int num_of_thread = 32;
-    int k = 10, p = 4, len = 256 / 10 ;	// Default params
+    int k = 6, p = 3, len = 8* 1024* 256 / 6 ;	// Default params
     int nerrs = 0;
     //struct Myinfo myp[num_of_thread];
     //long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;

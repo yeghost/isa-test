@@ -282,9 +282,10 @@ align 16
 mk_global gf_2vect_dot_prod_avx2, function
 
 func(gf_2vect_dot_prod_avx2)
-    GETTIME1
+    ;GETTIME1
 	FUNC_SAVE
 	SLDR	len, len_m
+
 	sub	len, 32
 	SSTR	len_m, len
 	jl	.return_fail
@@ -299,7 +300,7 @@ func(gf_2vect_dot_prod_avx2)
 	SSTR	dest2_m, dest2
 	mov	dest1, [dest1]
 	SSTR	dest1_m, dest1
-
+    GETTIME1
     GETTIME2
     push rax
     push rbx
@@ -312,20 +313,32 @@ func(gf_2vect_dot_prod_avx2)
 
     pop rbx
     pop rax
-
-    GETTIME1
 .loop32:
+    ;GETTIME1
 	vpxor	xp1, xp1
 	vpxor	xp2, xp2
 	mov	tmp, mul_array
 	xor	vec_i, vec_i
 
+    ;GETTIME2
+    ;push rax
+    ;push rbx
+
+    ;mov rax,[time2]
+    ;mov rbx,[time1]
+
+    ;sub rax,rbx
+    ;call .COUT
+
+    ;pop rbx
+    ;pop rax
 .next_vect:
 	SLDR	src, src_m
 	mov	ptr, [src+vec_i]
 
 	vmovdqu	xgft1_lo, [tmp]		;Load array Ax{00}, Ax{01}, ..., Ax{0f}
 					;     "     Ax{00}, Ax{10}, ..., Ax{f0}
+
 	vperm2i128 xgft1_hi, xgft1_lo, xgft1_lo, 0x11 ; swapped to hi | hi
 	vperm2i128 xgft1_lo, xgft1_lo, xgft1_lo, 0x00 ; swapped to lo | lo
  %ifidn PS,8				; 64-bit code
@@ -376,20 +389,6 @@ func(gf_2vect_dot_prod_avx2)
 	cmp	pos, len
 	jle	.loop32
 
-    GETTIME2
-    push rax
-    push rbx
-
-    mov rax,[time2]
-    mov rbx,[time1]
-
-    sub rax,rbx
-    call .COUT
-
-    pop rbx
-    pop rax
-
-    GETTIME1
 	lea	tmp, [len + 32]
 	cmp	pos, tmp
 	je	.return_pass
@@ -401,18 +400,6 @@ func(gf_2vect_dot_prod_avx2)
 .return_pass:
 	mov	return, 0
 	FUNC_RESTORE
-    GETTIME2
-    push rax
-    push rbx
-
-    mov rax,[time2]
-    mov rbx,[time1]
-
-    sub rax,rbx
-    call .COUT
-
-    pop rbx
-    pop rax
     ret
 .return_fail:
 	mov	return, 1
@@ -427,6 +414,7 @@ func(gf_2vect_dot_prod_avx2)
     push rdx
     push rsi
     push rdi
+    push r11
 
     mov rbx,10
     xor rcx,rcx
@@ -469,6 +457,7 @@ func(gf_2vect_dot_prod_avx2)
     mov rdx,2 ;size_t count
     syscall
 
+    pop r11
     pop rdi
     pop rsi
     pop rdx

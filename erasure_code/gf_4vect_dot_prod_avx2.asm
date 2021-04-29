@@ -334,7 +334,7 @@ section .text
 align 16
 mk_global gf_4vect_dot_prod_avx2, function
 func(gf_4vect_dot_prod_avx2)
-    GETTIME1
+
 	FUNC_SAVE
 	SLDR	len, len_m
 	sub	len, 32
@@ -358,19 +358,7 @@ func(gf_4vect_dot_prod_avx2)
 	mov	dest1, [dest1]
 	SSTR	dest1_m, dest1
 
-    GETTIME2
-    push rax
-    push rbx
-
-    mov rax,[time2]
-    mov rbx,[time1]
-
-    sub rax,rbx
-    call .COUT
-
-    pop rbx
-    pop rax
-
+    GETTIME1
 .loop32:
 	vpxor	xp1, xp1
 	vpxor	xp2, xp2
@@ -478,7 +466,6 @@ func(gf_4vect_dot_prod_avx2)
 	cmp	pos, len
 	jle	.loop32
 
-    GETTIME1
 	lea	tmp, [len + 32]
 	cmp	pos, tmp
 	je	.return_pass

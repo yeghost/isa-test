@@ -71,32 +71,24 @@ struct Myinfo
     int id;//线程编号
 };
 
-/*void encode(void *p) //void *p可以保存任何类型的指针
+void encode(void *p) //void *p可以保存任何类型的指针
 {
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
     CPU_ZERO(&mask);    //置空
-    CPU_SET(pinfo->id % 29,&mask);
+    CPU_SET(20,&mask);
     if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
         printf("Set CPU affinity failue\n");
     }
-    FILE *fp = NULL;
-    char s[40]= "10_4_mul/en_10_4_mul_32_";
-    char id[10];
-    sprintf(id,"%d",pinfo->id);
-    strcat(s,id);
-    char type[5]=".txt";
-    strcat(s,type);
-    fp = fopen(s, "a+");
-    struct timespec time1 = {0, 0};
-    struct timespec time2 = {0, 0};
-    clock_gettime(CLOCK_REALTIME, &time1);
-    ec_encode_data(pinfo->len, pinfo->k, pinfo->p, pinfo->g_tbls, *pinfo->frag_ptrs, pinfo->frag_ptrs[pinfo->k]);
-    clock_gettime(CLOCK_REALTIME, &time2);
-    long ans = time2.tv_nsec-time1.tv_nsec;
-    fprintf(fp,"%ld %ld\n",pinfo->len,ans);
-    fclose(fp);
-}*/
+    int i=0;
+    while(1)
+    {
+        //printf("%d\n",i++);
+        //sleep(3);
+        ec_encode_data(pinfo->len, pinfo->k, pinfo->p, pinfo->g_tbls, *pinfo->frag_ptrs, pinfo->frag_ptrs[pinfo->k]);
+        sleep(5);
+    }
+}
 u8 *recover_srcs[KMAX];
 u8 *recover_outp[KMAX];
 /*void decode(void *p) //void *p可以保存任何类型的指针
@@ -128,10 +120,16 @@ u8 *recover_outp[KMAX];
 int main(int argc, char *argv[])
 {
     int i, j, m, c, e, ret;
-    //int num_of_thread = 32;
-    int k = 4, p = 2, len = 16 * 1024 / 4 ;	// Default params
+    int num_of_thread = 1;
+    int k = 6, p = 3, len = 128 / 6 ;	// Default params
     int nerrs = 0;
-    //struct Myinfo myp[num_of_thread];
+    struct Myinfo myp[num_of_thread];
+    cpu_set_t mask;  //CPU核的集合
+    CPU_ZERO(&mask);    //置空
+    CPU_SET(21,&mask);
+    if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
+        printf("Set CPU affinity failue\n");
+    }
     //long cauchy_matrix = 0, en_init = 0, en_code = 0,de_init=0 ,de_code = 0;
     //long cauchy_sse=0 , init_sse = 0, code_sse=0;
     //long en_cauchy_matrix = 0,de_cauchy_matrix = 0;
@@ -147,13 +145,6 @@ int main(int argc, char *argv[])
     u8 *invert_matrix, *temp_matrix;
     u8 *g_tbls;
     u8 decode_index[MMAX];
-
-    cpu_set_t mask;  //CPU核的集合
-    CPU_ZERO(&mask);    //置空
-    CPU_SET(20,&mask);
-    if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
-        printf("Set CPU affinity failue\n");
-    }
 
 	if (argc == 1)
 		for (i = 0; i < p; i++)
@@ -264,7 +255,7 @@ int main(int argc, char *argv[])
     //ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
     //clock_gettime(CLOCK_REALTIME, &time2);
     //en_init = time2.tv_nsec-time1.tv_nsec;
-    /*for(i=0 ; i < num_of_thread; i++)
+    for(i=0 ; i < num_of_thread; i++)
     {
         myp[i].p = p;
         myp[i].g_tbls = g_tbls;
@@ -286,16 +277,10 @@ int main(int argc, char *argv[])
     for(i = 0 ; i < num_of_thread ; i++){
         pthread_join(tid[i],NULL);//等待线程结束
     }
-    clock_gettime(CLOCK_REALTIME, &time1);
-    for(i = 0;i<num_of_thread;i++)
-    {
-        ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
-    }
-    clock_gettime(CLOCK_REALTIME, &time2);*/
     //long en_com = time2.tv_nsec-time1.tv_nsec;
     //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
 
-    if (nerrs <= 0)
+    /*if (nerrs <= 0)
         return 0;
 
     printf(" recover %d fragments\n", nerrs);
@@ -318,13 +303,13 @@ int main(int argc, char *argv[])
     // Recover data
     ec_init_tables(k, nerrs, decode_matrix, g_tbls);
 
-    /*for( i = 0 ;i < num_of_thread; i++)
+    for( i = 0 ;i < num_of_thread; i++)
     {
         myp[i].nerrs = nerrs;
-    }*/
+    }
     ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
     // Generate EC parity blocks from sources
-    /*for(i = 0; i < num_of_thread; i++)
+    for(i = 0; i < num_of_thread; i++)
     {
         myp[i].id = i;
         pthread_create(&tid[i],NULL,decode,&myp[i]);
@@ -338,7 +323,7 @@ int main(int argc, char *argv[])
     {
         ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
     }
-    clock_gettime(CLOCK_REALTIME, &time2);*/
+    clock_gettime(CLOCK_REALTIME, &time2);
     //long de_com = time2.tv_nsec-time1.tv_nsec;
     //de_code = time2.tv_nsec-time1.tv_nsec;
     //fprintf(fp, "%ld %ld %ld %ld %ld \n",cauchy_matrix,en_init,en_code,de_init,de_code);
@@ -353,7 +338,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	printf(" } done all: Pass\n");
+	printf(" } done all: Pass\n");*/
 
 	return 0;
 }

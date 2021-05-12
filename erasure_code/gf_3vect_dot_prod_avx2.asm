@@ -233,37 +233,6 @@
  [bits 64]
 %endif
 
-;得到第一个时间，存在time1中
-%macro GETTIME1 0
-    push rax
-    push rdx
-
-    ;测出时间，并且放入一个寄存器内
-    RDTSC
-    shl rdx,32
-    mov edx,eax
-    mov rax,rdx
-    mov [time1],rax
-
-    pop rdx
-    pop rax
-%endmacro
-
-;得到第一个时间，存在time2中
-%macro GETTIME2 0
-    push rdx
-    push rax
-    ;测出时间，并且放入一个寄存器内
-    RDTSC
-    shl rdx,32
-    mov edx,eax
-    mov rax,rdx
-    mov [time2],rax
-
-    pop rax
-    pop rdx
-%endmacro
-
 section .text
 
 %ifidn PS,8				;64-bit code
@@ -321,7 +290,6 @@ func(gf_3vect_dot_prod_avx2)
 	mov	dest1, [dest1]
 	SSTR	dest1_m, dest1
 
-    GETTIME1
 .loop32:
 	vpxor	xp1, xp1
 	vpxor	xp2, xp2
@@ -414,84 +382,12 @@ func(gf_3vect_dot_prod_avx2)
 .return_pass:
 	mov	return, 0
 	FUNC_RESTORE
-
-    GETTIME2
-    push rax
-    push rbx
-
-    mov rax,[time2]
-    mov rbx,[time1]
-
-    sub rax,rbx
-    call .COUT
-
-    pop rbx
-    pop rax
-
     ret
 
 .return_fail:
 	mov	return, 1
 	FUNC_RESTORE
 	ret
-
-;将数字输出出来
-.COUT:
-    push rax
-    push rbx
-    push rcx
-    push rdx
-    push rsi
-    push rdi
-
-    mov rbx,10
-    xor rcx,rcx
-
-.out:
-    mov rdx,0
-    div rbx
-
-    add rdx,48
-    push rdx
-    inc rcx
-    cmp rax,0
-    jne .out
-
-    ;将结果存入数组
-    mov [count],rcx
-    mov rbx,sum
-    mov rsi,0
-    xor rdx,rdx
-
-.mystore:
-    pop rax
-    mov [rbx+rsi],rax
-    inc rsi
-    inc rdx
-    dec rcx
-    cmp rcx,0
-    jne .mystore
-    ;将数组输出
-    mov rax,1 ;系统调用1
-    mov rdi,1 ;unsigned int fd
-    mov rsi,sum ;const char *buf
-    ;mov rdx,[count] ;size_t count
-
-    syscall
-    ;换行
-    mov rax,1 ;系统调用1
-    mov rdi,1 ;unsigned int fd
-    mov rsi,change ;const char *buf
-    mov rdx,2 ;size_t count
-    syscall
-
-    pop rdi
-    pop rsi
-    pop rdx
-    pop rcx
-    pop rbx
-    pop rax
-    ret
 
 endproc_frame
 

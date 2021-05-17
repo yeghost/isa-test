@@ -217,6 +217,7 @@
  default rel
  [bits 64]
 %endif
+
 section .text
 
 %ifidn PS,8				;64-bit code
@@ -246,14 +247,12 @@ section .text
 
 %endif
 
-
 align 16
 mk_global gf_2vect_dot_prod_avx2, function
 
 func(gf_2vect_dot_prod_avx2)
 	FUNC_SAVE
 	SLDR	len, len_m
-
 	sub	len, 32
 	SSTR	len_m, len
 	jl	.return_fail
@@ -281,7 +280,6 @@ func(gf_2vect_dot_prod_avx2)
 
 	vmovdqu	xgft1_lo, [tmp]		;Load array Ax{00}, Ax{01}, ..., Ax{0f}
 					;     "     Ax{00}, Ax{10}, ..., Ax{f0}
-
 	vperm2i128 xgft1_hi, xgft1_lo, xgft1_lo, 0x11 ; swapped to hi | hi
 	vperm2i128 xgft1_lo, xgft1_lo, xgft1_lo, 0x00 ; swapped to lo | lo
  %ifidn PS,8				; 64-bit code
@@ -343,7 +341,8 @@ func(gf_2vect_dot_prod_avx2)
 .return_pass:
 	mov	return, 0
 	FUNC_RESTORE
-    ret
+	ret
+
 .return_fail:
 	mov	return, 1
 	FUNC_RESTORE
@@ -352,11 +351,6 @@ func(gf_2vect_dot_prod_avx2)
 endproc_frame
 
 section .data
-    count dq 0
-    time1 dq 0
-    time2 dq 0
-    sum times 64 dq 0
-    change db 0DH,0Ah
-    ;,'$'
+
 ;;;       func                   core, ver, snum
 slversion gf_2vect_dot_prod_avx2, 04,  05,  0196

@@ -43,23 +43,23 @@ typedef unsigned char u8;
 
 int usage(void)
 {
-	fprintf(stderr,
-		"Usage: ec_simple_example [options]\n"
-		"  -h        Help\n"
-		"  -k <val>  Number of source fragments\n"
-		"  -p <val>  Number of parity fragments\n"
-		"  -l <val>  Length of fragments\n"
-		"  -e <val>  Simulate erasure on frag index val. Zero based. Can be repeated.\n"
-		"  -r <seed> Pick random (k, p) with seed\n");
-	exit(0);
+    fprintf(stderr,
+            "Usage: ec_simple_example [options]\n"
+            "  -h        Help\n"
+            "  -k <val>  Number of source fragments\n"
+            "  -p <val>  Number of parity fragments\n"
+            "  -l <val>  Length of fragments\n"
+            "  -e <val>  Simulate erasure on frag index val. Zero based. Can be repeated.\n"
+            "  -r <seed> Pick random (k, p) with seed\n");
+    exit(0);
 }
 
 static int gf_gen_decode_matrix_simple(u8 * encode_matrix,
-				       u8 * decode_matrix,
-				       u8 * invert_matrix,
-				       u8 * temp_matrix,
-				       u8 * decode_index,
-				       u8 * frag_err_list, int nerrs, int k, int m);
+                                       u8 * decode_matrix,
+                                       u8 * invert_matrix,
+                                       u8 * temp_matrix,
+                                       u8 * decode_index,
+                                       u8 * frag_err_list, int nerrs, int k, int m);
 struct Myinfo
 {
     int len;//长度
@@ -76,17 +76,13 @@ void encode(void *p) //void *p可以保存任何类型的指针
     struct Myinfo *pinfo = p;
     cpu_set_t mask;  //CPU核的集合
     CPU_ZERO(&mask);    //置空
-    CPU_SET(20,&mask);
+    CPU_SET(24,&mask);
     if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
         printf("Set CPU affinity failue\n");
     }
-    int i=0;
     while(1)
     {
-        //printf("%d\n",i++);
-        //sleep(3);
         ec_encode_data(pinfo->len, pinfo->k, pinfo->p, pinfo->g_tbls, *pinfo->frag_ptrs, pinfo->frag_ptrs[pinfo->k]);
-        sleep(5);
     }
 }
 u8 *recover_srcs[KMAX];
@@ -121,12 +117,12 @@ int main(int argc, char *argv[])
 {
     int i, j, m, c, e, ret;
     int num_of_thread = 1;
-    int k = 6, p = 3, len = 128 / 6 ;	// Default params
+    int k = 4, p = 2, len = 64 * 1024 * 1024 / 4 ;	// Default params
     int nerrs = 0;
     struct Myinfo myp[num_of_thread];
     cpu_set_t mask;  //CPU核的集合
     CPU_ZERO(&mask);    //置空
-    CPU_SET(21,&mask);
+    CPU_SET(20,&mask);
     if (sched_setaffinity(0, sizeof(mask), &mask) == -1) {
         printf("Set CPU affinity failue\n");
     }
@@ -136,7 +132,7 @@ int main(int argc, char *argv[])
     //struct timespec time1 = {0, 0};
     //struct timespec time2 = {0, 0};
 
-	// Fragment buffer pointers
+    // Fragment buffer pointers
     u8 *frag_ptrs[MMAX];
     u8 frag_err_list[MMAX];
 
@@ -146,63 +142,41 @@ int main(int argc, char *argv[])
     u8 *g_tbls;
     u8 decode_index[MMAX];
 
-	if (argc == 1)
-		for (i = 0; i < p; i++)
-			frag_err_list[nerrs++] = rand() % (k + p);
+    if (argc == 1)
+        for (i = 0; i < p; i++)
+            frag_err_list[nerrs++] = rand() % (k + p);
 
-	while ((c = getopt(argc, argv, "k:p:l:e:r:h")) != -1) {
-		switch (c) {
-		case 'k':
-			k = atoi(optarg);
-			break;
-		case 'p':
-			p = atoi(optarg);
-			break;
-		case 'l':
-			len = atoi(optarg);
-			if (len < 0)
-				usage();
-			break;
-		case 'e':
-			e = atoi(optarg);
-			frag_err_list[nerrs++] = e;
-			break;
-		case 'r':
-			srand(atoi(optarg));
-			k = (rand() % (MMAX - 1)) + 1;	// Pick k {1 to MMAX - 1}
-			p = (rand() % (MMAX - k)) + 1;	// Pick p {1 to MMAX - k}
+    while ((c = getopt(argc, argv, "k:p:l:e:r:h")) != -1) {
+        switch (c) {
+            case 'l':
+                len = atoi(optarg);
+                break;
+            default:
+                usage();
+                break;
+        }
+    }
+    m = k + p;
 
-			for (i = 0; i < k + p && nerrs < p; i++)
-				if (rand() & 1)
-					frag_err_list[nerrs++] = i;
-			break;
-		case 'h':
-		default:
-			usage();
-			break;
-		}
-	}
-	m = k + p;
+    // Check for valid parameters
+    if (m > MMAX || k > KMAX || m < 0 || p < 1 || k < 1) {
+        printf(" Input test parameter error m=%d, k=%d, p=%d, erasures=%d\n",
+               m, k, p, nerrs);
+        usage();
+    }
+    if (nerrs > p) {
+        printf(" Number of erasures chosen exceeds power of code erasures=%d p=%d\n",
+               nerrs, p);
+        usage();
+    }
+    for (i = 0; i < nerrs; i++) {
+        if (frag_err_list[i] >= m) {
+            printf(" fragment %d not in range\n", frag_err_list[i]);
+            usage();
+        }
+    }
 
-	// Check for valid parameters
-	if (m > MMAX || k > KMAX || m < 0 || p < 1 || k < 1) {
-		printf(" Input test parameter error m=%d, k=%d, p=%d, erasures=%d\n",
-		       m, k, p, nerrs);
-		usage();
-	}
-	if (nerrs > p) {
-		printf(" Number of erasures chosen exceeds power of code erasures=%d p=%d\n",
-		       nerrs, p);
-		usage();
-	}
-	for (i = 0; i < nerrs; i++) {
-		if (frag_err_list[i] >= m) {
-			printf(" fragment %d not in range\n", frag_err_list[i]);
-			usage();
-		}
-	}
-
-	printf("ec_simple_example:\n");
+    printf("ec_simple_example:\n");
     // Allocate coding matrices
     encode_matrix = malloc(m * k);
     decode_matrix = malloc(m * k);
@@ -246,7 +220,6 @@ int main(int argc, char *argv[])
 
     ec_init_tables(k, p, &encode_matrix[k * k], g_tbls);
 
-    ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
 
     //gf_gen_cauchy1_matrix(encode_matrix, m, k);
 
@@ -272,75 +245,19 @@ int main(int argc, char *argv[])
     for(i = 0 ; i < num_of_thread ; i++)
     {
         myp[i].id = i;
+        for (i = 0; i < k; i++)
+            for (j = 0; j < len; j++)
+                frag_ptrs[i][j] = rand();
+        clock_gettime(CLOCK_REALTIME, &time1);
         pthread_create(&tid[i],NULL,encode,&myp[i]);
-    }
-    for(i = 0 ; i < num_of_thread ; i++){
         pthread_join(tid[i],NULL);//等待线程结束
-    }
-    //long en_com = time2.tv_nsec-time1.tv_nsec;
-    //ec_encode_data(len, k, p, g_tbls, frag_ptrs, &frag_ptrs[k]);
-
-    /*if (nerrs <= 0)
-        return 0;
-
-    printf(" recover %d fragments\n", nerrs);
-    // Find a decode matrix to regenerate all erasures from remaining frags
-    ret = gf_gen_decode_matrix_simple(encode_matrix, decode_matrix,
-                                      invert_matrix, temp_matrix, decode_index,
-                                      frag_err_list, nerrs, k, m);
-
-    //de_cauchy_matrix = time2.tv_nsec-time1.tv_nsec;
-    if (ret != 0) {
-        printf("Fail on generate decode matrix\n");
-        return -1;
-    }
-    // Pack recovery array pointers as list of valid fragments
-    for (i = 0; i < k; i++)
-    {
-        recover_srcs[i] = frag_ptrs[decode_index[i]];
-    }
-
-    // Recover data
-    ec_init_tables(k, nerrs, decode_matrix, g_tbls);
-
-    for( i = 0 ;i < num_of_thread; i++)
-    {
-        myp[i].nerrs = nerrs;
-    }
-    ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
-    // Generate EC parity blocks from sources
-    for(i = 0; i < num_of_thread; i++)
-    {
-        myp[i].id = i;
-        pthread_create(&tid[i],NULL,decode,&myp[i]);
+        clock_gettime(CLOCK_REALTIME, &time2);
     }
     for(i = 0 ; i < num_of_thread ; i++){
         pthread_join(tid[i],NULL);//等待线程结束
     }
 
-    clock_gettime(CLOCK_REALTIME, &time1);
-    for(i=0; i < num_of_thread; i++)
-    {
-        ec_encode_data(len, k, nerrs, g_tbls, recover_srcs, recover_outp);
-    }
-    clock_gettime(CLOCK_REALTIME, &time2);
-    //long de_com = time2.tv_nsec-time1.tv_nsec;
-    //de_code = time2.tv_nsec-time1.tv_nsec;
-    //fprintf(fp, "%ld %ld %ld %ld %ld \n",cauchy_matrix,en_init,en_code,de_init,de_code);
-    //fclose(fp);
-	// Check that recovered buffers are the same as original
-	printf(" check recovery of block {");
-	for (i = 0; i < nerrs; i++) {
-		printf(" %d", frag_err_list[i]);
-		if (memcmp(recover_outp[i], frag_ptrs[frag_err_list[i]], len)) {
-			printf(" Fail erasure recovery %d, frag %d\n", i, frag_err_list[i]);
-			return -1;
-		}
-	}
-
-	printf(" } done all: Pass\n");*/
-
-	return 0;
+    return 0;
 }
 
 /*
@@ -349,58 +266,58 @@ int main(int argc, char *argv[])
  */
 
 static int gf_gen_decode_matrix_simple(u8 * encode_matrix,
-				       u8 * decode_matrix,
-				       u8 * invert_matrix,
-				       u8 * temp_matrix,
-				       u8 * decode_index, u8 * frag_err_list, int nerrs, int k,
-				       int m)
+                                       u8 * decode_matrix,
+                                       u8 * invert_matrix,
+                                       u8 * temp_matrix,
+                                       u8 * decode_index, u8 * frag_err_list, int nerrs, int k,
+                                       int m)
 {
-	int i, j, p, r;
-	int nsrcerrs = 0;
-	u8 s, *b = temp_matrix;
-	u8 frag_in_err[MMAX];
+    int i, j, p, r;
+    int nsrcerrs = 0;
+    u8 s, *b = temp_matrix;
+    u8 frag_in_err[MMAX];
 
-	memset(frag_in_err, 0, sizeof(frag_in_err));
+    memset(frag_in_err, 0, sizeof(frag_in_err));
 
-	// Order the fragments in erasure for easier sorting
-	for (i = 0; i < nerrs; i++) {
-		if (frag_err_list[i] < k)
-			nsrcerrs++;
-		frag_in_err[frag_err_list[i]] = 1;
-	}
+    // Order the fragments in erasure for easier sorting
+    for (i = 0; i < nerrs; i++) {
+        if (frag_err_list[i] < k)
+            nsrcerrs++;
+        frag_in_err[frag_err_list[i]] = 1;
+    }
 
-	// Construct b (matrix that encoded remaining frags) by removing erased rows
-	for (i = 0, r = 0; i < k; i++, r++) {
-		while (frag_in_err[r])
-			r++;
-		for (j = 0; j < k; j++)
-			b[k * i + j] = encode_matrix[k * r + j];
-		decode_index[i] = r;
-	}
+    // Construct b (matrix that encoded remaining frags) by removing erased rows
+    for (i = 0, r = 0; i < k; i++, r++) {
+        while (frag_in_err[r])
+            r++;
+        for (j = 0; j < k; j++)
+            b[k * i + j] = encode_matrix[k * r + j];
+        decode_index[i] = r;
+    }
 
-	// Invert matrix to get recovery matrix
-	if (gf_invert_matrix(b, invert_matrix, k) < 0)
-		return -1;
+    // Invert matrix to get recovery matrix
+    if (gf_invert_matrix(b, invert_matrix, k) < 0)
+        return -1;
 
-	// Get decode matrix with only wanted recovery rows
-	for (i = 0; i < nerrs; i++) {
-		if (frag_err_list[i] < k)	// A src err
-			for (j = 0; j < k; j++)
-				decode_matrix[k * i + j] =
-				    invert_matrix[k * frag_err_list[i] + j];
-	}
+    // Get decode matrix with only wanted recovery rows
+    for (i = 0; i < nerrs; i++) {
+        if (frag_err_list[i] < k)	// A src err
+            for (j = 0; j < k; j++)
+                decode_matrix[k * i + j] =
+                        invert_matrix[k * frag_err_list[i] + j];
+    }
 
-	// For non-src (parity) erasures need to multiply encode matrix * invert
-	for (p = 0; p < nerrs; p++) {
-		if (frag_err_list[p] >= k) {	// A parity err
-			for (i = 0; i < k; i++) {
-				s = 0;
-				for (j = 0; j < k; j++)
-					s ^= gf_mul(invert_matrix[j * k + i],
-						    encode_matrix[k * frag_err_list[p] + j]);
-				decode_matrix[k * p + i] = s;
-			}
-		}
-	}
-	return 0;
+    // For non-src (parity) erasures need to multiply encode matrix * invert
+    for (p = 0; p < nerrs; p++) {
+        if (frag_err_list[p] >= k) {	// A parity err
+            for (i = 0; i < k; i++) {
+                s = 0;
+                for (j = 0; j < k; j++)
+                    s ^= gf_mul(invert_matrix[j * k + i],
+                                encode_matrix[k * frag_err_list[p] + j]);
+                decode_matrix[k * p + i] = s;
+            }
+        }
+    }
+    return 0;
 }
